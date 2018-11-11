@@ -1,0 +1,20 @@
+Insertar precios
+*fin->presupuestar
+
+- diseño modulado: en una estructura, se gasta X metros de X materal = $X
+
+- datos en hojas de excel. migrar a la aplicación**
+
+1. Modulo (mueble en singular).
+	- materiales (medidas y precio).
+	- accesorios (jaladeras, botes, etc.).
+	- medidas, precios y materiales variables por módulo.
+2. Proyecto (mezcla de modulos).
+	- presupuesto de proyecto (suma de modulos).
+
+I. Se deberán administrar los materiales y módulos.
+
+PREGUNTAS***1¿guardar presupuestos?2¿App, escritorio, movil, etc.?3¿vincular control con proyecto?4¿guardar quien realiza el presupuesto?5¿Quien accedería a este sistema?6¿deberá exportar reportes, cuáles?7¿ASISTENCIA?8¿hosting?
+RES:
+1. Sí, 4. Sí,6. sí, despiece total por proyecto.
+usuario: uziel.
