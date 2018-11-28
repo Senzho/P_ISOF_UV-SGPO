@@ -1,0 +1,27 @@
+﻿<Window x:Class="OrozGP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrozGP"
+        mc:Ignorable="d"
+        Title="Iniciar sesión" Height="350" Width="800">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Width="228" Background="#FFB49614"/>
+        <TextBox x:Name="campoUsuario" Height="51"  Margin="282,42,51,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextDecorations="{x:Null}" Style="{DynamicResource formulario}"/>
+        <PasswordBox x:Name="campoContrasena" Margin="282,101,51,0" VerticalAlignment="Top" Height="51"  Style="{DynamicResource formularioP}"/>
+        <Button x:Name="botonIngresar" Style="{DynamicResource botonDefault}" Content="Ingresar" Margin="282,0,51,41" Height="49" VerticalAlignment="Bottom" Background="{x:Null}"/>
+        <TextBlock x:Name="linkContrasena" Margin="282,0,51,10" TextWrapping="Wrap" Height="19" VerticalAlignment="Bottom" TextAlignment="Center">
+            <Hyperlink>¿Olvidaste tu contraseña?</Hyperlink>
+        </TextBlock>
+    </Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Recursos/Estilos/Botones.xaml"/>
+                <ResourceDictionary Source="Recursos/Estilos/Texto.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+</Window>
