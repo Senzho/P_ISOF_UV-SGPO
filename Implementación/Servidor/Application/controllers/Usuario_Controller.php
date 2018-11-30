@@ -1,5 +1,9 @@
 <?php
 require APPPATH . '/libraries/REST_Controller.php';
+/*Códigos de error:
+	1. Error de validación: los datos recibidos no son válidos.
+	2. Error de BD: ocurrió un problema al acceder a la base de datos.
+*/
 class Usuario_Controller extends REST_Controller
 {
 	private function validar_recepcion($datos, $u_c = False)
@@ -31,9 +35,9 @@ class Usuario_Controller extends REST_Controller
 		$tipo = gettype($dato);
 		if ($tipo === 'string'){
 			$len = strlen($dato);
-			$valido = $len < $max && $len > $min;
+			$valido = $len <= $max && $len >= $min;
 		}else if ($tipo === 'integer' || $tipo === 'double'){
-			$valido = $dato < $max && $dato > $min;
+			$valido = $dato <= $max && $dato >= $min;
 		}
 		return $valido;
 	}
@@ -47,40 +51,86 @@ class Usuario_Controller extends REST_Controller
 
 	public function usuario_post()
 	{
-		$usuario = $this->input->post();
+		$respuesta;
+		$usuario = $this->post();
 		if ($this->validar_recepcion($usuario, True)){
 			$resultado = $this->Usuario_Model->registrar($usuario);
-			$usuario['id'] = $resultado['id'];
-			$respuesta = array('exito' => $resultado['resultado'], 'usuario' => $usuario);
+			$respuesta['exito'] = $resultado['resultado'];
+			if ($respuesta['exito']){
+				$usuario['id'] = $resultado['id'];
+				$respuesta['usuario'] = $usuario;
+			}else{
+				$respuesta['error'] = 2;
+			}
 		}else{
-			$this->response(array('error' => '1'), 404);
+			$respuesta['exito'] = False;
+			$respuesta['error'] = 1;
 		}
+		$codigo = $respuesta['exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
 	}
 	public function usuario_put()
 	{
-		$usuario = $this->input->put();
-		if ($this->validar_recepcion($usuario)){
-			$resultado = $this->Usuario_Model->editar($usuario);
-			$respuesta = array('exito' => $resultado['resultado'], 'usuario' => $usuario);
+		$respuesta;
+		$usuario = $this->put();
+		if ($this->validar_recepcion($usuario, True)){
+			$respuesta['exito'] = $this->Usuario_Model->editar($usuario);
+			if (!$respuesta['exito']){
+				$respuesta['error'] = 2;
+			}
 		}else{
-			$this->response(array('error' => '1'), 404);
+			$respuesta['exito'] = False;
+			$respuesta['error'] = 1;
 		}
+		$codigo = $respuesta['exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
 	}
 	public function usuario_delete()
 	{
-
+		$respuesta;
+		$id = $this->get('id');
+		if ($this->validar_dato(1, 10000, $id)){
+			$respuesta['exito'] = $this->Usuario_Model->eliminar($id);
+			if (!$respuesta['exito']){
+				$respuesta['error'] = 2;
+			}
+		}else{
+			$respuesta['exito'] = False;
+			$respuesta['error'] = 1;
+		}
+		$codigo = $respuesta['exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
 	}
 	public function sesion_get()
 	{
-
+		$respuesta;
+		$nombre = $this->get('nombre');
+		$sha = $this->get('sha');
+		if ($this->validar_dato(3, 100, $nombre) && $this->validar_dato(64, 64, $sha)){
+			$resultado = $this->Usuario_Model->iniciar_sesion($nombre, $sha);
+			$respuesta['exito'] = $resultado['resultado'];
+			if ($respuesta['exito']){
+				$respuesta['usuario'] = $resultado['usuario'];
+			}else{
+				$respuesta['error'] = 2;
+			}
+		}else{
+			$respuesta['exito'] = False;
+			$respuesta['error'] = 1;
+		}
+		$codigo = $respuesta['exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
 	}
 	public function usuarios_get()
 	{
-
+		$respuesta['usuarios'] = $this->Usuario_Model->obtener_usuarios();
+		$this->response($respuesta, 200);
 	}
 	public function clave_get()
 	{
-
+		$clave = 
+		$respuesta['usuarios'] = $this->Usuario_Model->obtener_usuarios_clave();
+		$this->response($respuesta, 200);
 	}
 	public function contrasena_put()
 	{
