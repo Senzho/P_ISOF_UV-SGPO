@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrozGP.LogicaNegocio.Usuarios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,29 @@ namespace OrozGP
         public MainWindow()
         {
             InitializeComponent();
+        }
+        
+        private void botonIngresar_Click(object sender, RoutedEventArgs e)
+        {
+            this.iniciarSesion();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.campoUsuario.Focus();
+        }
+        public async Task iniciarSesion()
+        {
+            string nombre = this.campoUsuario.Text;
+            string contraseña = this.campoContrasena.Password;
+            Usuario usuario = await Usuario.iniciarSesion(nombre, contraseña);
+            if (usuario.Id > 0)
+            {
+                Console.WriteLine("Usuario encontrado");
+            }
+            else
+            {
+                Console.WriteLine("Usuario no encontrado");
+            }
         }
     }
 }

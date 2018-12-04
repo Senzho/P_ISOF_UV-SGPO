@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrozGP"
         mc:Ignorable="d"
-        Title="Iniciar sesión" Height="350" Width="800">
+        Title="Iniciar sesión" Height="350" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid HorizontalAlignment="Left" Width="228" Background="#FFB49614"/>
-        <TextBox x:Name="campoUsuario" Height="51"  Margin="282,42,51,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextDecorations="{x:Null}" Style="{DynamicResource formulario}"/>
-        <PasswordBox x:Name="campoContrasena" Margin="282,101,51,0" VerticalAlignment="Top" Height="51"  Style="{DynamicResource formularioP}"/>
-        <Button x:Name="botonIngresar" Style="{DynamicResource botonDefault}" Content="Ingresar" Margin="282,0,51,41" Height="49" VerticalAlignment="Bottom" Background="{x:Null}"/>
+        <TextBox x:Name="campoUsuario" Height="51"  Margin="282,42,51,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextDecorations="{x:Null}" Style="{DynamicResource formulario}" TabIndex="0"/>
+        <PasswordBox x:Name="campoContrasena" Margin="282,101,51,0" VerticalAlignment="Top" Height="51"  Style="{DynamicResource formularioP}" TabIndex="1"/>
+        <Button x:Name="botonIngresar" Style="{DynamicResource botonDefault}" Content="Ingresar" Margin="282,0,51,41" Height="49" VerticalAlignment="Bottom" Background="{x:Null}" TabIndex="2" Click="botonIngresar_Click"/>
         <TextBlock x:Name="linkContrasena" Margin="282,0,51,10" TextWrapping="Wrap" Height="19" VerticalAlignment="Bottom" TextAlignment="Center">
             <Hyperlink>¿Olvidaste tu contraseña?</Hyperlink>
         </TextBlock>
