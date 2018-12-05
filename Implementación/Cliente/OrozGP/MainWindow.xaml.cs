@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Usuarios;
+﻿using OrozGP.InterfazGrafica;
+using OrozGP.LogicaNegocio.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,27 +22,38 @@ namespace OrozGP
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void DesplegarVentanaPrincipal(Usuario usuario)
+        {
+            VentanaPrincipal principal = new VentanaPrincipal();
+            principal.Usuario = usuario;
+            principal.Show();
+            App.Current.MainWindow = principal;
+            App.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            this.Close();
+            App.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
         }
         
-        private void botonIngresar_Click(object sender, RoutedEventArgs e)
+        private void BotonIngresar_Click(object sender, RoutedEventArgs e)
         {
-            this.iniciarSesion();
+            this.IniciarSesion();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.campoUsuario.Focus();
         }
-        public async Task iniciarSesion()
+        public async Task IniciarSesion()
         {
             string nombre = this.campoUsuario.Text;
             string contraseña = this.campoContrasena.Password;
             Usuario usuario = await Usuario.iniciarSesion(nombre, contraseña);
             if (usuario.Id > 0)
             {
-                Console.WriteLine("Usuario encontrado");
+                this.DesplegarVentanaPrincipal(usuario);
             }
             else
             {

@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="Iniciar sesión" Height="350" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <Grid HorizontalAlignment="Left" Width="228" Background="#FFB49614"/>
+        <Grid HorizontalAlignment="Left" Width="228" Background="#FFB49614">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="228" Source="Recursos/Imagenes/into-logo-texto.png" Stretch="UniformToFill" Margin="0,10,0,0"/>
+        </Grid>
         <TextBox x:Name="campoUsuario" Height="51"  Margin="282,42,51,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextDecorations="{x:Null}" Style="{DynamicResource formulario}" TabIndex="0"/>
         <PasswordBox x:Name="campoContrasena" Margin="282,101,51,0" VerticalAlignment="Top" Height="51"  Style="{DynamicResource formularioP}" TabIndex="1"/>
-        <Button x:Name="botonIngresar" Style="{DynamicResource botonDefault}" Content="Ingresar" Margin="282,0,51,41" Height="49" VerticalAlignment="Bottom" Background="{x:Null}" TabIndex="2" Click="botonIngresar_Click"/>
+        <Button x:Name="botonIngresar" Style="{DynamicResource botonDefault}" Content="Ingresar" Margin="282,0,51,41" Height="49" VerticalAlignment="Bottom" Background="{x:Null}" TabIndex="2" Click="BotonIngresar_Click"/>
         <TextBlock x:Name="linkContrasena" Margin="282,0,51,10" TextWrapping="Wrap" Height="19" VerticalAlignment="Bottom" TextAlignment="Center">
             <Hyperlink>¿Olvidaste tu contraseña?</Hyperlink>
         </TextBlock>
