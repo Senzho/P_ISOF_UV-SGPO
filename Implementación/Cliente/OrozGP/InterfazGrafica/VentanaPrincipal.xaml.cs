@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Usuarios;
+﻿using OrozGP.InterfazGrafica.Usuarios;
+using OrozGP.LogicaNegocio.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,22 @@ namespace OrozGP.InterfazGrafica
     {
         private Usuario usuario;
 
+        private void CargarPanelUsuarios()
+        {
+            this.dockCentral.Children.Clear();
+            this.dockCentral.Children.Add(new PanelUsuarios());
+        }
+
         public VentanaPrincipal()
         {
             InitializeComponent();
         }
 
         internal Usuario Usuario { get => usuario; set => usuario = value; }
+
+        private void botonUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            this.CargarPanelUsuarios();
+        }
     }
 }

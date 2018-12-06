@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrozGP.InterfazGrafica"
         mc:Ignorable="d"
-        Title="Oroz" Height="545" Width="1014">
+        Title="Oroz" Height="545" Width="894">
     <Grid RenderTransformOrigin="0.545,0.189">
         <Grid HorizontalAlignment="Left" Width="232" Background="#FFB49614">
             <Button x:Name="botonPresupuestos" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="232" Height="45" Style="{DynamicResource opcion}">
@@ -38,7 +38,7 @@
                     <Label x:Name="tre5" Content="Módulos" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Width="175" Height="41" Foreground="White" FontSize="20"/>
                 </Grid>
             </Button>
-            <Button x:Name="botonUsuarios" HorizontalAlignment="Left" Margin="0,365,0,0" VerticalAlignment="Top" Width="232" Height="45" Style="{DynamicResource ResourceKey=opcion}">
+            <Button x:Name="botonUsuarios" HorizontalAlignment="Right" Margin="0,365,0,0" VerticalAlignment="Top" Width="232" Height="45" Style="{DynamicResource ResourceKey=opcion}" Click="botonUsuarios_Click">
                 <Grid Height="41" Width="230" Margin="2,0,0,0">
                     <Image x:Name="wert6" HorizontalAlignment="Left" Height="41" Margin="10,0,0,0" VerticalAlignment="Top" Width="40" Source="/OrozGP;component/Recursos/Imagenes/person.png"/>
                     <Label x:Name="tre6" Content="Usuarios" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Width="175" Height="41" Foreground="White" FontSize="20"/>
@@ -47,6 +47,7 @@
             <Image x:Name="image" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="80" Source="/OrozGP;component/Recursos/Imagenes/into-logo.png" Margin="0,15,0,0"/>
             <Image x:Name="image1" HorizontalAlignment="Center" Height="54" Margin="69,25,-10,0" VerticalAlignment="Top" Width="173" Source="/OrozGP;component/Recursos/Imagenes/into-texto.png"/>
         </Grid>
+        <DockPanel x:Name="dockCentral" LastChildFill="True" Margin="232,0,0,0"/>
     </Grid>
 
     <Window.Resources>

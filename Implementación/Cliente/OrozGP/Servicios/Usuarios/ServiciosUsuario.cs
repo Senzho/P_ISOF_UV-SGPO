@@ -20,5 +20,13 @@ namespace OrozGP.Servicios.Usuarios
             string cadena = await respuesta.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject(cadena);
         }
+        public static async Task<dynamic> ObtenerUsuarios()
+        {
+            string url = "http://localhost/CodeIgniter/index.php/Usuario_Controller/usuarios";
+            HttpClient cliente = new HttpClient();
+            var respuesta = await cliente.GetAsync(url);
+            string cadena = await respuesta.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject(cadena);
+        }
     }
 }

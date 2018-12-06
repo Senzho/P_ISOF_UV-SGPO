@@ -24,41 +24,83 @@ namespace OrozGP
     {
         private void DesplegarVentanaPrincipal(Usuario usuario)
         {
-            VentanaPrincipal principal = new VentanaPrincipal();
-            principal.Usuario = usuario;
+            VentanaPrincipal principal = new VentanaPrincipal
+            {
+                Usuario = usuario
+            };
             principal.Show();
             App.Current.MainWindow = principal;
             App.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             this.Close();
             App.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
+        private Login ValidarCampos()
+        {
+            Login valor;
+            string nombre = this.campoUsuario.Text.Trim();
+            string contraseña = this.campoContrasena.Password.Trim();
+            if (nombre.Length < 5 || nombre.Length > 100)
+            {
+                valor = Login.nombre;
+            }else if (contraseña.Length < 5 || contraseña.Length > 100)
+            {
+                valor = Login.contraseña;
+            }
+            else
+            {
+                valor = Login.ok;
+            }
+            return valor;
+        }
+        private void MostrarMensajeError(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Datos no válidos", MessageBoxButton.OK);
+        }
 
         public MainWindow()
         {
             InitializeComponent();
         }
-        
-        private void BotonIngresar_Click(object sender, RoutedEventArgs e)
+
+        enum Login
         {
-            this.IniciarSesion();
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.campoUsuario.Focus();
-        }
+            nombre,
+            contraseña,
+            ok,
+        };
         public async Task IniciarSesion()
         {
-            string nombre = this.campoUsuario.Text;
-            string contraseña = this.campoContrasena.Password;
-            Usuario usuario = await Usuario.iniciarSesion(nombre, contraseña);
+            string nombre = this.campoUsuario.Text.Trim();
+            string contraseña = this.campoContrasena.Password.Trim();
+            Usuario usuario = await Usuario.IniciarSesion(nombre, contraseña);
             if (usuario.Id > 0)
             {
                 this.DesplegarVentanaPrincipal(usuario);
             }
             else
             {
-                Console.WriteLine("Usuario no encontrado");
+                this.MostrarMensajeError("Lo sentimos, no podemos encontrar tu cuenta. Por favor, verifica que tus datos sean correctos");
             }
+        }
+
+        private void BotonIngresar_Click(object sender, RoutedEventArgs e)
+        {
+            switch (this.ValidarCampos())
+            {
+                case Login.nombre:
+                    this.MostrarMensajeError("Tu nombre de usuario debe tener entre 5 y 100 caracteres");
+                    break;
+                case Login.contraseña:
+                    this.MostrarMensajeError("Tu contraseña debe tener entre 5 y 100 caracteres");
+                    break;
+                default:
+                    this.IniciarSesion();
+                    break;
+            }
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.campoUsuario.Focus();
         }
     }
 }

@@ -45,11 +45,13 @@ class Usuario_Model extends CI_Model
 		$consulta = $this->db->get('usuario');
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
-			$row = $resultado[$i];
+			$fila = $resultado[$i];
 			$usuario = array(
-				'nombre' => $row->nombre,
-				'correo' => $row->correo,
-				'puesto' => $row->puesto
+				'id' => $fila->id,
+				'nombre' => $fila->nombre,
+				'correo' => $fila->correo,
+				'puesto' => $fila->puesto,
+				'nombreUsuario' => $fila->nombreUsuario
 			);
 			$usuarios[$i] = $usuario;
 		}
@@ -64,11 +66,13 @@ class Usuario_Model extends CI_Model
 		$consulta = $this->db->get('usuario');
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
-			$row = $resultado[$i];
+			$fila = $resultado[$i];
 			$usuario = array(
-				'nombre' => $row->nombre,
-				'correo' => $row->correo,
-				'puesto' => $row->puesto
+				'id' => $fila->id,
+				'nombre' => $fila->nombre,
+				'correo' => $fila->correo,
+				'puesto' => $fila->puesto,
+				'nombreUsuario' => $fila->nombreUsuario
 			);
 			$usuarios[$i] = $usuario;
 		}

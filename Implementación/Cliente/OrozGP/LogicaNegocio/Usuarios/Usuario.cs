@@ -63,7 +63,7 @@ namespace OrozGP.LogicaNegocio.Usuarios
             set => contraseña = value;
         }
 
-        public static async Task<Usuario> iniciarSesion(string nombre, string contraseña)
+        public static async Task<Usuario> IniciarSesion(string nombre, string contraseña)
         {
             Usuario usuario = new Usuario();
             dynamic json = await ServiciosUsuario.ObtenerUsuario(nombre, contraseña);
@@ -73,33 +73,38 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuario;
         }
-        public static bool generarContraseña(string nombre)
+        public static bool GenerarContraseña(string nombre)
         {
             return false;
         }
-        public static IList<Usuario> obtenerUsuarios()
+        public static async Task<IList<Usuario>> ObtenerUsuarios()
+        {
+            IList<Usuario> usuarios = new List<Usuario>();
+            dynamic json = await ServiciosUsuario.ObtenerUsuarios();
+            foreach (dynamic item in json.usuarios)
+            {
+                usuarios.Add(new Usuario(item));
+            }
+            return usuarios;
+        }
+        public static IList<Usuario> ObtenerUsuarios(string clave)
         {
             IList<Usuario> usuarios = new List<Usuario>();
             return usuarios;
         }
-        public static IList<Usuario> obtenerUsuarios(string clave)
-        {
-            IList<Usuario> usuarios = new List<Usuario>();
-            return usuarios;
-        }
-        public bool registrarUsuario()
+        public bool RegistrarUsuario()
         {
             return false;
         }
-        public bool editarUsuario()
+        public bool EditarUsuario()
         {
             return false;
         }
-        public bool eliminarUsuario()
+        public bool EliminarUsuario()
         {
             return false;
         }
-        public bool generarCredenciales()
+        public bool GenerarCredenciales()
         {
             return false;
         }
