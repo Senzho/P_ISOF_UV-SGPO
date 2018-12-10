@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrozGP.InterfazGrafica"
         mc:Ignorable="d"
-        Title="Oroz" Height="545" Width="920" WindowStartupLocation="CenterScreen">
+        Title="Oroz" Height="545" Width="920" WindowStartupLocation="CenterScreen" Icon="/OrozGP;component/Recursos/Imagenes/into-logo.png">
     <Grid RenderTransformOrigin="0.545,0.189">
         <Grid HorizontalAlignment="Left" Width="232" Background="#FFB49614">
             <Button x:Name="botonPresupuestos" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="232" Height="45" Style="{DynamicResource opcion}">

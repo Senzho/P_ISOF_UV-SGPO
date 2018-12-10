@@ -1,4 +1,5 @@
 ﻿using OrozGP.LogicaNegocio.Usuarios;
+using OrozGP.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,14 +56,52 @@ namespace OrozGP.InterfazGrafica.Usuarios
             //Falta validar correo.
             return valor;
         }
-        private void MostrarMensajeDatos(string mensaje)
+        private void MostrarMensajeDatos(DatosUsuario datos)
         {
-            MessageBox.Show(mensaje, "Datos no válidos", MessageBoxButton.OK);
+            VentanaMensaje ventanaMensaje;
+            string mensaje;
+            switch (datos)
+            {
+                case DatosUsuario.nombre:
+                    mensaje = "El campo 'Nombre' debe tener entre 5 y 100 caractéres";
+                    break;
+                case DatosUsuario.correo:
+                    mensaje = "El campo 'Correo' debe tener entre 5 y 100 caractéres";
+                    break;
+                //Puesto:
+                default:
+                    mensaje = "El campo 'Puesto' debe tener entre 5 y 100 caractéres";
+                    break;
+            }
+            ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            ventanaMensaje.ShowDialog();
         }
         private void Regresar()
         {
             this.principal.dockCentral.Children.Clear();
             this.principal.dockCentral.Children.Add(new PanelUsuarios(this.principal));
+        }
+        private async Task Registrar()
+        {
+            string correo = this.campoCorreo.Text.Trim();
+            string correoNoArroba = correo.Replace("@", "");
+            Usuario usuarioPeticion = new Usuario(0, this.campoNombre.Text.Trim(), correo, this.campoPuesto.Text.Trim(), correoNoArroba, Encriptacion.sha256(correoNoArroba));
+            Usuario usuarioRespuesta = await usuarioPeticion.RegistrarUsuario();
+            VentanaMensaje.Mensaje tipo;
+            string mensaje;
+            if (usuarioRespuesta.Id == 0)
+            {
+                tipo = VentanaMensaje.Mensaje.error;
+                mensaje = "Lo sentimos, no pudimos registrar el usuario";
+            }
+            else
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Usuario registrado";
+                this.usuario = usuarioRespuesta;
+            }
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            vMensaje.ShowDialog();
         }
 
         enum DatosUsuario
@@ -92,20 +131,14 @@ namespace OrozGP.InterfazGrafica.Usuarios
 
         private void BotonNuevo_Click(object sender, RoutedEventArgs e)
         {
-            switch (this.ValidarCampos())
+            DatosUsuario datos = this.ValidarCampos();
+            if (datos == DatosUsuario.ok)
             {
-                case DatosUsuario.nombre:
-                    this.MostrarMensajeDatos("El campo 'Nombre' debe tener entre 5 y 100 caractéres");
-                    break;
-                case DatosUsuario.correo:
-                    this.MostrarMensajeDatos("El campo 'Correo' debe tener entre 5 y 100 caractéres");
-                    break;
-                case DatosUsuario.puesto:
-                    this.MostrarMensajeDatos("El campo 'Puesto' debe tener entre 5 y 100 caractéres");
-                    break;
-                default:
-                    //Enviar petición.
-                    break;
+                this.Registrar();
+            }
+            else
+            {
+                this.MostrarMensajeDatos(datos);
             }
         }
 

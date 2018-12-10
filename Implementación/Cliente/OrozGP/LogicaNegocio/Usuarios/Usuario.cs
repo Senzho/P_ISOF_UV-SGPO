@@ -104,9 +104,19 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuarios;
         }
-        public bool RegistrarUsuario()
+        public async Task<Usuario> RegistrarUsuario()
         {
-            return false;
+            Usuario usuario;
+            dynamic json = await ServiciosUsuario.RegistrarUsuario(this);
+            if (json.exito == true)
+            {
+                usuario = new Usuario(json.usuario);
+            }
+            else
+            {
+                usuario = new Usuario();
+            }
+            return usuario;
         }
         public bool EditarUsuario()
         {

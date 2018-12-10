@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrozGP"
         mc:Ignorable="d"
-        Title="Iniciar sesión" Height="350" Width="750" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Iniciar sesión" Height="350" Width="750" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Recursos/Imagenes/into-logo.png">
     <Grid>
         <Grid HorizontalAlignment="Left" Width="228" Background="#FFB49614">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="228" Source="Recursos/Imagenes/into-logo-texto.png" Stretch="UniformToFill" Margin="0,10,0,0"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Width="190" Source="Recursos/Imagenes/into-logo-texto.png" Stretch="UniformToFill" Margin="18,36,0,0"/>
         </Grid>
         <TextBox x:Name="campoUsuario" Height="51"  Margin="282,42,51,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextDecorations="{x:Null}" Style="{DynamicResource formulario}" TabIndex="0"/>
         <PasswordBox x:Name="campoContrasena" Margin="282,101,51,0" VerticalAlignment="Top" Height="51"  Style="{DynamicResource formularioP}" TabIndex="1"/>

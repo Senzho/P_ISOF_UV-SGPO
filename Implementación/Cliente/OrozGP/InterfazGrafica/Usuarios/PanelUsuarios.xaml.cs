@@ -34,7 +34,8 @@ namespace OrozGP.InterfazGrafica.Usuarios
             IList<Usuario> usuariosBusqueda = await Usuario.ObtenerUsuarios(clave);
             if (usuariosBusqueda == null)
             {
-                MessageBox.Show("Escribe una palabra clave para buscar", "Datos no válidos", MessageBoxButton.OK);
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", "Escribe una palabra clave para buscar", VentanaMensaje.Botones.ok, this.principal);
+                ventanaMensaje.ShowDialog();
             }
             else
             {
@@ -66,6 +67,20 @@ namespace OrozGP.InterfazGrafica.Usuarios
         {
             this.principal.dockCentral.Children.Clear();
             this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, null));
+        }
+        private void BotonEditar_Click(object sender, RoutedEventArgs e)
+        {
+            Usuario usuario = (Usuario)this.tabla.SelectedItem;
+            if (usuario != null)
+            {
+                this.principal.dockCentral.Children.Clear();
+                this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, usuario));
+            }
+            else
+            {
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Elemento no seleccionado", "Debes seleccionar un elemento para editar", VentanaMensaje.Botones.ok, this.principal);
+                ventanaMensaje.ShowDialog();
+            }
         }
     }
 }

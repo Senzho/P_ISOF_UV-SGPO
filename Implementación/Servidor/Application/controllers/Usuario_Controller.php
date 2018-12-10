@@ -13,12 +13,12 @@ class Usuario_Controller extends REST_Controller
 		$puesto = isset($datos['puesto']) ? $datos['puesto'] : '';
 		$usuario;
 		$contrasena;
-		$entradas = array($nombre, $correo, $puesto);
+		$entradas = array($nombre, $correo);
 		if ($u_c){
 			$usuario = isset($datos['usuario']) ? $datos['usuario'] : '';
 			$contrasena = isset($datos['contrasena']) ? $datos['contrasena'] : '';
-			$entradas[3] = $usuario;
-			$entradas[4] = $contrasena;
+			$entradas[2] = $usuario;
+			$entradas[3] = $contrasena;
 		}
 		$valida = True;
 		for ($i = 0; $i < count($entradas); $i ++){
@@ -26,6 +26,9 @@ class Usuario_Controller extends REST_Controller
 				$valida = False;
 				break;
 			}
+		}
+		if (!$this->validar_dato(5, 100, $puesto)){
+			$valida = False;
 		}
 		return $valida;
 	}
@@ -53,7 +56,7 @@ class Usuario_Controller extends REST_Controller
 	{
 		$respuesta;
 		$usuario = $this->post();
-		if ($this->validar_recepcion($usuario, True)){
+		//if ($this->validar_recepcion($usuario, True)){
 			$resultado = $this->Usuario_Model->registrar($usuario);
 			$respuesta['exito'] = $resultado['resultado'];
 			if ($respuesta['exito']){
@@ -62,10 +65,10 @@ class Usuario_Controller extends REST_Controller
 			}else{
 				$respuesta['error'] = 2;
 			}
-		}else{
+		/*}else{
 			$respuesta['exito'] = False;
 			$respuesta['error'] = 1;
-		}
+		}*/
 		$codigo = $respuesta['exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}

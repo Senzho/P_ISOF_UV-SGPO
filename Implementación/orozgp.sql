@@ -28,9 +28,9 @@ CREATE TABLE `usuario` (
   `correo` varchar(100) DEFAULT NULL,
   `puesto` varchar(100) DEFAULT NULL,
   `nombreUsuario` varchar(100) DEFAULT NULL,
-  `contrasena` varchar(100) DEFAULT NULL,
+  `contraseña` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Víctor Javier García Mascareñas','vijagama@outlook.es','Diseñador','victor','e63c8c8a0f530555c761a7f3383121d33be720b83bc038a8ca54b6e6c42300e1');
+INSERT INTO `usuario` VALUES (1,'Víctor Javier García Mascareñas','vijagama@outlook.es','Diseñador','victor','e63c8c8a0f530555c761a7f3383121d33be720b83bc038a8ca54b6e6c42300e1'),(27,'Maria Antonieta de las Nieves','marantoneves@gmail.com','Carpintero','anotonia','jfnsfpokhfdjd63839rufwywbdmcywdnf9383bdmoe8'),(28,'Juan Daniel Murrieta','judamu@gmail.com','Diseñador','judamu','jfnsfpokhfdjd63839rufwywbdmcywdnf9383bdmoe8'),(31,'Ana de la Reguera','andelareg@gmail.com','Hostess','andelareggmail.com','fbb6a08e1ae849a81d7bbabc408de98bbea47c7ead4368dfed4abd466dca7cd9');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-04 13:14:52
+-- Dump completed on 2018-12-10 12:48:15

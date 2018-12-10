@@ -43,3 +43,5 @@ C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\O
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Usuarios\PanelUsuarios.baml
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Usuarios\PanelUsuario.g.cs
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Usuarios\PanelUsuario.baml
+C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\VentanaMensaje.g.cs
+C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\VentanaMensaje.baml

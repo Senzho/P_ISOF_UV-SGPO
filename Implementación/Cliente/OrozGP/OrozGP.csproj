@@ -64,6 +64,9 @@
     <Compile Include="InterfazGrafica\Usuarios\PanelUsuarios.xaml.cs">
       <DependentUpon>PanelUsuarios.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InterfazGrafica\VentanaMensaje.xaml.cs">
+      <DependentUpon>VentanaMensaje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InterfazGrafica\VentanaPrincipal.xaml.cs">
       <DependentUpon>VentanaPrincipal.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InterfazGrafica\Usuarios\PanelUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterfazGrafica\VentanaMensaje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +170,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\Imagenes\chevron-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\Imagenes\check.png" />
+    <Resource Include="Recursos\Imagenes\issue-opened-red.png" />
+    <Resource Include="Recursos\Imagenes\issue-opened.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\Imagenes\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

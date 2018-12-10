@@ -54,7 +54,8 @@ namespace OrozGP
         }
         private void MostrarMensajeError(string mensaje)
         {
-            MessageBox.Show(mensaje, "Datos no válidos", MessageBoxButton.OK);
+            VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this);
+            ventanaMensaje.ShowDialog();
         }
 
         public MainWindow()

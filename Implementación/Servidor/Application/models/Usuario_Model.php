@@ -9,7 +9,7 @@ class Usuario_Model extends CI_Model
 	public function iniciar_sesion($nombre, $contrasena)
 	{
 		$respuesta;
-		$consulta = $this->db->get_where('usuario', array('nombreUsuario' => $nombre, 'contrasena' => $contrasena));
+		$consulta = $this->db->get_where('usuario', array('nombreUsuario' => $nombre, 'contraseña' => $contrasena));
 		if ($consulta->num_rows() === 1){
 			$fila = $consulta->row();
 			$usuario = array('id' => $fila->id, 'nombre' => $fila->nombre, 'correo' => $fila->correo, 'puesto' => $fila->puesto, 'nombreUsuario' => $fila->nombreUsuario);
