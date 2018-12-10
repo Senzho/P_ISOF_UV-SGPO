@@ -31,7 +31,7 @@ class Usuario_Controller extends REST_Controller
 	}
 	private function validar_dato($min, $max, $dato)
 	{
-		$valido;
+		$valido = False;
 		$tipo = gettype($dato);
 		if ($tipo === 'string'){
 			$len = strlen($dato);
@@ -128,9 +128,18 @@ class Usuario_Controller extends REST_Controller
 	}
 	public function clave_get()
 	{
-		$clave = 
-		$respuesta['usuarios'] = $this->Usuario_Model->obtener_usuarios_clave();
-		$this->response($respuesta, 200);
+		$clave = $this->get('clave');
+		$respuesta;
+		$codigo;
+		if ($this->validar_dato(1, 100, $clave)){
+			$respuesta['exito'] = True;
+			$respuesta['usuarios'] = $this->Usuario_Model->obtener_usuarios_clave($clave);
+		}else{
+			$respuesta['exito'] = False;
+			$respuesta['error'] = 1;
+		}
+		$codigo = $respuesta['exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
 	}
 	public function contrasena_put()
 	{

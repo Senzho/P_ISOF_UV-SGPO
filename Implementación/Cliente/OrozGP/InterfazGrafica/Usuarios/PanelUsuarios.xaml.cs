@@ -22,27 +22,50 @@ namespace OrozGP.InterfazGrafica.Usuarios
     public partial class PanelUsuarios : UserControl
     {
         private IList<Usuario> usuarios;
+        private VentanaPrincipal principal;
 
         private async Task ObtenerUsuarios()
         {
             this.usuarios = await Usuario.ObtenerUsuarios();
             this.CargarUsuarios();
         }
+        private async Task BuscarUsuarios(string clave)
+        {
+            IList<Usuario> usuariosBusqueda = await Usuario.ObtenerUsuarios(clave);
+            if (usuariosBusqueda == null)
+            {
+                MessageBox.Show("Escribe una palabra clave para buscar", "Datos no válidos", MessageBoxButton.OK);
+            }
+            else
+            {
+                this.usuarios = usuariosBusqueda;
+                this.CargarUsuarios();
+            }
+        }
         private void CargarUsuarios()
         {
             this.tabla.ItemsSource = this.usuarios;
         }
 
-        public PanelUsuarios()
+        public PanelUsuarios(VentanaPrincipal principal)
         {
             InitializeComponent();
+            this.principal = principal;
             this.usuarios = new List<Usuario>();
             this.ObtenerUsuarios();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void CampoBusqueda_KeyUp(object sender, KeyEventArgs e)
         {
-
+            if (e.Key == Key.Return)
+            {
+                this.BuscarUsuarios(this.campoBusqueda.Text);
+            }
+        }
+        private void BotonNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            this.principal.dockCentral.Children.Clear();
+            this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, null));
         }
     }
 }

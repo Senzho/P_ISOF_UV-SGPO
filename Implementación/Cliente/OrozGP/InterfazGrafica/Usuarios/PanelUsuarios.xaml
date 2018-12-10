@@ -8,18 +8,18 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Label x:Name="label" Content="¿Alguien en especial?" Margin="140,10,140,0" VerticalAlignment="Top" FontSize="28" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="campoBusqueda" Height="32" Margin="140,60,140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Padding="0"/>
-        <DataGrid x:Name="tabla" Margin="40,109,40,88" AutoGenerateColumns="False">
+        <TextBox x:Name="campoBusqueda" Height="32" Margin="140,60,140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Padding="0" KeyUp="CampoBusqueda_KeyUp"/>
+        <DataGrid x:Name="tabla" Margin="10,109,10,88" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Nombre}" ClipboardContentBinding="{x:Null}" Header="Nombre" FontSize="18" Width="200"/>
                 <DataGridTextColumn Binding="{Binding Path=Correo}" ClipboardContentBinding="{x:Null}" Header="Correo" Width="200" FontSize="18"/>
                 <DataGridTextColumn Binding="{Binding Path=Puesto}" ClipboardContentBinding="{x:Null}" Header="Puesto" FontSize="18" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="botonEditar" Content="Editar" HorizontalAlignment="Left" Margin="40,0,0,23" Width="90" Click="button_Click" Style="{DynamicResource botonAccion}" Height="31" VerticalAlignment="Bottom"/>
-        <Button x:Name="botonEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="152,0,0,23" Width="90" Style="{DynamicResource botonError}" Height="31" VerticalAlignment="Bottom"/>
-        <Button x:Name="botonCredenciales" Content="Generar credenciales" HorizontalAlignment="Left" Margin="262,0,0,23" Width="210" Style="{DynamicResource botonExtra}" Height="31" VerticalAlignment="Bottom"/>
-        <Button x:Name="botonNuevo" Content="Nuevo" HorizontalAlignment="Right" Margin="0,0,40,23" Width="90" Style="{DynamicResource botonOk}" Height="31" VerticalAlignment="Bottom"/>
+        <Button x:Name="botonEditar" Content="Editar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonAccion}" Height="35" VerticalAlignment="Bottom"/>
+        <Button x:Name="botonEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="114,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom"/>
+        <Button x:Name="botonCredenciales" Content="Generar credenciales" HorizontalAlignment="Left" Margin="218,0,0,10" Width="210" Style="{DynamicResource botonExtra}" Height="35" VerticalAlignment="Bottom"/>
+        <Button x:Name="botonNuevo" Content="Nuevo" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonNuevo_Click"/>
 
     </Grid>
 

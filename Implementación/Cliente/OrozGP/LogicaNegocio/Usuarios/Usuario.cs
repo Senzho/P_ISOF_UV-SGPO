@@ -7,7 +7,7 @@ using OrozGP.Servicios.Usuarios;
 
 namespace OrozGP.LogicaNegocio.Usuarios
 {
-    class Usuario
+    public class Usuario
     {
         private int id;
         private string nombre;
@@ -87,9 +87,21 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuarios;
         }
-        public static IList<Usuario> ObtenerUsuarios(string clave)
+        public static async Task<IList<Usuario>> ObtenerUsuarios(string clave)
         {
             IList<Usuario> usuarios = new List<Usuario>();
+            dynamic json = await ServiciosUsuario.ObtenerUsuarios(clave);
+            if (json.exito == true)
+            {
+                foreach (dynamic item in json.usuarios)
+                {
+                    usuarios.Add(new Usuario(item));
+                }
+            }
+            else
+            {
+                usuarios = null;
+            }
             return usuarios;
         }
         public bool RegistrarUsuario()

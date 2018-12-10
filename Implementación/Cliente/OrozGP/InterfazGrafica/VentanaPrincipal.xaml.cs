@@ -26,7 +26,7 @@ namespace OrozGP.InterfazGrafica
         private void CargarPanelUsuarios()
         {
             this.dockCentral.Children.Clear();
-            this.dockCentral.Children.Add(new PanelUsuarios());
+            this.dockCentral.Children.Add(new PanelUsuarios(this));
         }
 
         public VentanaPrincipal()
@@ -36,7 +36,7 @@ namespace OrozGP.InterfazGrafica
 
         internal Usuario Usuario { get => usuario; set => usuario = value; }
 
-        private void botonUsuarios_Click(object sender, RoutedEventArgs e)
+        private void BotonUsuarios_Click(object sender, RoutedEventArgs e)
         {
             this.CargarPanelUsuarios();
         }

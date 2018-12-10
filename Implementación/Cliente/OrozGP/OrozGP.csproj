@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InterfazGrafica\Usuarios\PanelUsuario.xaml.cs">
+      <DependentUpon>PanelUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InterfazGrafica\Usuarios\PanelUsuarios.xaml.cs">
       <DependentUpon>PanelUsuarios.xaml</DependentUpon>
     </Compile>
@@ -66,6 +69,10 @@
     </Compile>
     <Compile Include="Servicios\Usuarios\ServiciosUsuario.cs" />
     <Compile Include="Util\Encriptacion.cs" />
+    <Page Include="InterfazGrafica\Usuarios\PanelUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InterfazGrafica\Usuarios\PanelUsuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\Imagenes\into-texto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\Imagenes\chevron-left.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

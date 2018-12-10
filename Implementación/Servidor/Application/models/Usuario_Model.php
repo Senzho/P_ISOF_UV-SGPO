@@ -41,7 +41,7 @@ class Usuario_Model extends CI_Model
 	}
 	public function obtener_usuarios()
 	{
-		$usuarios;
+		$usuarios = array();
 		$consulta = $this->db->get('usuario');
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
@@ -59,10 +59,10 @@ class Usuario_Model extends CI_Model
 	}
 	public function obtener_usuarios_clave($clave)
 	{
-		$usuarios;
+		$usuarios = array();
 		$this->db->like('nombre', $clave);
-		$this->db->like('correo', $clave);
-		$this->db->like('puesto', $clave);
+		$this->db->or_like('correo', $clave);
+		$this->db->or_like('puesto', $clave);
 		$consulta = $this->db->get('usuario');
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
