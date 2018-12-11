@@ -118,13 +118,19 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuario;
         }
-        public bool EditarUsuario()
+        public async Task<bool> EditarUsuario()
         {
-            return false;
+            bool edicion;
+            dynamic json = await ServiciosUsuario.EditarUsuario(this);
+            edicion = json.exito == true;
+            return edicion;
         }
-        public bool EliminarUsuario()
+        public async Task<bool> EliminarUsuario()
         {
-            return false;
+            bool baja;
+            dynamic json = await ServiciosUsuario.EliminarUsuario(this.id);
+            baja = json.exito == true;
+            return baja;
         }
         public bool GenerarCredenciales()
         {

@@ -99,8 +99,30 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Usuario registrado";
                 this.usuario = usuarioRespuesta;
+                this.botonEliminar.Content = "Regresar";
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            vMensaje.ShowDialog();
+        }
+        private async Task Editar()
+        {
+            Usuario usuarioPeticion = new Usuario(this.usuario.Id, this.campoNombre.Text.Trim(), this.campoCorreo.Text.Trim(), this.campoPuesto.Text.Trim(), "", "");
+            bool edicion = await usuarioPeticion.EditarUsuario();
+            VentanaMensaje.Mensaje tipo;
+            string mensaje;
+            if (edicion)
+            {
+                this.usuario = usuarioPeticion;
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Usuario actualizado";
+                this.botonEliminar.Content = "Regresar";
+            }
+            else
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Lo sentimos, no pudimos actualizar el usuario";
+            }
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Edicion", mensaje, VentanaMensaje.Botones.ok, this.principal);
             vMensaje.ShowDialog();
         }
 
@@ -129,12 +151,19 @@ namespace OrozGP.InterfazGrafica.Usuarios
             this.Regresar();
         }
 
-        private void BotonNuevo_Click(object sender, RoutedEventArgs e)
+        private void BotonGuardar_Click(object sender, RoutedEventArgs e)
         {
             DatosUsuario datos = this.ValidarCampos();
             if (datos == DatosUsuario.ok)
             {
-                this.Registrar();
+                if (this.usuario == null)
+                {
+                    this.Registrar();
+                }
+                else
+                {
+                    this.Editar();
+                }
             }
             else
             {

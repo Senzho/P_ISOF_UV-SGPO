@@ -23,7 +23,7 @@
         <Label x:Name="etiquetaPuesto" Content="Puesto:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox x:Name="campoPuesto" Height="30" Margin="102,160,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Button x:Name="botonEliminar" Content="Cancelar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom" Click="BotonEliminar_Click"/>
-        <Button x:Name="botonNuevo" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonNuevo_Click"/>
+        <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click"/>
 
     </Grid>
 </UserControl>

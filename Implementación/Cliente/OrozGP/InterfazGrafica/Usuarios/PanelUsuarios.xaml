@@ -17,8 +17,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="botonEditar" Content="Editar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonAccion}" Height="35" VerticalAlignment="Bottom" Click="BotonEditar_Click"/>
-        <Button x:Name="botonEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="114,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom"/>
-        <Button x:Name="botonCredenciales" Content="Generar credenciales" HorizontalAlignment="Left" Margin="218,0,0,10" Width="210" Style="{DynamicResource botonExtra}" Height="35" VerticalAlignment="Bottom"/>
+        <Button x:Name="botonEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="114,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom" Click="BotonEliminar_Click"/>
+        <Button x:Name="botonCredenciales" Content="Generar credenciales" HorizontalAlignment="Left" Margin="218,0,0,10" Width="210" Style="{DynamicResource botonExtra}" Height="35" VerticalAlignment="Bottom" Click="BotonCredenciales_Click"/>
         <Button x:Name="botonNuevo" Content="Nuevo" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonNuevo_Click"/>
 
     </Grid>

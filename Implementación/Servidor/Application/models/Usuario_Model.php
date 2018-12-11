@@ -29,13 +29,13 @@ class Usuario_Model extends CI_Model
 	}
 	public function editar($usuario)
 	{
-		$this->db->where('idUsuario', $usuario['id']);
+		$this->db->where('id', $usuario['id']);
 		$resultado = $this->db->update('usuario', $usuario);
 		return $resultado;
 	}
 	public function eliminar($id_usuario)
 	{
-		$this->db->where('idUsuario', $id_usuario);
+		$this->db->where('id', $id_usuario);
 		$resultado = $this->db->update('usuario', array('activo' => False));
 		return $resultado;
 	}

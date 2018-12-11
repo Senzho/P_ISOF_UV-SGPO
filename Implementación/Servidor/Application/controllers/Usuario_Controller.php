@@ -76,15 +76,15 @@ class Usuario_Controller extends REST_Controller
 	{
 		$respuesta;
 		$usuario = $this->put();
-		if ($this->validar_recepcion($usuario, True)){
+		//if ($this->validar_recepcion($usuario, True)){
 			$respuesta['exito'] = $this->Usuario_Model->editar($usuario);
 			if (!$respuesta['exito']){
 				$respuesta['error'] = 2;
 			}
-		}else{
+		/*}else{
 			$respuesta['exito'] = False;
 			$respuesta['error'] = 1;
-		}
+		}*/
 		$codigo = $respuesta['exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}

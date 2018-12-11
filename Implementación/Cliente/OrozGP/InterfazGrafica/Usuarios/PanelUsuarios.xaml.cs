@@ -24,6 +24,13 @@ namespace OrozGP.InterfazGrafica.Usuarios
         private IList<Usuario> usuarios;
         private VentanaPrincipal principal;
 
+        private enum Seleccion
+        {
+            editar,
+            eliminar,
+            generar,
+        };
+
         private async Task ObtenerUsuarios()
         {
             this.usuarios = await Usuario.ObtenerUsuarios();
@@ -47,6 +54,45 @@ namespace OrozGP.InterfazGrafica.Usuarios
         {
             this.tabla.ItemsSource = this.usuarios;
         }
+        private void CargarPanelUsuario(Usuario usuario)
+        {
+            this.principal.dockCentral.Children.Clear();
+            this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, usuario));
+        }
+        private bool ValidarSeleccion(Seleccion seleccion)
+        {
+            Object elemento = this.tabla.SelectedItem;
+            bool valida = elemento != null;
+            if (!valida)
+            {
+                string mensaje = seleccion == Seleccion.editar ? "editar" : (seleccion == Seleccion.eliminar ? "eliminar" : "generar credenciales");
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Elemento no seleccionado", "Debes seleccionar un elemento para " + mensaje + ".", VentanaMensaje.Botones.ok, this.principal);
+                ventanaMensaje.ShowDialog();
+            }
+            return valida;
+        }
+        private async Task EliminarUsuario(Usuario usuario)
+        {
+            bool baja = await usuario.EliminarUsuario();
+            VentanaMensaje.Mensaje tipo;
+            string mensaje;
+            if (baja)
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Usuario eliminado";
+            }
+            else
+            {
+                tipo = VentanaMensaje.Mensaje.error;
+                mensaje = "Lo sentimos, no pudimos eliminar el usuario";
+            }
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Baja", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            vMensaje.ShowDialog();
+        }
+        private void BorrarUsuario(Usuario usuario)
+        {
+
+        }
 
         public PanelUsuarios(VentanaPrincipal principal)
         {
@@ -65,21 +111,29 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private void BotonNuevo_Click(object sender, RoutedEventArgs e)
         {
-            this.principal.dockCentral.Children.Clear();
-            this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, null));
+            this.CargarPanelUsuario(null);
         }
         private void BotonEditar_Click(object sender, RoutedEventArgs e)
         {
-            Usuario usuario = (Usuario)this.tabla.SelectedItem;
-            if (usuario != null)
+            if (this.ValidarSeleccion(Seleccion.editar))
             {
-                this.principal.dockCentral.Children.Clear();
-                this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, usuario));
+                Usuario usuario = (Usuario)this.tabla.SelectedItem;
+                this.CargarPanelUsuario(usuario);
             }
-            else
+        }
+        private void BotonEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ValidarSeleccion(Seleccion.eliminar))
             {
-                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Elemento no seleccionado", "Debes seleccionar un elemento para editar", VentanaMensaje.Botones.ok, this.principal);
-                ventanaMensaje.ShowDialog();
+                Usuario usuario = (Usuario)this.tabla.SelectedItem;
+                this.EliminarUsuario(usuario);
+            }
+        }
+        private void BotonCredenciales_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ValidarSeleccion(Seleccion.generar))
+            {
+                //Generar credenciales.
             }
         }
     }
