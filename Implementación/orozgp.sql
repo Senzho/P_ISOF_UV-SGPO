@@ -16,6 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `permiso`
+--
+
+DROP TABLE IF EXISTS `permiso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permiso` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ambito` varchar(12) DEFAULT NULL,
+  `consultar` tinyint(1) DEFAULT NULL,
+  `crear` tinyint(1) DEFAULT NULL,
+  `modificar` tinyint(1) DEFAULT NULL,
+  `eliminar` tinyint(1) DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idUsuario` (`idUsuario`),
+  CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permiso`
+--
+
+LOCK TABLES `permiso` WRITE;
+/*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
+INSERT INTO `permiso` VALUES (1,'Materiales',1,1,1,1,1),(2,'Herrajes',1,1,1,1,1),(3,'Accesorios',1,1,1,1,1),(4,'Usuarios',1,1,1,1,1),(5,'Presupuestos',1,1,1,1,1);
+/*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -31,7 +62,7 @@ CREATE TABLE `usuario` (
   `contraseña` varchar(100) DEFAULT NULL,
   `activo` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +71,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Víctor Javier García Mascareñas','vijagama@outlook.es','Diseñador','victor','e63c8c8a0f530555c761a7f3383121d33be720b83bc038a8ca54b6e6c42300e1',1),(27,'María Antonieta de las Nieves','marantoneves@gmail.com','Carpintero','anotonia','jfnsfpokhfdjd63839rufwywbdmcywdnf9383bdmoe8',1),(28,'Juan Daniel Murrieta','judamu@gmail.com','Diseñador','judamu','jfnsfpokhfdjd63839rufwywbdmcywdnf9383bdmoe8',1),(31,'Ana de la Reguera','andelareg@gmail.com','Hostess','andelareggmail.com','fbb6a08e1ae849a81d7bbabc408de98bbea47c7ead4368dfed4abd466dca7cd9',1),(32,'Luis Gerardo Bonilla','lugebon@gmail.com','Carpintero','lugebongmail.com','8f1b737836b38a34b5e6002eae43a6fe54efdae54d342edf499f18fb8dd1f490',1),(34,'Laura Gabriela Sarmiento García','lagasaga@outlook.es','Diseñador','lagasaoutlook.es','3702c38a8aa38a2abf2fd87f49ff0c2d4a0e5cfcbfc4730c2bde3152eba27cf8',1);
+INSERT INTO `usuario` VALUES (1,'Víctor Javier García Mascareñas','vijagama@outlook.es','Diseñador','victor','e63c8c8a0f530555c761a7f3383121d33be720b83bc038a8ca54b6e6c42300e1',1),(36,'María Violeta Magaña Castelán','mavimacas@gmail.com','Hostess','mavimacasgmail.com','896e97a0aa774754268d03e36fde262761f4e1d1fc5e14adb649dbdf90324936',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-11 12:08:25
+-- Dump completed on 2018-12-18 15:05:30

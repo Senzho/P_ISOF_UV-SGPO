@@ -15,6 +15,7 @@ namespace OrozGP.LogicaNegocio.Usuarios
         private string puesto;
         private string nombreUsuario;
         private string contraseña;
+        private IList<Permiso> permisos;
 
         public Usuario(int id, string nombre, string correo, string puesto, string nombreUsuario, string contraseña)
         {
@@ -62,6 +63,10 @@ namespace OrozGP.LogicaNegocio.Usuarios
             get => contraseña;
             set => contraseña = value;
         }
+        public IList<Permiso> Permisos {
+            get => permisos;
+            set => permisos = value;
+        }
 
         public static async Task<Usuario> IniciarSesion(string nombre, string contraseña)
         {
@@ -70,6 +75,12 @@ namespace OrozGP.LogicaNegocio.Usuarios
             if (json.exito == true)
             {
                 usuario = new Usuario(json.usuario);
+                IList<Permiso> permisos = new List<Permiso>();
+                foreach (dynamic permiso in json.usuario.permisos)
+                {
+                    permisos.Add(new Permiso(permiso));
+                }
+                usuario.Permisos = permisos;
             }
             return usuario;
         }

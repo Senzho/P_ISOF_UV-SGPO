@@ -70,6 +70,7 @@
     <Compile Include="InterfazGrafica\VentanaPrincipal.xaml.cs">
       <DependentUpon>VentanaPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogicaNegocio\Usuarios\Permiso.cs" />
     <Compile Include="Servicios\Usuarios\ServiciosUsuario.cs" />
     <Compile Include="Util\Encriptacion.cs" />
     <Page Include="InterfazGrafica\Usuarios\PanelUsuario.xaml">

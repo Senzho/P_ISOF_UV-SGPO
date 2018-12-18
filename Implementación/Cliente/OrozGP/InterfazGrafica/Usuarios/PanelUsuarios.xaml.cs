@@ -89,10 +89,12 @@ namespace OrozGP.InterfazGrafica.Usuarios
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Baja", mensaje, VentanaMensaje.Botones.ok, this.principal);
             vMensaje.ShowDialog();
+            this.botonEliminar.IsEnabled = true;
         }
         private void BorrarUsuario(Usuario usuario)
         {
-            this.tabla.Items.Remove(usuario);
+            this.usuarios.Remove(usuario);
+            this.tabla.Items.Refresh();
         }
         private void SolicitarConfirmacionBaja()
         {
@@ -100,7 +102,12 @@ namespace OrozGP.InterfazGrafica.Usuarios
             bool? respuesta = vMensaje.ShowDialog();
             if (respuesta.Value)
             {
-
+                if (this.ValidarSeleccion(Seleccion.eliminar))
+                {
+                    this.botonEliminar.IsEnabled = false;
+                    Usuario usuario = (Usuario)this.tabla.SelectedItem;
+                    this.EliminarUsuario(usuario);
+                }
             }
         }
 
@@ -134,11 +141,6 @@ namespace OrozGP.InterfazGrafica.Usuarios
         private void BotonEliminar_Click(object sender, RoutedEventArgs e)
         {
             this.SolicitarConfirmacionBaja();
-            /*if (this.ValidarSeleccion(Seleccion.eliminar))
-            {
-                Usuario usuario = (Usuario)this.tabla.SelectedItem;
-                this.EliminarUsuario(usuario);
-            }*/
         }
         private void BotonCredenciales_Click(object sender, RoutedEventArgs e)
         {

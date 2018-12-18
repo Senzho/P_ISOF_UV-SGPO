@@ -144,6 +144,16 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 this.CargarUsuario();
             }
             this.campoNombre.Focus();
+            //
+            IList<Permiso> permisos = new List<Permiso>
+            {
+                new Permiso("Materiales", false, false, false, false),
+                new Permiso("Herrajes", false, true, false, false),
+                new Permiso("Accesorios", false, false, false, false),
+                new Permiso("Usuarios", false, false, true, false),
+                new Permiso("Presupuestos", false, false, false, false)
+            };
+            this.tablaPermisos.ItemsSource = permisos;
         }
 
         private void BotonEliminar_Click(object sender, RoutedEventArgs e)

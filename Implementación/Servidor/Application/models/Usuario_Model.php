@@ -1,6 +1,19 @@
 <?php
 class Usuario_Model extends CI_Model
 {
+	private function obtener_permisos($id_usuario)
+	{
+		$permisos = array();
+		$consulta = $this->db->get_where('permiso', array('idUsuario' => $id_usuario));
+		$resultado = $consulta->result();
+		for ($i = 0; $i < count($resultado); ++ $i) {
+			$fila = $resultado[$i];
+			$permiso = array('ambito' => $fila->ambito, 'consultar' => $fila->consultar, 'crear' => $fila->crear, 'modificar' => $fila->modificar, 'eliminar' => $fila->eliminar);
+			$permisos[$i] = $permiso;
+		}
+		return $permisos;
+	}
+
 	public function __construct()
 	{
 		$this->load->database('orozgp');
@@ -12,7 +25,7 @@ class Usuario_Model extends CI_Model
 		$consulta = $this->db->get_where('usuario', array('nombreUsuario' => $nombre, 'contraseña' => $contrasena));
 		if ($consulta->num_rows() === 1){
 			$fila = $consulta->row();
-			$usuario = array('id' => $fila->id, 'nombre' => $fila->nombre, 'correo' => $fila->correo, 'puesto' => $fila->puesto, 'nombreUsuario' => $fila->nombreUsuario);
+			$usuario = array('id' => $fila->id, 'nombre' => $fila->nombre, 'correo' => $fila->correo, 'puesto' => $fila->puesto, 'nombreUsuario' => $fila->nombreUsuario, 'permisos' => $this->obtener_permisos($fila->id));
 			$respuesta['resultado'] = True;
 			$respuesta['usuario'] = $usuario;
 		}else{
@@ -22,6 +35,7 @@ class Usuario_Model extends CI_Model
 	}
 	public function registrar($usuario)
 	{
+		$usuario['activo'] = True;
 		$resultado = $this->db->insert('usuario', $usuario);
 		$id = $this->db->insert_id();
 		$respuesta = array('resultado' => $resultado, 'id' => $id);

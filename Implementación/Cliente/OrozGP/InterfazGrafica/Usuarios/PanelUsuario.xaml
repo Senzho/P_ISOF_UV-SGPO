@@ -24,6 +24,15 @@
         <TextBox x:Name="campoPuesto" Height="30" Margin="102,160,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Button x:Name="botonEliminar" Content="Cancelar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom" Click="BotonEliminar_Click"/>
         <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click"/>
+        <DataGrid x:Name="tablaPermisos" Height="186" Margin="102,195,10,0" VerticalAlignment="Top" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Nombre}" ClipboardContentBinding="{x:Null}" Header="Ámbito" FontSize="18"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=Consultar}" ClipboardContentBinding="{x:Null}" Header="Consultar"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=Crear}" ClipboardContentBinding="{x:Null}" Header="Crear"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=Modificar}" ClipboardContentBinding="{x:Null}" Header="Modificar"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=Eliminar}" ClipboardContentBinding="{x:Null}" Header="Eliminar"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>

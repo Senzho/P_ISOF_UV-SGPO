@@ -53,6 +53,9 @@ namespace OrozGP.InterfazGrafica
                 case Botones.ok:
                     this.botonCancelar.Visibility = Visibility.Collapsed;
                     break;
+                case Botones.okCancel:
+                    //No esconder ningún botón.
+                    break;
                 //Cancel:
                 default:
                     this.botonAceptar.Visibility = Visibility.Collapsed;
