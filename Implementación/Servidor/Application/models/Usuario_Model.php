@@ -42,7 +42,7 @@ class Usuario_Model extends CI_Model
 	public function obtener_usuarios()
 	{
 		$usuarios = array();
-		$consulta = $this->db->get('usuario');
+		$consulta = $this->db->get_where('usuario', array('activo' => True));
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];
@@ -63,7 +63,7 @@ class Usuario_Model extends CI_Model
 		$this->db->like('nombre', $clave);
 		$this->db->or_like('correo', $clave);
 		$this->db->or_like('puesto', $clave);
-		$consulta = $this->db->get('usuario');
+		$consulta = $this->db->get_where('usuario', array('activo' => True));
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];

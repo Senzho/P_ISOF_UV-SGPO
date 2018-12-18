@@ -80,6 +80,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
             {
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Usuario eliminado";
+                this.BorrarUsuario(usuario);
             }
             else
             {
@@ -91,7 +92,16 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private void BorrarUsuario(Usuario usuario)
         {
+            this.tabla.Items.Remove(usuario);
+        }
+        private void SolicitarConfirmacionBaja()
+        {
+            VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar al usuario?", VentanaMensaje.Botones.okCancel, this.principal);
+            bool? respuesta = vMensaje.ShowDialog();
+            if (respuesta.Value)
+            {
 
+            }
         }
 
         public PanelUsuarios(VentanaPrincipal principal)
@@ -123,11 +133,12 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private void BotonEliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ValidarSeleccion(Seleccion.eliminar))
+            this.SolicitarConfirmacionBaja();
+            /*if (this.ValidarSeleccion(Seleccion.eliminar))
             {
                 Usuario usuario = (Usuario)this.tabla.SelectedItem;
                 this.EliminarUsuario(usuario);
-            }
+            }*/
         }
         private void BotonCredenciales_Click(object sender, RoutedEventArgs e)
         {
