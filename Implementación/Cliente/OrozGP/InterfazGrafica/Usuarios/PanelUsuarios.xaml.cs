@@ -102,12 +102,9 @@ namespace OrozGP.InterfazGrafica.Usuarios
             bool? respuesta = vMensaje.ShowDialog();
             if (respuesta.Value)
             {
-                if (this.ValidarSeleccion(Seleccion.eliminar))
-                {
-                    this.botonEliminar.IsEnabled = false;
-                    Usuario usuario = (Usuario)this.tabla.SelectedItem;
-                    this.EliminarUsuario(usuario);
-                }
+                this.botonEliminar.IsEnabled = false;
+                Usuario usuario = (Usuario)this.tabla.SelectedItem;
+                this.EliminarUsuario(usuario);
             }
         }
 
@@ -140,7 +137,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private void BotonEliminar_Click(object sender, RoutedEventArgs e)
         {
-            this.SolicitarConfirmacionBaja();
+            if (this.ValidarSeleccion(Seleccion.eliminar))
+            {
+                this.SolicitarConfirmacionBaja();
+            }
         }
         private void BotonCredenciales_Click(object sender, RoutedEventArgs e)
         {

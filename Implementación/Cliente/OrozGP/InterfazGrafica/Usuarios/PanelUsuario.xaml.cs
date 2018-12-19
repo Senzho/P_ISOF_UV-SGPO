@@ -30,6 +30,34 @@ namespace OrozGP.InterfazGrafica.Usuarios
             this.campoNombre.Text = this.usuario.Nombre;
             this.campoCorreo.Text = this.usuario.Correo;
             this.campoPuesto.Text = this.usuario.Puesto;
+            this.tablaPermisos.ItemsSource = this.usuario.Permisos;
+            this.ObtenerPermisos();
+        }
+        private async Task ObtenerPermisos()
+        {
+            this.usuario.Permisos = await Permiso.ObtenerPermisos(this.usuario.Id);
+            this.CargarPermisos();
+        }
+        private void CargarPermisos()
+        {
+            IList<Permiso> permisos;
+            if (this.usuario != null)
+            {
+                permisos = this.usuario.Permisos;
+            }
+            else
+            {
+                permisos = new List<Permiso>()
+                {
+                    new Permiso(0, "Materiales", false, false, false, false),
+                    new Permiso(0, "Herrajes", false, false, false, false),
+                    new Permiso(0, "Accesorios", false, false, false, false),
+                    new Permiso(0, "Usuarios", false, false, false, false),
+                    new Permiso(0, "Presupuestos", false, false, false, false)
+                };
+            }
+            this.tablaPermisos.ItemsSource = permisos;
+            this.botonGuardar.IsEnabled = true;
         }
         private DatosUsuario ValidarCampos()
         {
@@ -85,7 +113,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
         {
             string correo = this.campoCorreo.Text.Trim();
             string correoNoArroba = correo.Replace("@", "");
-            Usuario usuarioPeticion = new Usuario(0, this.campoNombre.Text.Trim(), correo, this.campoPuesto.Text.Trim(), correoNoArroba, Encriptacion.sha256(correoNoArroba));
+            Usuario usuarioPeticion = new Usuario(0, this.campoNombre.Text.Trim(), correo, this.campoPuesto.Text.Trim(), correoNoArroba, Encriptacion.sha256(correoNoArroba))
+            {
+                Permisos = (IList<Permiso>)this.tablaPermisos.ItemsSource
+            };
             Usuario usuarioRespuesta = await usuarioPeticion.RegistrarUsuario();
             VentanaMensaje.Mensaje tipo;
             string mensaje;
@@ -99,6 +130,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Usuario registrado";
                 this.usuario = usuarioRespuesta;
+                this.usuario.Permisos = (IList<Permiso>)this.tablaPermisos.ItemsSource;
                 this.botonEliminar.Content = "Regresar";
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.principal);
@@ -143,17 +175,11 @@ namespace OrozGP.InterfazGrafica.Usuarios
             {
                 this.CargarUsuario();
             }
-            this.campoNombre.Focus();
-            //
-            IList<Permiso> permisos = new List<Permiso>
+            else
             {
-                new Permiso("Materiales", false, false, false, false),
-                new Permiso("Herrajes", false, true, false, false),
-                new Permiso("Accesorios", false, false, false, false),
-                new Permiso("Usuarios", false, false, true, false),
-                new Permiso("Presupuestos", false, false, false, false)
-            };
-            this.tablaPermisos.ItemsSource = permisos;
+                this.CargarPermisos();
+            }
+            this.campoNombre.Focus();
         }
 
         private void BotonEliminar_Click(object sender, RoutedEventArgs e)

@@ -121,7 +121,15 @@ namespace OrozGP.LogicaNegocio.Usuarios
             dynamic json = await ServiciosUsuario.RegistrarUsuario(this);
             if (json.exito == true)
             {
-                usuario = new Usuario(json.usuario);
+                IList<Permiso> permisos = new List<Permiso>();
+                foreach (dynamic permiso in json.usuario.permisos)
+                {
+                    permisos.Add(new Permiso(permiso));
+                }
+                usuario = new Usuario(json.usuario)
+                {
+                    Permisos = permisos
+                };
             }
             else
             {

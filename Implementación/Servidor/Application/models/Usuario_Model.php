@@ -1,15 +1,19 @@
 <?php
 class Usuario_Model extends CI_Model
 {
-	private function obtener_permisos($id_usuario)
+	private function registrar_permisos($id_usuario, $permisos)
 	{
-		$permisos = array();
-		$consulta = $this->db->get_where('permiso', array('idUsuario' => $id_usuario));
-		$resultado = $consulta->result();
-		for ($i = 0; $i < count($resultado); ++ $i) {
-			$fila = $resultado[$i];
-			$permiso = array('ambito' => $fila->ambito, 'consultar' => $fila->consultar, 'crear' => $fila->crear, 'modificar' => $fila->modificar, 'eliminar' => $fila->eliminar);
+		$resultado = True;
+		$resultados;
+		for($i = 0; $i < count($permisos); $i ++){
+			$permiso = $permisos[$i];
+			$permiso['idUsuario'] = $id_usuario;
+			$resultados[$i] = $this->db->insert('permiso', $permiso);
+			$permiso['Id'] = $this->db->insert_id();
 			$permisos[$i] = $permiso;
+			if (!$resultados[$i]){
+				$resultado = False;
+			}
 		}
 		return $permisos;
 	}
@@ -36,9 +40,14 @@ class Usuario_Model extends CI_Model
 	public function registrar($usuario)
 	{
 		$usuario['activo'] = True;
+		$permisos = $usuario['Permisos'];
+		unset($usuario['Permisos']);
 		$resultado = $this->db->insert('usuario', $usuario);
 		$id = $this->db->insert_id();
-		$respuesta = array('resultado' => $resultado, 'id' => $id);
+		if ($resultado){
+			$permisos = $this->registrar_permisos($id, $permisos);
+		}
+		$respuesta = array('resultado' => $resultado, 'id' => $id, 'permisos' => $permisos);
 		return $respuesta;
 	}
 	public function editar($usuario)
@@ -91,6 +100,18 @@ class Usuario_Model extends CI_Model
 			$usuarios[$i] = $usuario;
 		}
 		return $usuarios;
+	}
+	public function obtener_permisos($id_usuario)
+	{
+		$permisos = array();
+		$consulta = $this->db->get_where('permiso', array('idUsuario' => $id_usuario));
+		$resultado = $consulta->result();
+		for ($i = 0; $i < count($resultado); ++ $i) {
+			$fila = $resultado[$i];
+			$permiso = array('id' => $fila->id ,'ambito' => $fila->ambito, 'consultar' => $fila->consultar, 'crear' => $fila->crear, 'modificar' => $fila->modificar, 'eliminar' => $fila->eliminar);
+			$permisos[$i] = $permiso;
+		}
+		return $permisos;
 	}
 	public function obtener_usuario($nombre)
 	{
