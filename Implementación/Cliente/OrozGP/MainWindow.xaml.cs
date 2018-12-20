@@ -61,6 +61,11 @@ namespace OrozGP
         public MainWindow()
         {
             InitializeComponent();
+            //Función provicional: pruebas del sistema con inicio de sesión automático.
+            this.campoUsuario.Text = "victor";
+            this.campoContrasena.Password = "snape";
+            this.IniciarSesion();
+            //
         }
 
         enum Login

@@ -7,7 +7,7 @@ class Usuario_Model extends CI_Model
 		$resultados;
 		for($i = 0; $i < count($permisos); $i ++){
 			$permiso = $permisos[$i];
-			$permiso['idUsuario'] = $id_usuario;
+			$permiso['IdUsuario'] = $id_usuario;
 			$resultados[$i] = $this->db->insert('permiso', $permiso);
 			$permiso['Id'] = $this->db->insert_id();
 			$permisos[$i] = $permiso;
@@ -16,6 +16,14 @@ class Usuario_Model extends CI_Model
 			}
 		}
 		return $permisos;
+	}
+	private function editar_permisos($permisos)
+	{
+		for($i = 0; $i < count($permisos); $i ++){
+			$permiso = $permisos[$i];
+			$this->db->where('id', $permiso['Id']);
+			$this->db->update('permiso', $permiso);
+		}
 	}
 
 	public function __construct()
@@ -29,11 +37,11 @@ class Usuario_Model extends CI_Model
 		$consulta = $this->db->get_where('usuario', array('nombreUsuario' => $nombre, 'contraseña' => $contrasena));
 		if ($consulta->num_rows() === 1){
 			$fila = $consulta->row();
-			$usuario = array('id' => $fila->id, 'nombre' => $fila->nombre, 'correo' => $fila->correo, 'puesto' => $fila->puesto, 'nombreUsuario' => $fila->nombreUsuario, 'permisos' => $this->obtener_permisos($fila->id));
-			$respuesta['resultado'] = True;
-			$respuesta['usuario'] = $usuario;
+			$usuario = array('Id' => $fila->id, 'Nombre' => $fila->nombre, 'Correo' => $fila->correo, 'Puesto' => $fila->puesto, 'NombreUsuario' => $fila->nombreUsuario, 'Permisos' => $this->obtener_permisos($fila->id));
+			$respuesta['Resultado'] = True;
+			$respuesta['Usuario'] = $usuario;
 		}else{
-			$respuesta['resultado'] = False;
+			$respuesta['Resultado'] = False;
 		}
 		return $respuesta;
 	}
@@ -47,13 +55,18 @@ class Usuario_Model extends CI_Model
 		if ($resultado){
 			$permisos = $this->registrar_permisos($id, $permisos);
 		}
-		$respuesta = array('resultado' => $resultado, 'id' => $id, 'permisos' => $permisos);
+		$respuesta = array('Resultado' => $resultado, 'Id' => $id, 'Permisos' => $permisos);
 		return $respuesta;
 	}
 	public function editar($usuario)
 	{
-		$this->db->where('id', $usuario['id']);
+		$this->db->where('id', $usuario['Id']);
+		$permisos = $usuario['Permisos'];
+		unset($usuario['Permisos']);
 		$resultado = $this->db->update('usuario', $usuario);
+		if ($resultado){
+			$this->editar_permisos($permisos);
+		}
 		return $resultado;
 	}
 	public function eliminar($id_usuario)
@@ -70,11 +83,11 @@ class Usuario_Model extends CI_Model
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];
 			$usuario = array(
-				'id' => $fila->id,
-				'nombre' => $fila->nombre,
-				'correo' => $fila->correo,
-				'puesto' => $fila->puesto,
-				'nombreUsuario' => $fila->nombreUsuario
+				'Id' => $fila->id,
+				'Nombre' => $fila->nombre,
+				'Correo' => $fila->correo,
+				'Puesto' => $fila->puesto,
+				'NombreUsuario' => $fila->nombreUsuario
 			);
 			$usuarios[$i] = $usuario;
 		}
@@ -91,11 +104,11 @@ class Usuario_Model extends CI_Model
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];
 			$usuario = array(
-				'id' => $fila->id,
-				'nombre' => $fila->nombre,
-				'correo' => $fila->correo,
-				'puesto' => $fila->puesto,
-				'nombreUsuario' => $fila->nombreUsuario
+				'Id' => $fila->id,
+				'Nombre' => $fila->nombre,
+				'Correo' => $fila->correo,
+				'Puesto' => $fila->puesto,
+				'NombreUsuario' => $fila->nombreUsuario
 			);
 			$usuarios[$i] = $usuario;
 		}
@@ -108,7 +121,7 @@ class Usuario_Model extends CI_Model
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];
-			$permiso = array('id' => $fila->id ,'ambito' => $fila->ambito, 'consultar' => $fila->consultar, 'crear' => $fila->crear, 'modificar' => $fila->modificar, 'eliminar' => $fila->eliminar);
+			$permiso = array('Id' => $fila->id ,'Ambito' => $fila->ambito, 'Consultar' => $fila->consultar, 'Crear' => $fila->crear, 'Modificar' => $fila->modificar, 'Eliminar' => $fila->eliminar);
 			$permisos[$i] = $permiso;
 		}
 		return $permisos;

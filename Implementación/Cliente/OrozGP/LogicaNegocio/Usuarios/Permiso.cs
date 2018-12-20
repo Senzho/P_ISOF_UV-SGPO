@@ -27,12 +27,12 @@ namespace OrozGP.LogicaNegocio.Usuarios
         }
         public Permiso(dynamic json)
         {
-            this.id = json.id;
-            this.ambito = json.ambito;
-            this.consultar = json.consultar == "1";
-            this.crear = json.crear == "1";
-            this.modificar = json.modificar == "1";
-            this.eliminar = json.eliminar == "1";
+            this.id = json.Id;
+            this.ambito = json.Ambito;
+            this.consultar = json.Consultar == "1";
+            this.crear = json.Crear == "1";
+            this.modificar = json.Modificar == "1";
+            this.eliminar = json.Eliminar == "1";
         }
 
         public int Id { get => id; set => id = value; }
@@ -46,7 +46,7 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             IList<Permiso> permisos = new List<Permiso>();
             dynamic json = await ServiciosUsuario.ObtenerPermisos(idUsuario);
-            foreach (dynamic item in json.permisos)
+            foreach (dynamic item in json.Permisos)
             {
                 permisos.Add(new Permiso(item));
             }

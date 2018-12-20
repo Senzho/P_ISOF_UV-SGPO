@@ -17,14 +17,14 @@
         <Image x:Name="botonRegresar" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="30" Source="/OrozGP;component/Recursos/Imagenes/chevron-left.png" MouseUp="BotonRegresar_MouseUp"/>
         <Label x:Name="label" Content="Usuario" HorizontalAlignment="Left" Margin="40,3,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label x:Name="etiquetaNombre" Content="Nombre:" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoNombre" Height="30" Margin="102,90,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="campoNombre" Height="30" Margin="107,90,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="etiquetaCorreo" Content="Correo:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoCorreo" Height="30" Margin="102,125,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="campoCorreo" Height="30" Margin="107,125,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="etiquetaPuesto" Content="Puesto:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoPuesto" Height="30" Margin="102,160,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="campoPuesto" Height="30" Margin="107,160,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Button x:Name="botonEliminar" Content="Cancelar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom" Click="BotonEliminar_Click"/>
         <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click" IsEnabled="False"/>
-        <DataGrid x:Name="tablaPermisos" Height="186" Margin="102,195,10,0" VerticalAlignment="Top" AutoGenerateColumns="False">
+        <DataGrid x:Name="tablaPermisos" Height="186" Margin="107,195,10,0" VerticalAlignment="Top" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Ambito}" ClipboardContentBinding="{x:Null}" Header="Ámbito" FontSize="18"/>
                 <DataGridCheckBoxColumn Binding="{Binding Path=Consultar}" ClipboardContentBinding="{x:Null}" Header="Consultar"/>
@@ -33,6 +33,7 @@
                 <DataGridCheckBoxColumn Binding="{Binding Path=Eliminar}" ClipboardContentBinding="{x:Null}" Header="Eliminar"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Label x:Name="etiquetaPermisos" Content="Permisos:" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" FontSize="20"/>
 
     </Grid>
 </UserControl>

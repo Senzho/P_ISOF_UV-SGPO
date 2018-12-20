@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Usuarios
 {
-    /// <summary>
-    /// Lógica de interacción para PanelUsuario.xaml
-    /// </summary>
     public partial class PanelUsuario : UserControl
     {
         private VentanaPrincipal principal;
@@ -71,7 +69,11 @@ namespace OrozGP.InterfazGrafica.Usuarios
             }
             else if (correo.Length < 5 || correo.Length > 100)
             {
-                valor = DatosUsuario.correo;
+                valor = DatosUsuario.correoLongitud;
+            }
+            else if (!this.ValidarCorreo(correo))
+            {
+                valor = DatosUsuario.correoIncorrecto;
             }
             else if (puesto.Length < 5 || puesto.Length > 100)
             {
@@ -81,8 +83,12 @@ namespace OrozGP.InterfazGrafica.Usuarios
             {
                 valor = DatosUsuario.ok;
             }
-            //Falta validar correo.
             return valor;
+        }
+        private bool ValidarCorreo(string correo)
+        {
+            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            return Regex.IsMatch(correo, expresion);
         }
         private void MostrarMensajeDatos(DatosUsuario datos)
         {
@@ -93,8 +99,11 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 case DatosUsuario.nombre:
                     mensaje = "El campo 'Nombre' debe tener entre 5 y 100 caractéres";
                     break;
-                case DatosUsuario.correo:
+                case DatosUsuario.correoLongitud:
                     mensaje = "El campo 'Correo' debe tener entre 5 y 100 caractéres";
+                    break;
+                case DatosUsuario.correoIncorrecto:
+                    mensaje = "El campo 'Correo' no es correcto";
                     break;
                 //Puesto:
                 default:
@@ -113,7 +122,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
         {
             string correo = this.campoCorreo.Text.Trim();
             string correoNoArroba = correo.Replace("@", "");
-            Usuario usuarioPeticion = new Usuario(0, this.campoNombre.Text.Trim(), correo, this.campoPuesto.Text.Trim(), correoNoArroba, Encriptacion.sha256(correoNoArroba))
+            Usuario usuarioPeticion = new Usuario(0, this.campoNombre.Text.Trim(), correo, this.campoPuesto.Text.Trim(), correoNoArroba, Encriptacion.Sha256(correoNoArroba))
             {
                 Permisos = (IList<Permiso>)this.tablaPermisos.ItemsSource
             };
@@ -130,7 +139,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Usuario registrado";
                 this.usuario = usuarioRespuesta;
-                this.usuario.Permisos = (IList<Permiso>)this.tablaPermisos.ItemsSource;
+                this.tablaPermisos.ItemsSource = this.usuario.Permisos;
                 this.botonEliminar.Content = "Regresar";
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.principal);
@@ -138,7 +147,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private async Task Editar()
         {
-            Usuario usuarioPeticion = new Usuario(this.usuario.Id, this.campoNombre.Text.Trim(), this.campoCorreo.Text.Trim(), this.campoPuesto.Text.Trim(), "", "");
+            Usuario usuarioPeticion = new Usuario(this.usuario.Id, this.campoNombre.Text.Trim(), this.campoCorreo.Text.Trim(), this.campoPuesto.Text.Trim(), "", "")
+            {
+                Permisos = this.usuario.Permisos
+            };
             bool edicion = await usuarioPeticion.EditarUsuario();
             VentanaMensaje.Mensaje tipo;
             string mensaje;
@@ -161,7 +173,8 @@ namespace OrozGP.InterfazGrafica.Usuarios
         enum DatosUsuario
         {
             nombre,
-            correo,
+            correoLongitud,
+            correoIncorrecto,
             puesto,
             ok,
         };

@@ -59,13 +59,13 @@ class Usuario_Controller extends REST_Controller
 		//if ($this->validar_recepcion($usuario, True)){
 
 			$resultado = $this->Usuario_Model->registrar($usuario);
-			$respuesta['exito'] = $resultado['resultado'];
-			if ($respuesta['exito']){
-				$usuario['Id'] = $resultado['id'];
-				$usuario['permisos'] = $resultado['permisos'];
-				$respuesta['usuario'] = $usuario;
+			$respuesta['Exito'] = $resultado['Resultado'];
+			if ($respuesta['Exito']){
+				$usuario['Id'] = $resultado['Id'];
+				$usuario['Permisos'] = $resultado['Permisos'];
+				$respuesta['Usuario'] = $usuario;
 			}else{
-				$respuesta['error'] = 2;
+				$respuesta['Error'] = 2;
 			}
 
 		/*}else{
@@ -73,7 +73,7 @@ class Usuario_Controller extends REST_Controller
 			$respuesta['error'] = 1;
 		}*/
 
-		$codigo = $respuesta['exito'] ? 200 : 404;
+		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
 	public function usuario_put()
@@ -81,15 +81,15 @@ class Usuario_Controller extends REST_Controller
 		$respuesta;
 		$usuario = $this->put();
 		//if ($this->validar_recepcion($usuario, True)){
-			$respuesta['exito'] = $this->Usuario_Model->editar($usuario);
-			if (!$respuesta['exito']){
-				$respuesta['error'] = 2;
+			$respuesta['Exito'] = $this->Usuario_Model->editar($usuario);
+			if (!$respuesta['Exito']){
+				$respuesta['Error'] = 2;
 			}
 		/*}else{
 			$respuesta['exito'] = False;
 			$respuesta['error'] = 1;
 		}*/
-		$codigo = $respuesta['exito'] ? 200 : 404;
+		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
 	public function usuario_delete()
@@ -97,15 +97,15 @@ class Usuario_Controller extends REST_Controller
 		$respuesta;
 		$id = $this->get('id');
 		if ($this->validar_dato(1, 10000, $id)){
-			$respuesta['exito'] = $this->Usuario_Model->eliminar($id);
-			if (!$respuesta['exito']){
-				$respuesta['error'] = 2;
+			$respuesta['Exito'] = $this->Usuario_Model->eliminar($id);
+			if (!$respuesta['Exito']){
+				$respuesta['Error'] = 2;
 			}
 		}else{
-			$respuesta['exito'] = False;
-			$respuesta['error'] = 1;
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
 		}
-		$codigo = $respuesta['exito'] ? 200 : 404;
+		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
 	public function sesion_get()
@@ -115,22 +115,22 @@ class Usuario_Controller extends REST_Controller
 		$sha = $this->get('sha');
 		if ($this->validar_dato(3, 100, $nombre) && $this->validar_dato(64, 64, $sha)){
 			$resultado = $this->Usuario_Model->iniciar_sesion($nombre, $sha);
-			$respuesta['exito'] = $resultado['resultado'];
-			if ($respuesta['exito']){
-				$respuesta['usuario'] = $resultado['usuario'];
+			$respuesta['Exito'] = $resultado['Resultado'];
+			if ($respuesta['Exito']){
+				$respuesta['Usuario'] = $resultado['Usuario'];
 			}else{
-				$respuesta['error'] = 2;
+				$respuesta['Error'] = 2;
 			}
 		}else{
-			$respuesta['exito'] = False;
-			$respuesta['error'] = 1;
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
 		}
-		$codigo = $respuesta['exito'] ? 200 : 404;
+		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
 	public function usuarios_get()
 	{
-		$respuesta['usuarios'] = $this->Usuario_Model->obtener_usuarios();
+		$respuesta['Usuarios'] = $this->Usuario_Model->obtener_usuarios();
 		$this->response($respuesta, 200);
 	}
 	public function clave_get()
@@ -139,13 +139,13 @@ class Usuario_Controller extends REST_Controller
 		$respuesta;
 		$codigo;
 		if ($this->validar_dato(1, 100, $clave)){
-			$respuesta['exito'] = True;
-			$respuesta['usuarios'] = $this->Usuario_Model->obtener_usuarios_clave($clave);
+			$respuesta['Exito'] = True;
+			$respuesta['Usuarios'] = $this->Usuario_Model->obtener_usuarios_clave($clave);
 		}else{
-			$respuesta['exito'] = False;
-			$respuesta['error'] = 1;
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
 		}
-		$codigo = $respuesta['exito'] ? 200 : 404;
+		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
 	public function permisos_get()
@@ -154,13 +154,13 @@ class Usuario_Controller extends REST_Controller
 		$respuesta;
 		$codigo;
 		if ($this->validar_dato(1, 10000, $id_usuario)){
-			$respuesta['exito'] = True;
-			$respuesta['permisos'] = $this->Usuario_Model->obtener_permisos($id_usuario);
+			$respuesta['Exito'] = True;
+			$respuesta['Permisos'] = $this->Usuario_Model->obtener_permisos($id_usuario);
 		}else{
-			$respuesta['exito'] = False;
-			$respuesta['error'] = 1;
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
 		}
-		$codigo = $respuesta['exito'] ? 200 : 404;
+		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
 	public function contrasena_put()

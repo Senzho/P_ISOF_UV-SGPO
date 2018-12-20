@@ -17,7 +17,7 @@ namespace OrozGP.Servicios.Usuarios
 
         public static async Task<dynamic>  ObtenerUsuario(string nombre, string contraseña)
         {
-            string hash = Encriptacion.sha256(contraseña);
+            string hash = Encriptacion.Sha256(contraseña);
             string url = ServiciosUsuario.rutaBase + "sesion/nombre/"+ nombre + "/sha/" + hash;
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.GetAsync(url);
@@ -53,12 +53,27 @@ namespace OrozGP.Servicios.Usuarios
         {
             string url = ServiciosUsuario.rutaBase + "usuario";
             HttpClient cliente = new HttpClient();
+            JArray permisos = new JArray();
+            foreach (Permiso permiso in usuario.Permisos)
+            {
+                JObject jPermiso = new JObject
+                {
+                    { "Id", permiso.Id },
+                    { "Ambito", permiso.Ambito },
+                    { "Consultar", permiso.Consultar },
+                    { "Crear", permiso.Crear },
+                    { "Modificar", permiso.Modificar },
+                    { "Eliminar", permiso.Eliminar}
+                };
+                permisos.Add(jPermiso);
+            }
             JObject json = new JObject
             {
-                { "id", usuario.Id },
-                { "nombre", usuario.Nombre},
-                { "correo", usuario.Correo},
-                { "puesto", usuario.Puesto},
+                { "Id", usuario.Id },
+                { "Nombre", usuario.Nombre},
+                { "Correo", usuario.Correo},
+                { "Puesto", usuario.Puesto},
+                { "Permisos", permisos }
             };
             var contenido = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             var respuesta = await cliente.PutAsync(url, contenido);

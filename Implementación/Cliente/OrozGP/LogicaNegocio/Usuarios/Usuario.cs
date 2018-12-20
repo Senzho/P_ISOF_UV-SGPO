@@ -28,11 +28,19 @@ namespace OrozGP.LogicaNegocio.Usuarios
         }
         public Usuario(dynamic json)
         {
-            this.Id = json.id;
-            this.Nombre = json.nombre;
-            this.Correo = json.correo;
-            this.Puesto = json.puesto;
-            this.NombreUsuario = json.nombreUsuario;
+            this.Id = json.Id;
+            this.Nombre = json.Nombre;
+            this.Correo = json.Correo;
+            this.Puesto = json.Puesto;
+            this.NombreUsuario = json.NombreUsuario;
+            this.Permisos = new List<Permiso>();
+            if (json.GetType().GetProperty("Permisos") != null)
+            {
+                foreach (dynamic permiso in json.Permisos)
+                {
+                    this.Permisos.Add(new Permiso(permiso));
+                }
+            }
         }
         public Usuario()
         {
@@ -72,15 +80,9 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             Usuario usuario = new Usuario();
             dynamic json = await ServiciosUsuario.ObtenerUsuario(nombre, contraseña);
-            if (json.exito == true)
+            if (json.Exito == true)
             {
-                usuario = new Usuario(json.usuario);
-                IList<Permiso> permisos = new List<Permiso>();
-                foreach (dynamic permiso in json.usuario.permisos)
-                {
-                    permisos.Add(new Permiso(permiso));
-                }
-                usuario.Permisos = permisos;
+                usuario = new Usuario(json.Usuario);
             }
             return usuario;
         }
@@ -92,7 +94,7 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             IList<Usuario> usuarios = new List<Usuario>();
             dynamic json = await ServiciosUsuario.ObtenerUsuarios();
-            foreach (dynamic item in json.usuarios)
+            foreach (dynamic item in json.Usuarios)
             {
                 usuarios.Add(new Usuario(item));
             }
@@ -102,9 +104,9 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             IList<Usuario> usuarios = new List<Usuario>();
             dynamic json = await ServiciosUsuario.ObtenerUsuarios(clave);
-            if (json.exito == true)
+            if (json.Exito == true)
             {
-                foreach (dynamic item in json.usuarios)
+                foreach (dynamic item in json.Usuarios)
                 {
                     usuarios.Add(new Usuario(item));
                 }
@@ -119,17 +121,9 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             Usuario usuario;
             dynamic json = await ServiciosUsuario.RegistrarUsuario(this);
-            if (json.exito == true)
+            if (json.Exito == true)
             {
-                IList<Permiso> permisos = new List<Permiso>();
-                foreach (dynamic permiso in json.usuario.permisos)
-                {
-                    permisos.Add(new Permiso(permiso));
-                }
-                usuario = new Usuario(json.usuario)
-                {
-                    Permisos = permisos
-                };
+                usuario = new Usuario(json.Usuario);
             }
             else
             {
@@ -141,14 +135,14 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             bool edicion;
             dynamic json = await ServiciosUsuario.EditarUsuario(this);
-            edicion = json.exito == true;
+            edicion = json.Exito == true;
             return edicion;
         }
         public async Task<bool> EliminarUsuario()
         {
             bool baja;
             dynamic json = await ServiciosUsuario.EliminarUsuario(this.id);
-            baja = json.exito == true;
+            baja = json.Exito == true;
             return baja;
         }
         public bool GenerarCredenciales()

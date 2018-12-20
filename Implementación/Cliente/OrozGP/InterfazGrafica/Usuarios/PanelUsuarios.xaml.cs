@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Usuarios
 {
-    /// <summary>
-    /// Lógica de interacción para PanelUsuarios.xaml
-    /// </summary>
     public partial class PanelUsuarios : UserControl
     {
         private IList<Usuario> usuarios;
