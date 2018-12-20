@@ -35,12 +35,30 @@ namespace OrozGP.LogicaNegocio.Usuarios
             this.eliminar = json.Eliminar == "1";
         }
 
-        public int Id { get => id; set => id = value; }
-        public string Ambito { get => ambito; set => ambito = value; }
-        public bool Consultar { get => consultar; set => consultar = value; }
-        public bool Crear { get => crear; set => crear = value; }
-        public bool Modificar { get => modificar; set => modificar = value; }
-        public bool Eliminar { get => eliminar; set => eliminar = value; }
+        public int Id {
+            get => id;
+            set => id = value;
+        }
+        public string Ambito {
+            get => ambito;
+            set => ambito = value;
+        }
+        public bool Consultar {
+            get => consultar;
+            set => consultar = value;
+        }
+        public bool Crear {
+            get => crear;
+            set => crear = value;
+        }
+        public bool Modificar {
+            get => modificar;
+            set => modificar = value;
+        }
+        public bool Eliminar {
+            get => eliminar;
+            set => eliminar = value;
+        }
 
         public static async Task<IList<Permiso>> ObtenerPermisos(int idUsuario)
         {

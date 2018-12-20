@@ -32,4 +32,34 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="opcionCategoria" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Grid.Background>
+                            <SolidColorBrush Color="#FFA6A6A6"></SolidColorBrush>
+                        </Grid.Background>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.Foreground="White" TextElement.FontSize="36"></ContentPresenter>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="grid">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#FFB0B0B0"></SolidColorBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="grid">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#FFBABABA"></SolidColorBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

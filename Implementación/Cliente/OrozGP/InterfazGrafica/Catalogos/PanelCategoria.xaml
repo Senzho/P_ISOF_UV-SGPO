@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="OrozGP.InterfazGrafica.Catalogos.PanelCategoria"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OrozGP.InterfazGrafica.Catalogos"
+             mc:Ignorable="d" 
+             d:DesignHeight="140.167" d:DesignWidth="505.556" Margin="10" Width="Auto">
+    <Grid>
+        <Button x:Name="botonCategoria" Content="Nombre Categoría" Height="142" HorizontalContentAlignment="Center" Style="{DynamicResource opcionCategoria}" Click="BotonCategoria_Click"/>
+    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OrozGP;component/Recursos/Estilos/Opciones.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+</UserControl>

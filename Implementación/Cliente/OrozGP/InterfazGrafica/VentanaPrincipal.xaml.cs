@@ -1,4 +1,5 @@
-﻿using OrozGP.InterfazGrafica.Usuarios;
+﻿using OrozGP.InterfazGrafica.Catalogos;
+using OrozGP.InterfazGrafica.Usuarios;
 using OrozGP.LogicaNegocio.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica
 {
-    /// <summary>
-    /// Lógica de interacción para VentanaPrincipal.xaml
-    /// </summary>
     public partial class VentanaPrincipal : Window
     {
         private Usuario usuario;
@@ -28,17 +26,30 @@ namespace OrozGP.InterfazGrafica
             this.dockCentral.Children.Clear();
             this.dockCentral.Children.Add(new PanelUsuarios(this));
         }
+        private void CargarPanelCategoriasTipo(int tipo)
+        {
+            this.dockCentral.Children.Clear();
+            this.dockCentral.Children.Add(new PanelCategoriasTipo(tipo));
+        }
 
         public VentanaPrincipal()
         {
             InitializeComponent();
         }
 
-        internal Usuario Usuario { get => usuario; set => usuario = value; }
+        internal Usuario Usuario {
+            get => usuario;
+            set => usuario = value;
+        }
 
         private void BotonUsuarios_Click(object sender, RoutedEventArgs e)
         {
             this.CargarPanelUsuarios();
+        }
+
+        private void BotonMateriales_Click(object sender, RoutedEventArgs e)
+        {
+            this.CargarPanelCategoriasTipo(1);
         }
     }
 }

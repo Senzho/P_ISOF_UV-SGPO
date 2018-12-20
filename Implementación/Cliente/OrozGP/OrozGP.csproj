@@ -58,6 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InterfazGrafica\Catalogos\PanelCategoria.xaml.cs">
+      <DependentUpon>PanelCategoria.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazGrafica\Catalogos\PanelCategoriasTipo.xaml.cs">
+      <DependentUpon>PanelCategoriasTipo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InterfazGrafica\Usuarios\PanelUsuario.xaml.cs">
       <DependentUpon>PanelUsuario.xaml</DependentUpon>
     </Compile>
@@ -70,9 +76,20 @@
     <Compile Include="InterfazGrafica\VentanaPrincipal.xaml.cs">
       <DependentUpon>VentanaPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogicaNegocio\Catalogos\Categoria.cs" />
+    <Compile Include="LogicaNegocio\Catalogos\SeleccionCategoria.cs" />
     <Compile Include="LogicaNegocio\Usuarios\Permiso.cs" />
+    <Compile Include="Servicios\Catalogos\ServiciosCategoria.cs" />
     <Compile Include="Servicios\Usuarios\ServiciosUsuario.cs" />
     <Compile Include="Util\Encriptacion.cs" />
+    <Page Include="InterfazGrafica\Catalogos\PanelCategoria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterfazGrafica\Catalogos\PanelCategoriasTipo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InterfazGrafica\Usuarios\PanelUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\Imagenes\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\Imagenes\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

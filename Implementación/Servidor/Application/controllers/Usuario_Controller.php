@@ -32,24 +32,13 @@ class Usuario_Controller extends REST_Controller
 		}
 		return $valida;
 	}
-	private function validar_dato($min, $max, $dato)
-	{
-		$valido = False;
-		$tipo = gettype($dato);
-		if ($tipo === 'string'){
-			$len = strlen($dato);
-			$valido = $len <= $max && $len >= $min;
-		}else if ($tipo === 'integer' || $tipo === 'double'){
-			$valido = $dato <= $max && $dato >= $min;
-		}
-		return $valido;
-	}
 	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Usuario_Model');
 		$this->load->helper('url');
+		$this->load->helper('Validacion_Helper');
 	}
 
 	public function usuario_post()
@@ -96,7 +85,7 @@ class Usuario_Controller extends REST_Controller
 	{
 		$respuesta;
 		$id = $this->get('id');
-		if ($this->validar_dato(1, 10000, $id)){
+		if (validar_dato(1, 10000, $id)){
 			$respuesta['Exito'] = $this->Usuario_Model->eliminar($id);
 			if (!$respuesta['Exito']){
 				$respuesta['Error'] = 2;
@@ -113,7 +102,7 @@ class Usuario_Controller extends REST_Controller
 		$respuesta;
 		$nombre = $this->get('nombre');
 		$sha = $this->get('sha');
-		if ($this->validar_dato(3, 100, $nombre) && $this->validar_dato(64, 64, $sha)){
+		if (validar_dato(3, 100, $nombre) && validar_dato(64, 64, $sha)){
 			$resultado = $this->Usuario_Model->iniciar_sesion($nombre, $sha);
 			$respuesta['Exito'] = $resultado['Resultado'];
 			if ($respuesta['Exito']){
@@ -138,7 +127,7 @@ class Usuario_Controller extends REST_Controller
 		$clave = $this->get('clave');
 		$respuesta;
 		$codigo;
-		if ($this->validar_dato(1, 100, $clave)){
+		if (validar_dato(1, 100, $clave)){
 			$respuesta['Exito'] = True;
 			$respuesta['Usuarios'] = $this->Usuario_Model->obtener_usuarios_clave($clave);
 		}else{
@@ -153,7 +142,7 @@ class Usuario_Controller extends REST_Controller
 		$id_usuario = $this->get('idUsuario');
 		$respuesta;
 		$codigo;
-		if ($this->validar_dato(1, 10000, $id_usuario)){
+		if (validar_dato(1, 10000, $id_usuario)){
 			$respuesta['Exito'] = True;
 			$respuesta['Permisos'] = $this->Usuario_Model->obtener_permisos($id_usuario);
 		}else{
