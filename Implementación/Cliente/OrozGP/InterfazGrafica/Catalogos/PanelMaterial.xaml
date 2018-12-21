@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OrozGP.InterfazGrafica.Catalogos"
              mc:Ignorable="d" 
-             d:DesignHeight="491" d:DesignWidth="800">
+             d:DesignHeight="543" d:DesignWidth="693">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,37 +19,45 @@
         <Label x:Name="etiquetaNombre" Content="Nombre:" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox x:Name="campoNombre" Height="30" Margin="107,90,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="etiquetaClave" Content="Clave:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoClave" Height="30" Margin="107,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="292"/>
-        <Label x:Name="etiquetaProveedor" Content="Proveedor:" HorizontalAlignment="Left" Margin="404,120,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoProveedor" Height="30" Margin="514,125,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="campoClave" Height="30" Margin="107,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="240"/>
+        <Label x:Name="etiquetaProveedor" Content="Proveedor:" HorizontalAlignment="Left" Margin="352,120,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="campoProveedor" Height="30" Margin="462,125,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Button x:Name="botonEliminar" Content="Cancelar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom" Click="BotonEliminar_Click"/>
-        <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click" IsEnabled="False"/>
+        <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click"/>
         <Label x:Name="etiquetaPrecio" Content="Precio:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoPrecio" Height="30" Margin="107,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="396"/>
-        <ComboBox x:Name="comboMonedas" Margin="514,160,81,0" VerticalAlignment="Top" Height="30" FontSize="20"/>
+        <TextBox x:Name="campoPrecio" Height="30" Margin="107,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="350"/>
+        <ComboBox x:Name="comboMonedas" Margin="462,160,81,0" VerticalAlignment="Top" Height="30" FontSize="20"/>
         <CheckBox x:Name="checkIva" Content="IVA" Margin="0,160,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="20" Height="30" HorizontalAlignment="Right" Width="57"/>
         <Label x:Name="etiquetaAncho" Content="Ancho:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoAncho" Height="30" Margin="107,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="141"/>
+        <TextBox x:Name="campoAncho" Height="30" Margin="107,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="125"/>
         <Label x:Name="etiquetaAlto" Content="Alto:" HorizontalAlignment="Left" Margin="265,190,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoAlto" Height="30" Margin="362,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="141"/>
-        <Label x:Name="etiquetaGrosor" Content="Grosor:" HorizontalAlignment="Left" Margin="552,190,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="campoGrosor" Height="30" Margin="649,195,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
-        <Label x:Name="etiquetaAcabados" Content="Acabados" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Button x:Name="botonNuevoAcabado" Content="Nuevo" Margin="107,232,552,0" Style="{DynamicResource botonOk}" Height="30" VerticalAlignment="Top" Click="BotonGuardar_Click" IsEnabled="False"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="156" Margin="10,267,0,0" VerticalAlignment="Top" Width="238">
+        <TextBox x:Name="campoAlto" Height="30" Margin="352,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="105"/>
+        <Label x:Name="etiquetaGrosor" Content="Grosor:" HorizontalAlignment="Left" Margin="462,190,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="campoGrosor" Height="30" Margin="541,195,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="etiquetaAcabados" Content="Acabados" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Button x:Name="botonNuevoAcabado" Content="Nuevo" Margin="107,244,0,0" Style="{DynamicResource botonAccion}" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92" Click="BotonNuevoAcabado_Click"/>
+        <ListView x:Name="listaAcabados" HorizontalAlignment="Left" Height="156" Margin="10,279,0,0" VerticalAlignment="Top" Width="189" SelectionChanged="ListaAcabados_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Grid HorizontalAlignment="Left" Height="156" Margin="253,267,0,0" VerticalAlignment="Top" Width="537" Background="#FFA6A6A6">
+        <Grid Height="156" Margin="204,279,10,0" VerticalAlignment="Top" Background="#FFC8C8C8">
             <Label x:Name="etiquetaNombreAcabado" Content="Nombre:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="10,6,0,0"/>
             <TextBox x:Name="campoNombreAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="102,10,10,0"/>
             <Label x:Name="etiquetaPrecioAcabado" Content="Precio:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="10,41,0,0"/>
             <TextBox x:Name="campoPrecioAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="102,45,0,0" HorizontalAlignment="Left" Width="151"/>
             <ComboBox x:Name="comboMonedasAcabado" Margin="258,45,64,0" VerticalAlignment="Top" Height="30" FontSize="20"/>
             <CheckBox x:Name="checkIvaAcabado" Content="IVA" Margin="0,47,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="20" Height="28" HorizontalAlignment="Right" Width="49"/>
+            <Label x:Name="etiquetaAnchoAcabado" Content="Ancho:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="10,76,0,0"/>
+            <TextBox x:Name="campoAnchoAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="102,80,0,0" HorizontalAlignment="Left" Width="64"/>
+            <Label x:Name="etiquetaAltoAcabado" Content="Ancho:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="168,76,0,0"/>
+            <TextBox x:Name="campoAltoAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="245,80,0,0" HorizontalAlignment="Left" Width="64"/>
+            <Label x:Name="etiquetaGrosorAcabado" Content="Ancho:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="314,76,0,0"/>
+            <TextBox x:Name="campoGrosorAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="405,80,10,0"/>
+            <Button x:Name="botonNuevoAgregarAcabado" Content="Agregar" Margin="0,0,10,8" Style="{DynamicResource botonOk}" HorizontalAlignment="Right" Width="98" Height="30" VerticalAlignment="Bottom" Click="BotonNuevoAgregarAcabado_Click"/>
+            <Button x:Name="botonQuitarAcabado" Content="Quitar" HorizontalAlignment="Right" Margin="0,0,113,8" Width="90" Style="{DynamicResource botonError}" Height="30" VerticalAlignment="Bottom" Click="BotonQuitarAcabado_Click"/>
         </Grid>
     </Grid>
 </UserControl>

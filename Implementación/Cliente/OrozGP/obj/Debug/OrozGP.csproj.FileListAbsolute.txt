@@ -51,3 +51,5 @@ C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\O
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Catalogos\PanelCategoria.baml
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Catalogos\PanelMateriales.g.cs
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Catalogos\PanelMateriales.baml
+C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Catalogos\PanelMaterial.g.cs
+C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\InterfazGrafica\Catalogos\PanelMaterial.baml

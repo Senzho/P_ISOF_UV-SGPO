@@ -89,6 +89,7 @@
     <Compile Include="LogicaNegocio\Catalogos\SeleccionCategoria.cs" />
     <Compile Include="LogicaNegocio\Configuraciones\Moneda.cs" />
     <Compile Include="LogicaNegocio\Usuarios\Permiso.cs" />
+    <Compile Include="Servicios\Catalogos\ServiciosAcabado.cs" />
     <Compile Include="Servicios\Catalogos\ServiciosCategoria.cs" />
     <Compile Include="Servicios\Catalogos\ServiciosMaterial.cs" />
     <Compile Include="Servicios\Configuraciones\ServiciosMoneda.cs" />

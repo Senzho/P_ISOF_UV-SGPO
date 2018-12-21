@@ -33,6 +33,24 @@ namespace OrozGP.InterfazGrafica.Catalogos
         {
             this.tabla.ItemsSource = this.materiales;
         }
+        private bool ValidarSeleccion(Seleccion seleccion)
+        {
+            Object elemento = this.tabla.SelectedItem;
+            bool valida = elemento != null;
+            if (!valida)
+            {
+                string mensaje = seleccion == Seleccion.editar ? "editar" : "eliminar";
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Elemento no seleccionado", "Debes seleccionar un elemento para " + mensaje + ".", VentanaMensaje.Botones.ok, this.cargador.Principal);
+                ventanaMensaje.ShowDialog();
+            }
+            return valida;
+        }
+
+        private enum Seleccion
+        {
+            editar,
+            eliminar,
+        };
 
         public PanelMateriales(Cargador cargador, int tipo, Categoria categoria)
         {
@@ -47,6 +65,25 @@ namespace OrozGP.InterfazGrafica.Catalogos
         private void BotonRegresar_MouseUp(object sender, MouseButtonEventArgs e)
         {
             this.cargador.Cargar(new PanelCategoriasTipo(this.tipo, this.cargador));
+        }
+        private void BotonNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            this.cargador.Cargar(new PanelMaterial(this.categoria, this.tipo, this.cargador, null));
+        }
+        private void BotonEditar_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ValidarSeleccion(Seleccion.editar))
+            {
+                Material material = (Material)this.tabla.SelectedItem;
+                this.cargador.Cargar(new PanelMaterial(this.categoria, this.tipo, this.cargador, material));
+            }
+        }
+        private void BotonEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ValidarSeleccion(Seleccion.eliminar))
+            {
+
+            }
         }
     }
 }

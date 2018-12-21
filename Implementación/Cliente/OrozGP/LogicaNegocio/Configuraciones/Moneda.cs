@@ -32,6 +32,11 @@ namespace OrozGP.LogicaNegocio.Configuraciones
             set => nombre = value;
         }
 
+        public override string ToString()
+        {
+            return this.nombre;
+        }
+
         public static async Task<IList<Moneda>> ObtenerMonedas()
         {
             IList<Moneda> monedas = new List<Moneda>();

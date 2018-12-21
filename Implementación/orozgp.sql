@@ -16,6 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `acabado`
+--
+
+DROP TABLE IF EXISTS `acabado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acabado` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `ancho` double DEFAULT NULL,
+  `alto` double DEFAULT NULL,
+  `grosor` double DEFAULT NULL,
+  `precio` double DEFAULT NULL,
+  `iva` tinyint(1) DEFAULT NULL,
+  `idMoneda` int(11) DEFAULT NULL,
+  `idMaterial` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idMoneda` (`idMoneda`),
+  KEY `idMaterial` (`idMaterial`),
+  CONSTRAINT `acabado_ibfk_1` FOREIGN KEY (`idMoneda`) REFERENCES `moneda` (`id`),
+  CONSTRAINT `acabado_ibfk_2` FOREIGN KEY (`idMaterial`) REFERENCES `material` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acabado`
+--
+
+LOCK TABLES `acabado` WRITE;
+/*!40000 ALTER TABLE `acabado` DISABLE KEYS */;
+INSERT INTO `acabado` VALUES (1,'Frosy',2,2,1.5,220.33,1,1,1),(2,'Agatha',2,2,1.5,220.33,1,1,1);
+/*!40000 ALTER TABLE `acabado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categoria`
 --
 
@@ -170,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-21  1:17:42
+-- Dump completed on 2018-12-21 16:18:15

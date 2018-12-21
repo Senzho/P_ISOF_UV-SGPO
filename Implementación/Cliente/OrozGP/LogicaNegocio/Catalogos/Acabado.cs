@@ -1,4 +1,5 @@
 ﻿using OrozGP.LogicaNegocio.Configuraciones;
+using OrozGP.Servicios.Catalogos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.alto = json.Alto;
             this.grosor = json.Grosor;
             this.precio = json.Precio;
-            this.iva = json.Iva == true;
+            this.iva = json.Iva == "1";
             this.moneda = new Moneda(json.Moneda);
         }
 
@@ -73,9 +74,19 @@ namespace OrozGP.LogicaNegocio.Catalogos
             set => moneda = value;
         }
 
+        public override string ToString()
+        {
+            return this.nombre;
+        }
+
         public static async Task<IList<Acabado>> ObtenerAcabados(int idMaterial)
         {
             IList<Acabado> acabados = new List<Acabado>();
+            dynamic json = await ServiciosAcabado.ObtenerAcabados(idMaterial);
+            foreach (dynamic acabado in json.Acabados)
+            {
+                acabados.Add(new Acabado(acabado));
+            }
             return acabados;
         }
     }
