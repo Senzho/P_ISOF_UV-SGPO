@@ -1,5 +1,6 @@
 ﻿using OrozGP.InterfazGrafica.Catalogos;
 using OrozGP.InterfazGrafica.Usuarios;
+using OrozGP.LogicaNegocio;
 using OrozGP.LogicaNegocio.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -20,21 +21,21 @@ namespace OrozGP.InterfazGrafica
     public partial class VentanaPrincipal : Window
     {
         private Usuario usuario;
+        private Cargador cargador;
 
         private void CargarPanelUsuarios()
         {
-            this.dockCentral.Children.Clear();
-            this.dockCentral.Children.Add(new PanelUsuarios(this));
+            this.cargador.Cargar(new PanelUsuarios(this.cargador));
         }
         private void CargarPanelCategoriasTipo(int tipo)
         {
-            this.dockCentral.Children.Clear();
-            this.dockCentral.Children.Add(new PanelCategoriasTipo(tipo));
+            this.cargador.Cargar(new PanelCategoriasTipo(tipo, this.cargador));
         }
 
         public VentanaPrincipal()
         {
             InitializeComponent();
+            this.cargador = new Cargador(this, this.dockCentral);
         }
 
         internal Usuario Usuario {

@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Usuarios;
+﻿using OrozGP.LogicaNegocio;
+using OrozGP.LogicaNegocio.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
     public partial class PanelUsuarios : UserControl
     {
         private IList<Usuario> usuarios;
-        private VentanaPrincipal principal;
+        private Cargador cargador;
 
         private enum Seleccion
         {
@@ -38,7 +39,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
             IList<Usuario> usuariosBusqueda = await Usuario.ObtenerUsuarios(clave);
             if (usuariosBusqueda == null)
             {
-                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", "Escribe una palabra clave para buscar", VentanaMensaje.Botones.ok, this.principal);
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", "Escribe una palabra clave para buscar", VentanaMensaje.Botones.ok, this.cargador.Principal);
                 ventanaMensaje.ShowDialog();
             }
             else
@@ -53,8 +54,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private void CargarPanelUsuario(Usuario usuario)
         {
-            this.principal.dockCentral.Children.Clear();
-            this.principal.dockCentral.Children.Add(new PanelUsuario(this.principal, usuario));
+            this.cargador.Cargar(new PanelUsuario(this.cargador, usuario));
         }
         private bool ValidarSeleccion(Seleccion seleccion)
         {
@@ -63,7 +63,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
             if (!valida)
             {
                 string mensaje = seleccion == Seleccion.editar ? "editar" : (seleccion == Seleccion.eliminar ? "eliminar" : "generar credenciales");
-                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Elemento no seleccionado", "Debes seleccionar un elemento para " + mensaje + ".", VentanaMensaje.Botones.ok, this.principal);
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Elemento no seleccionado", "Debes seleccionar un elemento para " + mensaje + ".", VentanaMensaje.Botones.ok, this.cargador.Principal);
                 ventanaMensaje.ShowDialog();
             }
             return valida;
@@ -84,7 +84,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 tipo = VentanaMensaje.Mensaje.error;
                 mensaje = "Lo sentimos, no pudimos eliminar el usuario";
             }
-            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Baja", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Baja", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
             this.botonEliminar.IsEnabled = true;
         }
@@ -95,7 +95,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
         }
         private void SolicitarConfirmacionBaja()
         {
-            VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar al usuario?", VentanaMensaje.Botones.okCancel, this.principal);
+            VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar al usuario?", VentanaMensaje.Botones.okCancel, this.cargador.Principal);
             bool? respuesta = vMensaje.ShowDialog();
             if (respuesta.Value)
             {
@@ -105,10 +105,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
             }
         }
 
-        public PanelUsuarios(VentanaPrincipal principal)
+        public PanelUsuarios(Cargador cargador)
         {
             InitializeComponent();
-            this.principal = principal;
+            this.cargador = cargador;
             this.usuarios = new List<Usuario>();
             this.ObtenerUsuarios();
         }

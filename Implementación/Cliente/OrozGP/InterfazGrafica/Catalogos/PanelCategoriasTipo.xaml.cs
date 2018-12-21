@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Catalogos;
+﻿using OrozGP.LogicaNegocio;
+using OrozGP.LogicaNegocio.Catalogos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
 {
     public partial class PanelCategoriasTipo : UserControl, ISeleccionCategoria
     {
+        private Cargador cargador;
         private int tipo;
         private IList<Categoria> categorias;
 
@@ -33,17 +35,25 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.panelCategorias.Children.Add(new PanelCategoria(categoria, this));
             }
         }
+        private void CargarPanelCatalogo(Categoria categoria)
+        {
+            if (this.tipo == 1)
+            {
+                this.cargador.Cargar(new PanelMateriales(this.cargador, this.tipo, categoria));
+            }
+        }
 
-        public PanelCategoriasTipo(int tipo)
+        public PanelCategoriasTipo(int tipo, Cargador cargador)
         {
             InitializeComponent();
             this.tipo = tipo;
+            this.cargador = cargador;
             this.ObtenerCategorias();
         }
 
         public void CategoriaSeleccionada(Categoria categoria)
         {
-            //Cargar panel de materiales.
+            this.CargarPanelCatalogo(categoria);
         }
     }
 }

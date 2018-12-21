@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Usuarios;
+﻿using OrozGP.LogicaNegocio;
+using OrozGP.LogicaNegocio.Usuarios;
 using OrozGP.Util;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
 {
     public partial class PanelUsuario : UserControl
     {
-        private VentanaPrincipal principal;
+        private Cargador cargador;
         private Usuario usuario;
 
         private void CargarUsuario()
@@ -110,13 +111,12 @@ namespace OrozGP.InterfazGrafica.Usuarios
                     mensaje = "El campo 'Puesto' debe tener entre 5 y 100 caractéres";
                     break;
             }
-            ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             ventanaMensaje.ShowDialog();
         }
         private void Regresar()
         {
-            this.principal.dockCentral.Children.Clear();
-            this.principal.dockCentral.Children.Add(new PanelUsuarios(this.principal));
+            this.cargador.Cargar(new PanelUsuarios(this.cargador));
         }
         private async Task Registrar()
         {
@@ -142,7 +142,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 this.tablaPermisos.ItemsSource = this.usuario.Permisos;
                 this.botonEliminar.Content = "Regresar";
             }
-            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
         }
         private async Task Editar()
@@ -166,7 +166,7 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Lo sentimos, no pudimos actualizar el usuario";
             }
-            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Edicion", mensaje, VentanaMensaje.Botones.ok, this.principal);
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Edicion", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
         }
 
@@ -179,10 +179,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
             ok,
         };
 
-        public PanelUsuario(VentanaPrincipal principal, Usuario usuario)
+        public PanelUsuario(Cargador cargador, Usuario usuario)
         {
             InitializeComponent();
-            this.principal = principal;
+            this.cargador = cargador;
             this.usuario = usuario;
             if (usuario != null)
             {

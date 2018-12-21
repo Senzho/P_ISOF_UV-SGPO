@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace OrozGP.Servicios.Catalogos
 {
-    public class ServiciosCategoria
+    public class ServiciosMaterial
     {
-        private const string rutaBase = "http://localhost/CodeIgniter/index.php/Categoria_Controller/";
+        private const string rutaBase = "http://localhost/CodeIgniter/index.php/Material_Controller/";
 
-        public static async Task<dynamic> ObtenerCategorias(int tipo)
+        public static async Task<dynamic> ObtenerMateriales(int idCategoria)
         {
-            string url = ServiciosCategoria.rutaBase + "categorias/tipo/" + tipo;
+            string url = ServiciosMaterial.rutaBase + "categoria/idCategoria/" + idCategoria;
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.GetAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();

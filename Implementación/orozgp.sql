@@ -41,6 +41,67 @@ INSERT INTO `categoria` VALUES (1,'Madera',1),(2,'Aluminio',1),(3,'Mármol',1),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `material`
+--
+
+DROP TABLE IF EXISTS `material`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `material` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `proveedor` varchar(100) DEFAULT NULL,
+  `clave` varchar(100) DEFAULT NULL,
+  `alto` double DEFAULT NULL,
+  `ancho` double DEFAULT NULL,
+  `grosor` double DEFAULT NULL,
+  `precio` double DEFAULT NULL,
+  `iva` tinyint(1) DEFAULT NULL,
+  `idCategoria` int(11) DEFAULT NULL,
+  `idMoneda` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idCategoria` (`idCategoria`),
+  KEY `idMoneda` (`idMoneda`),
+  CONSTRAINT `material_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`id`),
+  CONSTRAINT `material_ibfk_2` FOREIGN KEY (`idMoneda`) REFERENCES `moneda` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `material`
+--
+
+LOCK TABLES `material` WRITE;
+/*!40000 ALTER TABLE `material` DISABLE KEYS */;
+INSERT INTO `material` VALUES (1,'MDF','Maisa','X00YU7',1.5,1,0.5,230.6,1,1,1),(2,'Melamina','Maisa','X01Z67',1,0.5,0.5,88.36,1,1,1);
+/*!40000 ALTER TABLE `material` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `moneda`
+--
+
+DROP TABLE IF EXISTS `moneda`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `moneda` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `moneda`
+--
+
+LOCK TABLES `moneda` WRITE;
+/*!40000 ALTER TABLE `moneda` DISABLE KEYS */;
+INSERT INTO `moneda` VALUES (1,'MXN'),(2,'USD');
+/*!40000 ALTER TABLE `moneda` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `permiso`
 --
 
@@ -109,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-20 14:50:52
+-- Dump completed on 2018-12-21  1:17:42

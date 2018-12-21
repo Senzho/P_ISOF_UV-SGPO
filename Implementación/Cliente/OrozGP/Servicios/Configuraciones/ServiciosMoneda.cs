@@ -6,15 +6,15 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrozGP.Servicios.Catalogos
+namespace OrozGP.Servicios
 {
-    public class ServiciosCategoria
+    public class ServiciosMoneda
     {
-        private const string rutaBase = "http://localhost/CodeIgniter/index.php/Categoria_Controller/";
+        private const string rutaBase = "http://localhost/CodeIgniter/index.php/Moneda_Controller/";
 
-        public static async Task<dynamic> ObtenerCategorias(int tipo)
+        public static async Task<dynamic> ObtenerMonedas()
         {
-            string url = ServiciosCategoria.rutaBase + "categorias/tipo/" + tipo;
+            string url = ServiciosMoneda.rutaBase + "monedas";
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.GetAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();

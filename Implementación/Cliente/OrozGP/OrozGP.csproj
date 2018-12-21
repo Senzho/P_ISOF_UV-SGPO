@@ -64,6 +64,12 @@
     <Compile Include="InterfazGrafica\Catalogos\PanelCategoriasTipo.xaml.cs">
       <DependentUpon>PanelCategoriasTipo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InterfazGrafica\Catalogos\PanelMaterial.xaml.cs">
+      <DependentUpon>PanelMaterial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazGrafica\Catalogos\PanelMateriales.xaml.cs">
+      <DependentUpon>PanelMateriales.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InterfazGrafica\Usuarios\PanelUsuario.xaml.cs">
       <DependentUpon>PanelUsuario.xaml</DependentUpon>
     </Compile>
@@ -76,10 +82,16 @@
     <Compile Include="InterfazGrafica\VentanaPrincipal.xaml.cs">
       <DependentUpon>VentanaPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogicaNegocio\Cargador.cs" />
+    <Compile Include="LogicaNegocio\Catalogos\Acabado.cs" />
     <Compile Include="LogicaNegocio\Catalogos\Categoria.cs" />
+    <Compile Include="LogicaNegocio\Catalogos\Material.cs" />
     <Compile Include="LogicaNegocio\Catalogos\SeleccionCategoria.cs" />
+    <Compile Include="LogicaNegocio\Configuraciones\Moneda.cs" />
     <Compile Include="LogicaNegocio\Usuarios\Permiso.cs" />
     <Compile Include="Servicios\Catalogos\ServiciosCategoria.cs" />
+    <Compile Include="Servicios\Catalogos\ServiciosMaterial.cs" />
+    <Compile Include="Servicios\Configuraciones\ServiciosMoneda.cs" />
     <Compile Include="Servicios\Usuarios\ServiciosUsuario.cs" />
     <Compile Include="Util\Encriptacion.cs" />
     <Page Include="InterfazGrafica\Catalogos\PanelCategoria.xaml">
@@ -87,6 +99,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InterfazGrafica\Catalogos\PanelCategoriasTipo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterfazGrafica\Catalogos\PanelMaterial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterfazGrafica\Catalogos\PanelMateriales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
