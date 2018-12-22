@@ -29,10 +29,10 @@ namespace OrozGP.LogicaNegocio.Usuarios
         {
             this.id = json.Id;
             this.ambito = json.Ambito;
-            this.consultar = json.Consultar == "1";
-            this.crear = json.Crear == "1";
-            this.modificar = json.Modificar == "1";
-            this.eliminar = json.Eliminar == "1";
+            this.consultar = json.Consultar == true;
+            this.crear = json.Crear == true;
+            this.modificar = json.Modificar == true;
+            this.eliminar = json.Eliminar == true;
         }
 
         public int Id {

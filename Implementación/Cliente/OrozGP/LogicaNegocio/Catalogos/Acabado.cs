@@ -37,7 +37,7 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.alto = json.Alto;
             this.grosor = json.Grosor;
             this.precio = json.Precio;
-            this.iva = json.Iva == "1";
+            this.iva = json.Iva == true;
             this.moneda = new Moneda(json.Moneda);
         }
 

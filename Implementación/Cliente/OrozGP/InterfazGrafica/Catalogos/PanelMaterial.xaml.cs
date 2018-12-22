@@ -43,6 +43,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
             if (this.material != null)
             {
                 this.EstablecerMonedaSeleccionada(this.material.Moneda, true);
+                this.EstablecerMonedaSeleccionada(this.monedas.First(), false);
             }
             else
             {
@@ -106,7 +107,6 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.campoAltoAcabado.Text = "";
             this.campoGrosorAcabado.Text = "";
             this.checkIvaAcabado.IsChecked = false;
-            this.comboMonedasAcabado.SelectedItem = null;
         }
         private bool FormularioAcabadoEnEdicion()
         {
@@ -305,6 +305,36 @@ namespace OrozGP.InterfazGrafica.Catalogos
             acabado.Precio = Double.Parse(this.campoPrecioAcabado.Text.Trim());
             acabado.Iva = this.checkIvaAcabado.IsChecked.Value;
             acabado.Moneda = (Moneda)this.comboMonedasAcabado.SelectedItem;
+            this.listaAcabados.Items.Refresh();
+        }
+        private async Task Registrar()
+        {
+            Material materialPeticion = new Material(0, this.campoNombre.Text.Trim(), this.campoProveedor.Text.Trim(), this.campoClave.Text.Trim(), Double.Parse(this.campoPrecio.Text.Trim()), this.checkIva.IsChecked.Value)
+            {
+                Ancho = Double.Parse(this.campoAncho.Text.Trim()),
+                Alto = Double.Parse(this.campoAlto.Text.Trim()),
+                Grosor = Double.Parse(this.campoGrosor.Text.Trim()),
+                Moneda = (Moneda)this.comboMonedas.SelectedItem,
+                Acabados = this.acabados
+            };
+            Material materialRespuesta = await materialPeticion.RegistrarMaterial(this.categoria.Id);
+            VentanaMensaje.Mensaje tipo;
+            string mensaje;
+            if (materialRespuesta.Id == 0)
+            {
+                tipo = VentanaMensaje.Mensaje.error;
+                mensaje = "Lo sentimos, no pudimos registrar el material";
+            }
+            else
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Material registrado";
+                this.material = materialRespuesta;
+                this.listaAcabados.ItemsSource = this.material.Acabados;
+                this.botonEliminar.Content = "Regresar";
+            }
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
+            vMensaje.ShowDialog();
         }
 
         private enum DatosMaterial
@@ -339,6 +369,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
             else
             {
                 this.acabados = new List<Acabado>();
+                this.listaAcabados.ItemsSource = this.acabados;
             }
         }
 
@@ -425,7 +456,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 }
                 else
                 {
-                    //Registrar.
+                    this.Registrar();
                 }
             }
             else

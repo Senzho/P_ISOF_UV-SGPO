@@ -7,6 +7,26 @@ class Acabado_Model extends CI_Model
 		$this->load->model('Moneda_Model');
 	}
 
+	public function registrar($id_material, $acabados)
+	{
+		$resultado = True;
+		$resultados;
+		for($i = 0; $i < count($acabados); $i ++){
+			$acabado = $acabados[$i];
+			$moneda = $acabado['Moneda'];
+			unset($acabado['Moneda']);
+			$acabado['idMoneda'] = $moneda['Id'];
+			$acabado['IdMaterial'] = $id_material;
+			$resultados[$i] = $this->db->insert('acabado', $acabado);
+			$acabado['Id'] = $this->db->insert_id();
+			$acabado['Moneda'] = $moneda;
+			$acabados[$i] = $acabado;
+			if (!$resultados[$i]){
+				$resultado = False;
+			}
+		}
+		return $acabados;
+	}
 	public function obtener_acabados($id_material)
 	{
 		$acabados = array();
@@ -21,7 +41,7 @@ class Acabado_Model extends CI_Model
 				'Ancho' => $fila->ancho,
 				'Grosor' => $fila->grosor,
 				'Precio' => $fila->precio,
-				'Iva' => $fila->iva,
+				'Iva' => $fila->iva == '1' ? True : False,
 				'Moneda' => $this->Moneda_Model->obtener_moneda($fila->idMoneda)
 			);
 			$acabados[$i] = $acabado;

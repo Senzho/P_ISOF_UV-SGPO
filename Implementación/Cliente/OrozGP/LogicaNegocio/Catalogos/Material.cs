@@ -45,17 +45,17 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.alto = json.Alto;
             this.grosor = json.Grosor;
             this.precio = json.Precio;
-            this.iva = json.Iva == "1";
+            this.iva = json.Iva == true;
             this.moneda = new Moneda(json.Moneda);
             this.acabados = new List<Acabado>();
-            if (json.GetType().GetProperty("Acabados") != null)
+            try
             {
                 foreach (dynamic acabado in json.Acabados)
                 {
                     this.acabados.Add(new Acabado(acabado));
-
                 }
             }
+            catch (NullReferenceException) { }
         }
 
         public int Id {
@@ -105,7 +105,17 @@ namespace OrozGP.LogicaNegocio.Catalogos
 
         public async Task<Material> RegistrarMaterial(int idCategoria)
         {
-            return new Material();
+            Material material;
+            dynamic json = await ServiciosMaterial.RegistrarMaterial(this, idCategoria);
+            if (json.Exito == true)
+            {
+                material = new Material(json.Material);
+            }
+            else
+            {
+                material = new Material();
+            }
+            return material;
         }
         public async Task<bool> EditarMaterial()
         {
@@ -129,6 +139,18 @@ namespace OrozGP.LogicaNegocio.Catalogos
         public static async Task<IList<Material>> ObtenerMateriales(int idCategoria, string clave)
         {
             IList<Material> materiales = new List<Material>();
+            dynamic json = await ServiciosMaterial.ObtenerMateriales(idCategoria, clave);
+            if (json.Exito == true)
+            {
+                foreach (dynamic material in json.Materiales)
+                {
+                    materiales.Add(new Material(material));
+                }
+            }
+            else
+            {
+                materiales = null;
+            }
             return materiales;
         }
         public static async Task<IList<Material>> ObtenerMateriales(string clave)

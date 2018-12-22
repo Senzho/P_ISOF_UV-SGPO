@@ -121,7 +121,7 @@ class Usuario_Model extends CI_Model
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];
-			$permiso = array('Id' => $fila->id ,'Ambito' => $fila->ambito, 'Consultar' => $fila->consultar, 'Crear' => $fila->crear, 'Modificar' => $fila->modificar, 'Eliminar' => $fila->eliminar);
+			$permiso = array('Id' => $fila->id ,'Ambito' => $fila->ambito == '1' ? True : False, 'Consultar' => $fila->consultar == '1' ? True : False, 'Crear' => $fila->crear == '1' ? True : False, 'Modificar' => $fila->modificar == '1' ? True : False, 'Eliminar' => $fila->eliminar == '1' ? True : False);
 			$permisos[$i] = $permiso;
 		}
 		return $permisos;

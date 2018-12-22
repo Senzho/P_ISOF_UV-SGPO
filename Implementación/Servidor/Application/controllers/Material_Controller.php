@@ -14,6 +14,28 @@ class Material_Controller extends REST_Controller
 		$this->load->helper('Validacion_Helper');
 	}
 
+	public function material_post()
+	{
+		$respuesta;
+		$material = $this->post();
+		$id_categoria = $this->get('idCategoria');
+		if (validar_dato(1, 10000, $id_categoria)){
+			$resultado = $this->Material_Model->registrar($material, $id_categoria);
+			$respuesta['Exito'] = $resultado['Resultado'];
+			if ($respuesta['Exito']){
+				$material['Id'] = $resultado['Id'];
+				$material['Acabados'] = $resultado['Acabados'];
+				$respuesta['Material'] = $material;
+			}else{
+				$respuesta['Error'] = 2;
+			}
+		}else{
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
+		}
+		$codigo = $respuesta['Exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
+	}
 	public function categoria_get()
 	{
 		$id_categoria = $this->get('idCategoria');
@@ -21,7 +43,23 @@ class Material_Controller extends REST_Controller
 		$codigo;
 		if (validar_dato(1, 10000, $id_categoria)){
 			$respuesta['Exito'] = True;
-			$respuesta['Materiales'] = $this->Material_Model->obtener_materiales($id_categoria);
+			$respuesta['Materiales'] = $this->Material_Model->obtener_materiales_categoria($id_categoria);
+		}else{
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
+		}
+		$codigo = $respuesta['Exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
+	}
+	public function categoria_clave_get()
+	{
+		$id_categoria = $this->get('idCategoria');
+		$clave = $this->get('clave');
+		$respuesta;
+		$codigo;
+		if (validar_dato(1, 10000, $id_categoria) && validar_dato(1, 100, $clave)){
+			$respuesta['Exito'] = True;
+			$respuesta['Materiales'] = $this->Material_Model->obtener_materiales_categoria_clave($id_categoria, $clave);
 		}else{
 			$respuesta['Exito'] = False;
 			$respuesta['Error'] = 1;

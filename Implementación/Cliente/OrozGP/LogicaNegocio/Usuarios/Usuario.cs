@@ -34,13 +34,14 @@ namespace OrozGP.LogicaNegocio.Usuarios
             this.Puesto = json.Puesto;
             this.NombreUsuario = json.NombreUsuario;
             this.Permisos = new List<Permiso>();
-            if (json.GetType().GetProperty("Permisos") != null)
+            try
             {
                 foreach (dynamic permiso in json.Permisos)
                 {
                     this.Permisos.Add(new Permiso(permiso));
                 }
             }
+            catch (NullReferenceException){}
         }
         public Usuario()
         {

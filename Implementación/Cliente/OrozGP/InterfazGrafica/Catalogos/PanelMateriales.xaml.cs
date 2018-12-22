@@ -45,6 +45,20 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return valida;
         }
+        private async Task BuscarMateriales(string clave)
+        {
+            IList<Material> materialesBusqueda = await Material.ObtenerMateriales(this.categoria.Id, clave);
+            if (materialesBusqueda == null)
+            {
+                VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", "Escribe una palabra clave para buscar", VentanaMensaje.Botones.ok, this.cargador.Principal);
+                ventanaMensaje.ShowDialog();
+            }
+            else
+            {
+                this.materiales = materialesBusqueda;
+                this.CargarMateriales();
+            }
+        }
 
         private enum Seleccion
         {
@@ -83,6 +97,13 @@ namespace OrozGP.InterfazGrafica.Catalogos
             if (this.ValidarSeleccion(Seleccion.eliminar))
             {
 
+            }
+        }
+        private void CampoBusqueda_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                this.BuscarMateriales(this.campoBusqueda.Text.Trim());
             }
         }
     }
