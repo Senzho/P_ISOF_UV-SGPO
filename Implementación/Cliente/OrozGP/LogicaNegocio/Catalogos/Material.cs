@@ -117,13 +117,19 @@ namespace OrozGP.LogicaNegocio.Catalogos
             }
             return material;
         }
-        public async Task<bool> EditarMaterial()
+        public async Task<bool> EditarMaterial(IList<Acabado> acabadosQuitar)
         {
-            return false;
+            bool edicion;
+            dynamic json = await ServiciosMaterial.EditarMaterial(this, acabadosQuitar);
+            edicion = json.Exito == true;
+            return edicion;
         }
         public async Task<bool> EliminarMaterial()
         {
-            return false;
+            bool baja;
+            dynamic json = await ServiciosMaterial.EliminarMaterial(this.id);
+            baja = json.Exito == true;
+            return baja;
         }
         
         public static async Task<IList<Material>> ObtenerMateriales(int idCategoria)

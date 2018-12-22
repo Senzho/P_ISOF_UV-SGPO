@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="label" Content="¿Algo en especial?" Margin="140,10,140,0" VerticalAlignment="Top" FontSize="28" HorizontalContentAlignment="Center"/>
         <TextBox x:Name="campoBusqueda" Height="32" Margin="140,60,140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Padding="0" KeyUp="CampoBusqueda_KeyUp"/>
-        <DataGrid x:Name="tabla" Margin="10,138,10,88" AutoGenerateColumns="False">
+        <DataGrid x:Name="tabla" Margin="10,138,10,88" AutoGenerateColumns="False" IsReadOnly="True" EnableColumnVirtualization="True" EnableRowVirtualization="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Nombre}" ClipboardContentBinding="{x:Null}" Header="Nombre" FontSize="18" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding Path=Clave}" ClipboardContentBinding="{x:Null}" Header="Clave" Width="Auto" FontSize="18"/>

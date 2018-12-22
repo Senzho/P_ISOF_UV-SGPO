@@ -23,7 +23,7 @@
         <Label x:Name="etiquetaProveedor" Content="Proveedor:" HorizontalAlignment="Left" Margin="352,120,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox x:Name="campoProveedor" Height="30" Margin="462,125,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Button x:Name="botonEliminar" Content="Cancelar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonError}" Height="35" VerticalAlignment="Bottom" Click="BotonEliminar_Click"/>
-        <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click"/>
+        <Button x:Name="botonGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,10" Width="90" Style="{DynamicResource botonOk}" Height="35" VerticalAlignment="Bottom" Click="BotonGuardar_Click" IsEnabled="False"/>
         <Label x:Name="etiquetaPrecio" Content="Precio:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox x:Name="campoPrecio" Height="30" Margin="107,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Left" Width="350"/>
         <ComboBox x:Name="comboMonedas" Margin="462,160,81,0" VerticalAlignment="Top" Height="30" FontSize="20"/>

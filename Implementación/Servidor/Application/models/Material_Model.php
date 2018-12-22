@@ -24,10 +24,30 @@ class Material_Model extends CI_Model
 		$respuesta = array('Resultado' => $resultado, 'Id' => $id, 'Acabados' => $acabados);
 		return $respuesta;
 	}
+	public function editar($material)
+	{
+		$this->db->where('id', $material['Id']);
+		$acabados = $material['Acabados'];
+		unset($material['Acabados']);
+		$acabados_quitar = $material['AcabadosEliminar'];
+		unset($material['AcabadosEliminar']);
+		$resultado = $this->db->update('material', $material);
+		if ($resultado){
+			$this->Acabado_Model->editar_acabados($acabados);
+			$this->Acabado_Model->eliminar_acabados($acabados_quitar);
+		}
+		return $resultado;
+	}
+	public function eliminar($id_material)
+	{
+		$this->db->where('id', $id_material);
+		$resultado = $this->db->update('material', array('activo' => False));
+		return $resultado;
+	}
 	public function obtener_materiales_categoria($id_categoria)
 	{
 		$materiales = array();
-		$consulta = $this->db->get_where('material', array('idCategoria' => $id_categoria));
+		$consulta = $this->db->get_where('material', array('idCategoria' => $id_categoria, 'Activo' => True));
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];
@@ -54,7 +74,7 @@ class Material_Model extends CI_Model
 		$this->db->or_like('proveedor', $clave);
 		$this->db->or_like('clave', $clave);
 		$this->db->or_like('precio', $clave);
-		$consulta = $this->db->get_where('material', array('idCategoria' => $id_categoria));
+		$consulta = $this->db->get_where('material', array('idCategoria' => $id_categoria, 'Activo' => True));
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];

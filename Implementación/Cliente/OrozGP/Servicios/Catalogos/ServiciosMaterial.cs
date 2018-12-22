@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OrozGP.LogicaNegocio.Catalogos;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,63 @@ namespace OrozGP.Servicios.Catalogos
             HttpClient cliente = new HttpClient();
             var contenido = new StringContent(JsonConvert.SerializeObject(material), Encoding.UTF8, "application/json");
             var respuesta = await cliente.PostAsync(url, contenido);
+            string cadena = await respuesta.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject(cadena);
+        }
+        public static async Task<dynamic> EditarMaterial(Material material, IList<Acabado> acabadosQuitar)
+        {
+            string url = ServiciosMaterial.rutaBase + "material";
+            HttpClient cliente = new HttpClient();
+            JArray acabados = new JArray();
+            foreach (Acabado acabado in material.Acabados)
+            {
+                JObject jAcabado = new JObject
+                {
+                    { "Id", acabado.Id },
+                    { "Nombre", acabado.Nombre },
+                    { "Ancho", acabado.Ancho },
+                    { "Alto", acabado.Alto },
+                    { "Grosor", acabado.Grosor },
+                    { "Precio", acabado.Precio},
+                    { "Iva", acabado.Iva },
+                    { "IdMoneda", acabado.Moneda.Id }
+                };
+                acabados.Add(jAcabado);
+            }
+            JArray acabadosEliminar = new JArray();
+            foreach (Acabado acabado in acabadosQuitar)
+            {
+                JObject jAcabado = new JObject
+                {
+                    { "Id", acabado.Id }
+                };
+                acabadosEliminar.Add(jAcabado);
+            }
+            JObject json = new JObject
+            {
+                { "Id", material.Id },
+                { "Nombre", material.Nombre},
+                { "Clave", material.Clave},
+                { "Proveedor", material.Proveedor},
+                { "Ancho", material.Ancho },
+                { "Alto", material.Alto },
+                { "Grosor", material.Grosor },
+                { "Precio", material.Precio},
+                { "Iva", material.Iva },
+                { "IdMoneda", material.Moneda.Id },
+                { "Acabados", acabados },
+                { "AcabadosEliminar", acabadosEliminar }
+            };
+            var contenido = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+            var respuesta = await cliente.PutAsync(url, contenido);
+            string cadena = await respuesta.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject(cadena);
+        }
+        public static async Task<dynamic> EliminarMaterial(int idMaterial)
+        {
+            string url = ServiciosMaterial.rutaBase + "material/idMaterial/" + idMaterial;
+            HttpClient cliente = new HttpClient();
+            var respuesta = await cliente.DeleteAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject(cadena);
         }

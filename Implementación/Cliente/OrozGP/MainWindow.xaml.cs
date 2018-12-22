@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace OrozGP
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private void DesplegarVentanaPrincipal(Usuario usuario)
@@ -62,9 +59,9 @@ namespace OrozGP
         {
             InitializeComponent();
             //Función provicional: pruebas del sistema con inicio de sesión automático.
-            this.campoUsuario.Text = "victor";
+            /*this.campoUsuario.Text = "victor";
             this.campoContrasena.Password = "snape";
-            this.IniciarSesion();
+            this.IniciarSesion();*/
             //
         }
 

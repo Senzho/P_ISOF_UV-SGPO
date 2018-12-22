@@ -6,33 +6,6 @@ require APPPATH . '/libraries/REST_Controller.php';
 */
 class Usuario_Controller extends REST_Controller
 {
-	private function validar_recepcion($datos, $u_c = False)
-	{
-		$nombre = isset($datos['nombre']) ? $datos['nombre'] : '';
-		$correo = isset($datos['correo']) ? $datos['correo'] : '';
-		$puesto = isset($datos['puesto']) ? $datos['puesto'] : '';
-		$usuario;
-		$contrasena;
-		$entradas = array($nombre, $correo);
-		if ($u_c){
-			$usuario = isset($datos['usuario']) ? $datos['usuario'] : '';
-			$contrasena = isset($datos['contrasena']) ? $datos['contrasena'] : '';
-			$entradas[2] = $usuario;
-			$entradas[3] = $contrasena;
-		}
-		$valida = True;
-		for ($i = 0; $i < count($entradas); $i ++){
-			if (!$this->validar_dato(10, 100, $entradas[$i])){
-				$valida = False;
-				break;
-			}
-		}
-		if (!$this->validar_dato(5, 100, $puesto)){
-			$valida = False;
-		}
-		return $valida;
-	}
-	
 	public function __construct()
 	{
 		parent::__construct();
@@ -45,23 +18,15 @@ class Usuario_Controller extends REST_Controller
 	{
 		$respuesta;
 		$usuario = $this->post();
-		//if ($this->validar_recepcion($usuario, True)){
-
-			$resultado = $this->Usuario_Model->registrar($usuario);
-			$respuesta['Exito'] = $resultado['Resultado'];
-			if ($respuesta['Exito']){
-				$usuario['Id'] = $resultado['Id'];
-				$usuario['Permisos'] = $resultado['Permisos'];
-				$respuesta['Usuario'] = $usuario;
-			}else{
-				$respuesta['Error'] = 2;
-			}
-
-		/*}else{
-			$respuesta['exito'] = False;
-			$respuesta['error'] = 1;
-		}*/
-
+		$resultado = $this->Usuario_Model->registrar($usuario);
+		$respuesta['Exito'] = $resultado['Resultado'];
+		if ($respuesta['Exito']){
+			$usuario['Id'] = $resultado['Id'];
+			$usuario['Permisos'] = $resultado['Permisos'];
+			$respuesta['Usuario'] = $usuario;
+		}else{
+			$respuesta['Error'] = 2;
+		}
 		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
@@ -69,15 +34,10 @@ class Usuario_Controller extends REST_Controller
 	{
 		$respuesta;
 		$usuario = $this->put();
-		//if ($this->validar_recepcion($usuario, True)){
-			$respuesta['Exito'] = $this->Usuario_Model->editar($usuario);
-			if (!$respuesta['Exito']){
-				$respuesta['Error'] = 2;
-			}
-		/*}else{
-			$respuesta['exito'] = False;
-			$respuesta['error'] = 1;
-		}*/
+		$respuesta['Exito'] = $this->Usuario_Model->editar($usuario);
+		if (!$respuesta['Exito']){
+			$respuesta['Error'] = 2;
+		}
 		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}

@@ -59,6 +59,42 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.CargarMateriales();
             }
         }
+        private void SolicitarConfirmacionBaja()
+        {
+            VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar al usuario?", VentanaMensaje.Botones.okCancel, this.cargador.Principal);
+            bool? respuesta = vMensaje.ShowDialog();
+            if (respuesta.Value)
+            {
+                this.botonEliminar.IsEnabled = false;
+                Material material = (Material)this.tabla.SelectedItem;
+                this.EliminarMaterial(material);
+            }
+        }
+        private async Task EliminarMaterial(Material material)
+        {
+            bool baja = await material.EliminarMaterial();
+            VentanaMensaje.Mensaje tipo;
+            string mensaje;
+            if (baja)
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Material eliminado";
+                this.BorrarMaterial(material);
+            }
+            else
+            {
+                tipo = VentanaMensaje.Mensaje.error;
+                mensaje = "Lo sentimos, no pudimos eliminar el material";
+            }
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Baja", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
+            vMensaje.ShowDialog();
+            this.botonEliminar.IsEnabled = true;
+        }
+        private void BorrarMaterial(Material material)
+        {
+            this.materiales.Remove(material);
+            this.tabla.Items.Refresh();
+        }
 
         private enum Seleccion
         {
@@ -96,7 +132,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
         {
             if (this.ValidarSeleccion(Seleccion.eliminar))
             {
-
+                this.SolicitarConfirmacionBaja();
             }
         }
         private void CampoBusqueda_KeyUp(object sender, KeyEventArgs e)

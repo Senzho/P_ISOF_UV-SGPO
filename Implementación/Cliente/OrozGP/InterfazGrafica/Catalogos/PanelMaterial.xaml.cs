@@ -25,6 +25,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
         private Cargador cargador;
         private Material material;
         private IList<Acabado> acabados;
+        private IList<Acabado> acabadosQuitar;
         private IList<Moneda> monedas;
 
         private void Regresar()
@@ -49,12 +50,15 @@ namespace OrozGP.InterfazGrafica.Catalogos
             {
                 this.EstablecerMonedaSeleccionada(this.monedas.First(), true);
                 this.EstablecerMonedaSeleccionada(this.monedas.First(), false);
+                this.botonGuardar.IsEnabled = true;
             }
         }
         private async Task ObtenerAcabados(int idMaterial)
         {
             this.acabados = await Acabado.ObtenerAcabados(idMaterial);
-            this.listaAcabados.ItemsSource = this.acabados;
+            this.material.Acabados = this.acabados;
+            this.listaAcabados.ItemsSource = this.material.Acabados;
+            this.botonGuardar.IsEnabled = true;
         }
         private void CargarMaterial()
         {
@@ -332,8 +336,37 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.material = materialRespuesta;
                 this.listaAcabados.ItemsSource = this.material.Acabados;
                 this.botonEliminar.Content = "Regresar";
+                this.LimpiarFormularioAcabado();
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
+            vMensaje.ShowDialog();
+        }
+        private async Task Editar()
+        {
+            Material materialPeticion = new Material(this.material.Id, this.campoNombre.Text.Trim(), this.campoProveedor.Text.Trim(), this.campoClave.Text.Trim(), Double.Parse(this.campoPrecio.Text.Trim()), this.checkIva.IsChecked.Value)
+            {
+                Ancho = Double.Parse(this.campoAncho.Text.Trim()),
+                Alto = Double.Parse(this.campoAlto.Text.Trim()),
+                Grosor = Double.Parse(this.campoGrosor.Text.Trim()),
+                Moneda = (Moneda)this.comboMonedas.SelectedItem,
+                Acabados = this.material.Acabados
+            };
+            bool edicion = await materialPeticion.EditarMaterial(this.acabadosQuitar);
+            VentanaMensaje.Mensaje tipo;
+            string mensaje;
+            if (edicion)
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Material actualizado";
+                this.botonEliminar.Content = "Regresar";
+                this.acabadosQuitar.Clear();
+            }
+            else
+            {
+                tipo = VentanaMensaje.Mensaje.exito;
+                mensaje = "Lo sentimos, no pudimos actualizar el Material";
+            }
+            VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Edicion", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
         }
 
@@ -362,6 +395,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.material = material;
             this.etiquetaCategoria.Content = categoria.Nombre;
             this.ObtenerMonedas();
+            this.acabadosQuitar = new List<Acabado>();
             if (this.material != null)
             {
                 this.CargarMaterial();
@@ -435,7 +469,9 @@ namespace OrozGP.InterfazGrafica.Catalogos
             Object elemento = this.listaAcabados.SelectedItem;
             if (elemento != null)
             {
-                this.acabados.Remove((Acabado)elemento);
+                Acabado acabado = (Acabado)elemento;
+                this.acabados.Remove(acabado);
+                this.acabadosQuitar.Add(acabado);
                 this.LimpiarFormularioAcabado();
                 this.listaAcabados.Items.Refresh();
             }
@@ -452,7 +488,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
             {
                 if (this.material != null)
                 {
-                    //Editar.
+                    this.Editar();
                 }
                 else
                 {

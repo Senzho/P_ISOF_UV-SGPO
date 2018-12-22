@@ -27,10 +27,26 @@ class Acabado_Model extends CI_Model
 		}
 		return $acabados;
 	}
+	public function editar_acabados($acabados)
+	{
+		for($i = 0; $i < count($acabados); $i ++){
+			$acabado = $acabados[$i];
+			$this->db->where('id', $acabado['Id']);
+			$this->db->update('acabado', $acabado);
+		}
+	}
+	public function eliminar_acabados($acabados)
+	{
+		for($i = 0; $i < count($acabados); $i ++){
+			$acabado = $acabados[$i];
+			$this->db->where('id', $acabado['Id']);
+			$this->db->update('acabado', array('activo' => False));
+		}
+	}
 	public function obtener_acabados($id_material)
 	{
 		$acabados = array();
-		$consulta = $this->db->get_where('acabado', array('idMaterial' => $id_material));
+		$consulta = $this->db->get_where('acabado', array('idMaterial' => $id_material, 'Activo' => True));
 		$resultado = $consulta->result();
 		for ($i = 0; $i < count($resultado); ++ $i) {
 			$fila = $resultado[$i];

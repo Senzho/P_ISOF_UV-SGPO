@@ -36,6 +36,33 @@ class Material_Controller extends REST_Controller
 		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);
 	}
+	public function material_put()
+	{
+		$respuesta;
+		$material = $this->put();
+		$respuesta['Exito'] = $this->Material_Model->editar($material);
+		if (!$respuesta['Exito']){
+			$respuesta['Error'] = 2;
+		}
+		$codigo = $respuesta['Exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
+	}
+	public function material_delete()
+	{
+		$respuesta;
+		$id = $this->get('idMaterial');
+		if (validar_dato(1, 10000, $id)){
+			$respuesta['Exito'] = $this->Material_Model->eliminar($id);
+			if (!$respuesta['Exito']){
+				$respuesta['Error'] = 2;
+			}
+		}else{
+			$respuesta['Exito'] = False;
+			$respuesta['Error'] = 1;
+		}
+		$codigo = $respuesta['Exito'] ? 200 : 404;
+		$this->response($respuesta, $codigo);
+	}
 	public function categoria_get()
 	{
 		$id_categoria = $this->get('idCategoria');
