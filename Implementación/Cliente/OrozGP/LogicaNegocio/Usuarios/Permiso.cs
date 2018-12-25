@@ -1,4 +1,5 @@
-﻿using OrozGP.Servicios.Usuarios;
+﻿using Newtonsoft.Json.Linq;
+using OrozGP.Servicios.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,14 +26,14 @@ namespace OrozGP.LogicaNegocio.Usuarios
             this.modificar = modificar;
             this.eliminar = eliminar;
         }
-        public Permiso(dynamic json)
+        public Permiso(JObject json)
         {
-            this.id = json.Id;
-            this.ambito = json.Ambito;
-            this.consultar = json.Consultar == true;
-            this.crear = json.Crear == true;
-            this.modificar = json.Modificar == true;
-            this.eliminar = json.Eliminar == true;
+            this.id = json.GetValue("Id").Value<int>();
+            this.ambito = json.GetValue("Ambito").Value<string>();
+            this.consultar = json.GetValue("Consultar").Value<bool>();
+            this.crear = json.GetValue("Crear").Value<bool>();
+            this.modificar = json.GetValue("Modificar").Value<bool>();
+            this.eliminar = json.GetValue("Eliminar").Value<bool>();
         }
 
         public int Id {
@@ -63,8 +64,8 @@ namespace OrozGP.LogicaNegocio.Usuarios
         public static async Task<IList<Permiso>> ObtenerPermisos(int idUsuario)
         {
             IList<Permiso> permisos = new List<Permiso>();
-            dynamic json = await ServiciosUsuario.ObtenerPermisos(idUsuario);
-            foreach (dynamic item in json.Permisos)
+            JObject json = await ServiciosUsuario.ObtenerPermisos(idUsuario);
+            foreach (JObject item in json.GetValue("Permisos"))
             {
                 permisos.Add(new Permiso(item));
             }

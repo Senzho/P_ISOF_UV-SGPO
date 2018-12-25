@@ -1,4 +1,5 @@
-﻿using OrozGP.Servicios;
+﻿using Newtonsoft.Json.Linq;
+using OrozGP.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,10 @@ namespace OrozGP.LogicaNegocio.Configuraciones
             this.id = id;
             this.nombre = nombre;
         }
-        public Moneda(dynamic json)
+        public Moneda(JObject json)
         {
-            this.id = json.Id;
-            this.nombre = json.Nombre;
+            this.id = json.GetValue("Id").Value<int>();
+            this.nombre = json.GetValue("Nombre").Value<string>();
         }
 
         public int Id {
@@ -40,8 +41,8 @@ namespace OrozGP.LogicaNegocio.Configuraciones
         public static async Task<IList<Moneda>> ObtenerMonedas()
         {
             IList<Moneda> monedas = new List<Moneda>();
-            dynamic json = await ServiciosMoneda.ObtenerMonedas();
-            foreach (dynamic moneda in json.Monedas)
+            JObject json = await ServiciosMoneda.ObtenerMonedas();
+            foreach (JObject moneda in json.GetValue("Monedas"))
             {
                 monedas.Add(new Moneda(moneda));
             }

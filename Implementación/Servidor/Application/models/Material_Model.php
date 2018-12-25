@@ -16,6 +16,7 @@ class Material_Model extends CI_Model
 		$material['idMoneda'] = $moneda['Id'];
 		$acabados = $material['Acabados'];
 		unset($material['Acabados']);
+		$material['Activo'] = True;
 		$resultado = $this->db->insert('material', $material);
 		$id = $this->db->insert_id();
 		if ($resultado){

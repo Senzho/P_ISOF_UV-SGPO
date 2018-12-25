@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace OrozGP.Servicios.Catalogos
     {
         private const string rutaBase = "http://localhost/CodeIgniter/index.php/Acabado_Controller/";
 
-        public static async Task<dynamic> ObtenerAcabados(int idMaterial)
+        public static async Task<JObject> ObtenerAcabados(int idMaterial)
         {
             string url = ServiciosAcabado.rutaBase + "acabados/idMaterial/" + idMaterial;
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.GetAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject(cadena);
+            return JObject.Parse(cadena);
         }
     }
 }

@@ -18,7 +18,7 @@
                 <DataGridTextColumn Binding="{Binding Path=Ancho}" ClipboardContentBinding="{x:Null}" Header="Ancho" Width="Auto" FontSize="18"/>
                 <DataGridTextColumn Binding="{Binding Path=Grosor}" ClipboardContentBinding="{x:Null}" Header="Grosor" FontSize="18" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding Path=Precio}" ClipboardContentBinding="{x:Null}" Header="Precio" Width="Auto" FontSize="18"/>
-                <DataGridTextColumn Binding="{Binding Path=Iva}" ClipboardContentBinding="{x:Null}" Header="Iva" FontSize="18" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Path=IvaEnTexto}" ClipboardContentBinding="{x:Null}" Header="Iva" FontSize="18" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="botonEditar" Content="Editar" HorizontalAlignment="Left" Margin="10,0,0,10" Width="90" Style="{DynamicResource botonAccion}" Height="35" VerticalAlignment="Bottom" Click="BotonEditar_Click"/>

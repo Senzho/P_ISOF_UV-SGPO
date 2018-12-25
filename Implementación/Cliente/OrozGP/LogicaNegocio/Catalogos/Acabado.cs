@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Configuraciones;
+﻿using Newtonsoft.Json.Linq;
+using OrozGP.LogicaNegocio.Configuraciones;
 using OrozGP.Servicios.Catalogos;
 using System;
 using System.Collections.Generic;
@@ -29,16 +30,16 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.precio = precio;
             this.iva = iva;
         }
-        public Acabado(dynamic json)
+        public Acabado(JObject json)
         {
-            this.id = json.Id;
-            this.nombre = json.Nombre;
-            this.ancho = json.Ancho;
-            this.alto = json.Alto;
-            this.grosor = json.Grosor;
-            this.precio = json.Precio;
-            this.iva = json.Iva == true;
-            this.moneda = new Moneda(json.Moneda);
+            this.id = json.GetValue("Id").Value<int>();
+            this.nombre = json.GetValue("Nombre").Value<string>();
+            this.ancho = json.GetValue("Ancho").Value<double>();
+            this.alto = json.GetValue("Alto").Value<double>();
+            this.grosor = json.GetValue("Grosor").Value<double>();
+            this.precio = json.GetValue("Precio").Value<double>();
+            this.iva = json.GetValue("Iva").Value<bool>();
+            this.moneda = new Moneda(json.GetValue("Moneda").Value<JObject>());
         }
 
         public int Id {
@@ -73,6 +74,9 @@ namespace OrozGP.LogicaNegocio.Catalogos
             get => moneda;
             set => moneda = value;
         }
+        public string IvaEnTexto {
+            get => this.iva ? "Sí" : "No";
+        }
 
         public override string ToString()
         {
@@ -82,8 +86,8 @@ namespace OrozGP.LogicaNegocio.Catalogos
         public static async Task<IList<Acabado>> ObtenerAcabados(int idMaterial)
         {
             IList<Acabado> acabados = new List<Acabado>();
-            dynamic json = await ServiciosAcabado.ObtenerAcabados(idMaterial);
-            foreach (dynamic acabado in json.Acabados)
+            JObject json = await ServiciosAcabado.ObtenerAcabados(idMaterial);
+            foreach (JObject acabado in json.GetValue("Acabados"))
             {
                 acabados.Add(new Acabado(acabado));
             }

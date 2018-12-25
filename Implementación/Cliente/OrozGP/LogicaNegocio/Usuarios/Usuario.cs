@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using OrozGP.Servicios.Usuarios;
 
 namespace OrozGP.LogicaNegocio.Usuarios
@@ -26,22 +27,21 @@ namespace OrozGP.LogicaNegocio.Usuarios
             this.nombreUsuario = nombreUsuario;
             this.contraseña = contraseña;
         }
-        public Usuario(dynamic json)
+        public Usuario(JObject json)
         {
-            this.Id = json.Id;
-            this.Nombre = json.Nombre;
-            this.Correo = json.Correo;
-            this.Puesto = json.Puesto;
-            this.NombreUsuario = json.NombreUsuario;
+            this.Id = json.GetValue("Id").Value<int>();
+            this.Nombre = json.GetValue("Nombre").Value<string>();
+            this.Correo = json.GetValue("Correo").Value<string>();
+            this.Puesto = json.GetValue("Puesto").Value<string>();
+            this.NombreUsuario = json.GetValue("NombreUsuario").Value<string>();
             this.Permisos = new List<Permiso>();
-            try
+            if (json.ContainsKey("Permisos"))
             {
-                foreach (dynamic permiso in json.Permisos)
+                foreach (JObject permiso in json.GetValue("Permisos"))
                 {
                     this.Permisos.Add(new Permiso(permiso));
                 }
             }
-            catch (NullReferenceException){}
         }
         public Usuario()
         {
@@ -80,10 +80,10 @@ namespace OrozGP.LogicaNegocio.Usuarios
         public static async Task<Usuario> IniciarSesion(string nombre, string contraseña)
         {
             Usuario usuario = new Usuario();
-            dynamic json = await ServiciosUsuario.ObtenerUsuario(nombre, contraseña);
-            if (json.Exito == true)
+            JObject json = await ServiciosUsuario.ObtenerUsuario(nombre, contraseña);
+            if (json.GetValue("Exito").Value<bool>())
             {
-                usuario = new Usuario(json.Usuario);
+                usuario = new Usuario(json.GetValue("Usuario").Value<JObject>());
             }
             return usuario;
         }
@@ -94,8 +94,8 @@ namespace OrozGP.LogicaNegocio.Usuarios
         public static async Task<IList<Usuario>> ObtenerUsuarios()
         {
             IList<Usuario> usuarios = new List<Usuario>();
-            dynamic json = await ServiciosUsuario.ObtenerUsuarios();
-            foreach (dynamic item in json.Usuarios)
+            JObject json = await ServiciosUsuario.ObtenerUsuarios();
+            foreach (JObject item in json.GetValue("Usuarios"))
             {
                 usuarios.Add(new Usuario(item));
             }
@@ -104,10 +104,10 @@ namespace OrozGP.LogicaNegocio.Usuarios
         public static async Task<IList<Usuario>> ObtenerUsuarios(string clave)
         {
             IList<Usuario> usuarios = new List<Usuario>();
-            dynamic json = await ServiciosUsuario.ObtenerUsuarios(clave);
-            if (json.Exito == true)
+            JObject json = await ServiciosUsuario.ObtenerUsuarios(clave);
+            if (json.GetValue("Exito").Value<bool>())
             {
-                foreach (dynamic item in json.Usuarios)
+                foreach (JObject item in json.GetValue("Usuarios"))
                 {
                     usuarios.Add(new Usuario(item));
                 }
@@ -121,10 +121,10 @@ namespace OrozGP.LogicaNegocio.Usuarios
         public async Task<Usuario> RegistrarUsuario()
         {
             Usuario usuario;
-            dynamic json = await ServiciosUsuario.RegistrarUsuario(this);
-            if (json.Exito == true)
+            JObject json = await ServiciosUsuario.RegistrarUsuario(this);
+            if (json.GetValue("Exito").Value<bool>())
             {
-                usuario = new Usuario(json.Usuario);
+                usuario = new Usuario(json.GetValue("Usuario").Value<JObject>());
             }
             else
             {
@@ -135,15 +135,15 @@ namespace OrozGP.LogicaNegocio.Usuarios
         public async Task<bool> EditarUsuario()
         {
             bool edicion;
-            dynamic json = await ServiciosUsuario.EditarUsuario(this);
-            edicion = json.Exito == true;
+            JObject json = await ServiciosUsuario.EditarUsuario(this);
+            edicion = json.GetValue("Exito").Value<bool>();
             return edicion;
         }
         public async Task<bool> EliminarUsuario()
         {
             bool baja;
-            dynamic json = await ServiciosUsuario.EliminarUsuario(this.id);
-            baja = json.Exito == true;
+            JObject json = await ServiciosUsuario.EliminarUsuario(this.id);
+            baja = json.GetValue("Exito").Value<bool>();
             return baja;
         }
         public bool GenerarCredenciales()

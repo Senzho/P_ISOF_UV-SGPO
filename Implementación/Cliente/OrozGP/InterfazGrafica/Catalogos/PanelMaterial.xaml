@@ -52,9 +52,9 @@
             <CheckBox x:Name="checkIvaAcabado" Content="IVA" Margin="0,47,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="20" Height="28" HorizontalAlignment="Right" Width="49"/>
             <Label x:Name="etiquetaAnchoAcabado" Content="Ancho:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="10,76,0,0"/>
             <TextBox x:Name="campoAnchoAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="102,80,0,0" HorizontalAlignment="Left" Width="64"/>
-            <Label x:Name="etiquetaAltoAcabado" Content="Ancho:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="168,76,0,0"/>
+            <Label x:Name="etiquetaAltoAcabado" Content="Alto:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="168,76,0,0"/>
             <TextBox x:Name="campoAltoAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="245,80,0,0" HorizontalAlignment="Left" Width="64"/>
-            <Label x:Name="etiquetaGrosorAcabado" Content="Ancho:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="314,76,0,0"/>
+            <Label x:Name="etiquetaGrosorAcabado" Content="Grosor:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="314,76,0,0"/>
             <TextBox x:Name="campoGrosorAcabado" Height="30" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" Margin="405,80,10,0"/>
             <Button x:Name="botonNuevoAgregarAcabado" Content="Guardar" Margin="0,0,10,8" Style="{DynamicResource botonOk}" HorizontalAlignment="Right" Width="98" Height="30" VerticalAlignment="Bottom" Click="BotonNuevoAgregarAcabado_Click"/>
             <Button x:Name="botonQuitarAcabado" Content="Quitar" HorizontalAlignment="Right" Margin="0,0,113,8" Width="90" Style="{DynamicResource botonError}" Height="30" VerticalAlignment="Bottom" Click="BotonQuitarAcabado_Click"/>

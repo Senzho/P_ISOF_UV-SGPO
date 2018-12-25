@@ -1,4 +1,5 @@
-﻿using OrozGP.Servicios.Catalogos;
+﻿using Newtonsoft.Json.Linq;
+using OrozGP.Servicios.Catalogos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,10 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.id = id;
             this.nombre = nombre;
         }
-        public Categoria(dynamic json)
+        public Categoria(JObject json)
         {
-            this.id = json.Id;
-            this.nombre = json.Nombre;
+            this.id = json.GetValue("Id").Value<int>();
+            this.nombre = json.GetValue("Nombre").Value<string>();
         }
 
         public int Id {
@@ -44,8 +45,8 @@ namespace OrozGP.LogicaNegocio.Catalogos
         public static async Task<IList<Categoria>> ObtenerCategorias(int tipo)
         {
             IList<Categoria> categorias = new List<Categoria>();
-            dynamic json = await ServiciosCategoria.ObtenerCategorias(tipo);
-            foreach (dynamic categoria in json.Categorias)
+            JObject json = await ServiciosCategoria.ObtenerCategorias(tipo);
+            foreach (JObject categoria in json.GetValue("Categorias"))
             {
                 categorias.Add(new Categoria(categoria));
             }

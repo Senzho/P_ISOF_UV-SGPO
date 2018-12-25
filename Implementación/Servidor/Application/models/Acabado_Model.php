@@ -17,6 +17,7 @@ class Acabado_Model extends CI_Model
 			unset($acabado['Moneda']);
 			$acabado['idMoneda'] = $moneda['Id'];
 			$acabado['IdMaterial'] = $id_material;
+			$acabado['Activo'] = True;
 			$resultados[$i] = $this->db->insert('acabado', $acabado);
 			$acabado['Id'] = $this->db->insert_id();
 			$acabado['Moneda'] = $moneda;

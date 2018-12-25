@@ -1,4 +1,5 @@
-﻿using OrozGP.LogicaNegocio.Configuraciones;
+﻿using Newtonsoft.Json.Linq;
+using OrozGP.LogicaNegocio.Configuraciones;
 using OrozGP.Servicios.Catalogos;
 using System;
 using System.Collections.Generic;
@@ -35,27 +36,26 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.precio = precio;
             this.iva = iva;
         }
-        public Material(dynamic json)
+        public Material(JObject json)
         {
-            this.id = json.Id;
-            this.nombre = json.Nombre;
-            this.proveedor = json.Proveedor;
-            this.clave = json.Clave;
-            this.ancho = json.Ancho;
-            this.alto = json.Alto;
-            this.grosor = json.Grosor;
-            this.precio = json.Precio;
-            this.iva = json.Iva == true;
-            this.moneda = new Moneda(json.Moneda);
+            this.id = json.GetValue("Id").Value<int>();
+            this.nombre = json.GetValue("Nombre").Value<string>();
+            this.proveedor = json.GetValue("Proveedor").Value<string>();
+            this.clave = json.GetValue("Clave").Value<string>();
+            this.ancho = json.GetValue("Ancho").Value<double>();
+            this.alto = json.GetValue("Alto").Value<double>();
+            this.grosor = json.GetValue("Grosor").Value<double>();
+            this.precio = json.GetValue("Precio").Value<double>();
+            this.iva = json.GetValue("Iva").Value<bool>();
+            this.moneda = new Moneda(json.GetValue("Moneda").Value<JObject>());
             this.acabados = new List<Acabado>();
-            try
+            if (json.ContainsKey("Acabados"))
             {
-                foreach (dynamic acabado in json.Acabados)
+                foreach (JObject acabado in json.GetValue("Acabados"))
                 {
                     this.acabados.Add(new Acabado(acabado));
                 }
             }
-            catch (NullReferenceException) { }
         }
 
         public int Id {
@@ -102,14 +102,17 @@ namespace OrozGP.LogicaNegocio.Catalogos
             get => moneda;
             set => moneda = value;
         }
+        public string IvaEnTexto {
+            get => this.iva ? "Sí" : "No";
+        }
 
         public async Task<Material> RegistrarMaterial(int idCategoria)
         {
             Material material;
-            dynamic json = await ServiciosMaterial.RegistrarMaterial(this, idCategoria);
-            if (json.Exito == true)
+            JObject json = await ServiciosMaterial.RegistrarMaterial(this, idCategoria);
+            if (json.GetValue("Exito").Value<bool>())
             {
-                material = new Material(json.Material);
+                material = new Material(json.GetValue("Material").Value<JObject>());
             }
             else
             {
@@ -120,23 +123,23 @@ namespace OrozGP.LogicaNegocio.Catalogos
         public async Task<bool> EditarMaterial(IList<Acabado> acabadosQuitar)
         {
             bool edicion;
-            dynamic json = await ServiciosMaterial.EditarMaterial(this, acabadosQuitar);
-            edicion = json.Exito == true;
+            JObject json = await ServiciosMaterial.EditarMaterial(this, acabadosQuitar);
+            edicion = json.GetValue("Exito").Value<bool>();
             return edicion;
         }
         public async Task<bool> EliminarMaterial()
         {
             bool baja;
-            dynamic json = await ServiciosMaterial.EliminarMaterial(this.id);
-            baja = json.Exito == true;
+            JObject json = await ServiciosMaterial.EliminarMaterial(this.id);
+            baja = json.GetValue("Exito").Value<bool>();
             return baja;
         }
         
         public static async Task<IList<Material>> ObtenerMateriales(int idCategoria)
         {
             IList<Material> materiales = new List<Material>();
-            dynamic json = await ServiciosMaterial.ObtenerMateriales(idCategoria);
-            foreach (dynamic material in json.Materiales)
+            JObject json = await ServiciosMaterial.ObtenerMateriales(idCategoria);
+            foreach (JObject material in json.GetValue("Materiales"))
             {
                 materiales.Add(new Material(material));
             }
@@ -145,10 +148,10 @@ namespace OrozGP.LogicaNegocio.Catalogos
         public static async Task<IList<Material>> ObtenerMateriales(int idCategoria, string clave)
         {
             IList<Material> materiales = new List<Material>();
-            dynamic json = await ServiciosMaterial.ObtenerMateriales(idCategoria, clave);
-            if (json.Exito == true)
+            JObject json = await ServiciosMaterial.ObtenerMateriales(idCategoria, clave);
+            if (json.GetValue("Exito").Value<bool>())
             {
-                foreach (dynamic material in json.Materiales)
+                foreach (JObject material in json.GetValue("Materiales"))
                 {
                     materiales.Add(new Material(material));
                 }

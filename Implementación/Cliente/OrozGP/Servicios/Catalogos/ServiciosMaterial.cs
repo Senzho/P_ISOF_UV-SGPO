@@ -14,16 +14,22 @@ namespace OrozGP.Servicios.Catalogos
     {
         private const string rutaBase = "http://localhost/CodeIgniter/index.php/Material_Controller/";
 
-        public static async Task<dynamic> RegistrarMaterial(Material material, int idCategoria)
+        public static async Task<JObject> RegistrarMaterial(Material material, int idCategoria)
         {
             string url = ServiciosMaterial.rutaBase + "material/idCategoria/" + idCategoria;
             HttpClient cliente = new HttpClient();
-            var contenido = new StringContent(JsonConvert.SerializeObject(material), Encoding.UTF8, "application/json");
+            JObject jMaterial = JObject.Parse(JsonConvert.SerializeObject(material));
+            jMaterial.Remove("IvaEnTexto");
+            foreach (JObject acabado in jMaterial.GetValue("Acabados"))
+            {
+                acabado.Remove("IvaEnTexto");
+            }
+            var contenido = new StringContent(jMaterial.ToString(), Encoding.UTF8, "application/json");
             var respuesta = await cliente.PostAsync(url, contenido);
             string cadena = await respuesta.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject(cadena);
+            return JObject.Parse(cadena);
         }
-        public static async Task<dynamic> EditarMaterial(Material material, IList<Acabado> acabadosQuitar)
+        public static async Task<JObject> EditarMaterial(Material material, IList<Acabado> acabadosQuitar)
         {
             string url = ServiciosMaterial.rutaBase + "material";
             HttpClient cliente = new HttpClient();
@@ -70,31 +76,31 @@ namespace OrozGP.Servicios.Catalogos
             var contenido = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             var respuesta = await cliente.PutAsync(url, contenido);
             string cadena = await respuesta.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject(cadena);
+            return JObject.Parse(cadena);
         }
-        public static async Task<dynamic> EliminarMaterial(int idMaterial)
+        public static async Task<JObject> EliminarMaterial(int idMaterial)
         {
             string url = ServiciosMaterial.rutaBase + "material/idMaterial/" + idMaterial;
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.DeleteAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject(cadena);
+            return JObject.Parse(cadena);
         }
-        public static async Task<dynamic> ObtenerMateriales(int idCategoria)
+        public static async Task<JObject> ObtenerMateriales(int idCategoria)
         {
             string url = ServiciosMaterial.rutaBase + "categoria/idCategoria/" + idCategoria;
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.GetAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject(cadena);
+            return JObject.Parse(cadena);
         }
-        public static async Task<dynamic> ObtenerMateriales(int idCategoria, string clave)
+        public static async Task<JObject> ObtenerMateriales(int idCategoria, string clave)
         {
             string url = ServiciosMaterial.rutaBase + "categoria_clave/idCategoria/" + idCategoria + "/clave/" + clave;
             HttpClient cliente = new HttpClient();
             var respuesta = await cliente.GetAsync(url);
             string cadena = await respuesta.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject(cadena);
+            return JObject.Parse(cadena);
         }
     }
 }
