@@ -120,12 +120,20 @@ namespace OrozGP.LogicaNegocio.Catalogos
             }
             return material;
         }
-        public async Task<bool> EditarMaterial(IList<Acabado> acabadosQuitar)
+        public async Task<Object[]> EditarMaterial(IList<Acabado> acabadosAgregar, IList<Acabado> acabadosQuitar)
         {
+            Object[] respuesta = new object[2];
             bool edicion;
-            JObject json = await ServiciosMaterial.EditarMaterial(this, acabadosQuitar);
+            JObject json = await ServiciosMaterial.EditarMaterial(this, acabadosAgregar, acabadosQuitar);
             edicion = json.GetValue("Exito").Value<bool>();
-            return edicion;
+            respuesta[0] = edicion;
+            IList<Acabado> acabados = new List<Acabado>();
+            foreach (JObject acabado in json.GetValue("AcabadosAgregados"))
+            {
+                acabados.Add(new Acabado(acabado));
+            }
+            respuesta[1] = acabados;
+            return respuesta;
         }
         public async Task<bool> EliminarMaterial()
         {

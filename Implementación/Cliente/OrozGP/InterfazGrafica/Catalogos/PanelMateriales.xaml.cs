@@ -61,7 +61,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
         }
         private void SolicitarConfirmacionBaja()
         {
-            VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar al usuario?", VentanaMensaje.Botones.okCancel, this.cargador.Principal);
+            VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar el material?", VentanaMensaje.Botones.okCancel, this.cargador.Principal);
             bool? respuesta = vMensaje.ShowDialog();
             if (respuesta.Value)
             {

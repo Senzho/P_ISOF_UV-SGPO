@@ -25,6 +25,8 @@ namespace OrozGP.InterfazGrafica.Catalogos
         private Cargador cargador;
         private Material material;
         private IList<Acabado> acabados;
+        private IList<Acabado> acabadosEditar;
+        private IList<Acabado> acabadosAgregar;
         private IList<Acabado> acabadosQuitar;
         private IList<Moneda> monedas;
 
@@ -57,7 +59,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
         {
             this.acabados = await Acabado.ObtenerAcabados(idMaterial);
             this.material.Acabados = this.acabados;
-            this.listaAcabados.ItemsSource = this.material.Acabados;
+            this.listaAcabados.ItemsSource = this.acabados;
             this.botonGuardar.IsEnabled = true;
         }
         private void CargarMaterial()
@@ -111,6 +113,15 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.campoAltoAcabado.Text = "";
             this.campoGrosorAcabado.Text = "";
             this.checkIvaAcabado.IsChecked = false;
+        }
+        private bool AcabadoEnEdicion(Acabado acabado)
+        {
+            bool enEdicion = false;
+            if (this.campoNombreAcabado.Text != acabado.Nombre || this.campoPrecioAcabado.Text != acabado.Precio.ToString() || this.campoAnchoAcabado.Text != acabado.Ancho.ToString() || this.campoAltoAcabado.Text != acabado.Alto.ToString() || this.campoGrosorAcabado.Text != acabado.Grosor.ToString())
+            {
+                enEdicion = true;
+            }
+            return enEdicion;
         }
         private bool FormularioAcabadoEnEdicion()
         {
@@ -295,6 +306,7 @@ namespace OrozGP.InterfazGrafica.Catalogos
             {
                 Moneda = (Moneda)this.comboMonedasAcabado.SelectedItem
             };
+            this.acabadosAgregar.Add(acabado);
             this.acabados.Add(acabado);
             this.listaAcabados.Items.Refresh();
             this.LimpiarFormularioAcabado();
@@ -302,6 +314,16 @@ namespace OrozGP.InterfazGrafica.Catalogos
         private void ActualizarAcabado()
         {
             Acabado acabado = (Acabado)this.listaAcabados.SelectedItem;
+            if (this.acabados.Contains(acabado))
+            {
+                this.acabados.Remove(acabado);
+            }
+            this.acabados.Add(acabado);
+            if (this.acabadosEditar.Contains(acabado))
+            {
+                this.acabadosEditar.Remove(acabado);
+            }
+            this.acabadosEditar.Add(acabado);
             acabado.Nombre = this.campoNombreAcabado.Text.Trim();
             acabado.Ancho = Double.Parse(this.campoAnchoAcabado.Text.Trim());
             acabado.Alto = Double.Parse(this.campoAltoAcabado.Text.Trim());
@@ -334,9 +356,11 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Material registrado";
                 this.material = materialRespuesta;
-                this.listaAcabados.ItemsSource = this.material.Acabados;
+                this.acabados = this.material.Acabados;
+                this.listaAcabados.ItemsSource = this.acabados;
                 this.botonEliminar.Content = "Regresar";
                 this.LimpiarFormularioAcabado();
+                this.VaciarListas();
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
@@ -349,17 +373,18 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 Alto = Double.Parse(this.campoAlto.Text.Trim()),
                 Grosor = Double.Parse(this.campoGrosor.Text.Trim()),
                 Moneda = (Moneda)this.comboMonedas.SelectedItem,
-                Acabados = this.material.Acabados
+                Acabados = this.acabadosEditar
             };
-            bool edicion = await materialPeticion.EditarMaterial(this.acabadosQuitar);
+            Object[] respuesta = await materialPeticion.EditarMaterial(this.acabadosAgregar, this.acabadosQuitar);
             VentanaMensaje.Mensaje tipo;
             string mensaje;
-            if (edicion)
+            if ((bool) respuesta[0])
             {
                 tipo = VentanaMensaje.Mensaje.exito;
                 mensaje = "Material actualizado";
                 this.botonEliminar.Content = "Regresar";
-                this.acabadosQuitar.Clear();
+                this.VaciarListas();
+                this.ActualizarAcabadosEditados((IList<Acabado>) respuesta[1]);
             }
             else
             {
@@ -368,6 +393,26 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Edicion", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
+        }
+        private void VaciarListas()
+        {
+            this.acabadosAgregar.Clear();
+            this.acabadosEditar.Clear();
+            this.acabadosQuitar.Clear();
+        }
+        private void ActualizarAcabadosEditados(IList<Acabado> acabados)
+        {
+            Acabado acabado;
+            for (int i = 0; i < this.acabados.Count; i++)
+            {
+                acabado = this.acabados.ElementAt(i);
+                if (acabado.Id == 0)
+                {
+                    this.acabados.Remove(acabado);
+                }
+            }
+            this.acabados = this.acabados.Concat<Acabado>(acabados).ToList();
+            this.listaAcabados.ItemsSource = this.acabados;
         }
 
         private enum DatosMaterial
@@ -395,6 +440,8 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.material = material;
             this.etiquetaCategoria.Content = categoria.Nombre;
             this.ObtenerMonedas();
+            this.acabadosAgregar = new List<Acabado>();
+            this.acabadosEditar = new List<Acabado>();
             this.acabadosQuitar = new List<Acabado>();
             if (this.material != null)
             {
@@ -415,14 +462,16 @@ namespace OrozGP.InterfazGrafica.Catalogos
         {
             this.Regresar();
         }
-        private void ListaAcabados_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListaAcabadosItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Acabado acabado = (Acabado)this.listaAcabados.SelectedItem;
-            if (acabado != null)
+            ListViewItem item = (ListViewItem)sender;
+            Acabado acabado = (Acabado)item.Content;
+            Object elementoSeleccionado = this.listaAcabados.SelectedItem;
+            if (elementoSeleccionado != null)
             {
-                if (this.FormularioAcabadoEnEdicion())
+                Acabado acabadoSeleccionado = (Acabado)elementoSeleccionado;
+                if (this.AcabadoEnEdicion(acabadoSeleccionado))
                 {
-                    this.listaAcabados.SelectedItem = null;
                     this.MostrarMensajeEdicion();
                 }
                 else
@@ -430,15 +479,36 @@ namespace OrozGP.InterfazGrafica.Catalogos
                     this.CargarAcabado(acabado);
                 }
             }
+            else
+            {
+                if (this.FormularioAcabadoEnEdicion())
+                {
+                    this.MostrarMensajeEdicion();
+                }
+                else
+                {
+                    this.CargarAcabado(acabado);
+                }   
+            }
         }
         private void BotonNuevoAcabado_Click(object sender, RoutedEventArgs e)
         {
-            if (this.listaAcabados.SelectedItem != null)
+            Object elementoSeleccionado = this.listaAcabados.SelectedItem;
+            if (elementoSeleccionado != null)
             {
-                this.LimpiarFormularioAcabado();
+                Acabado acabado = (Acabado)elementoSeleccionado;
+                if (this.AcabadoEnEdicion(acabado))
+                {
+                    this.MostrarMensajeEdicion();
+                }
+                else
+                {
+                    this.LimpiarFormularioAcabado();
+                }
             }
             else
             {
+
                 if (this.FormularioAcabadoEnEdicion())
                 {
                     this.MostrarMensajeEdicion();
@@ -471,6 +541,14 @@ namespace OrozGP.InterfazGrafica.Catalogos
             {
                 Acabado acabado = (Acabado)elemento;
                 this.acabados.Remove(acabado);
+                if (this.acabadosEditar.Contains(acabado))
+                {
+                    this.acabadosEditar.Remove(acabado);
+                }
+                else if (this.acabadosAgregar.Contains(acabado))
+                {
+                    this.acabadosAgregar.Remove(acabado);
+                }
                 this.acabadosQuitar.Add(acabado);
                 this.LimpiarFormularioAcabado();
                 this.listaAcabados.Items.Refresh();

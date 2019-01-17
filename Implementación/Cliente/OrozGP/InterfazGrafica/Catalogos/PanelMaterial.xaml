@@ -36,12 +36,17 @@
         <TextBox x:Name="campoGrosor" Height="30" Margin="541,195,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="etiquetaAcabados" Content="Acabados" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Button x:Name="botonNuevoAcabado" Content="Nuevo" Margin="107,244,0,0" Style="{DynamicResource botonAccion}" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92" Click="BotonNuevoAcabado_Click"/>
-        <ListView x:Name="listaAcabados" HorizontalAlignment="Left" Height="156" Margin="10,279,0,0" VerticalAlignment="Top" Width="189" SelectionChanged="ListaAcabados_SelectionChanged">
+        <ListView x:Name="listaAcabados" HorizontalAlignment="Left" Height="156" Margin="10,279,0,0" VerticalAlignment="Top" Width="189">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListaAcabadosItem_PreviewMouseLeftButtonDown" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
         <Grid Height="156" Margin="204,279,10,0" VerticalAlignment="Top" Background="#FFC8C8C8">
             <Label x:Name="etiquetaNombreAcabado" Content="Nombre:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="10,6,0,0"/>

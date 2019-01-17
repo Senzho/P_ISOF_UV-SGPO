@@ -29,25 +29,25 @@ namespace OrozGP.Servicios.Catalogos
             string cadena = await respuesta.Content.ReadAsStringAsync();
             return JObject.Parse(cadena);
         }
-        public static async Task<JObject> EditarMaterial(Material material, IList<Acabado> acabadosQuitar)
+        public static async Task<JObject> EditarMaterial(Material material, IList<Acabado> acabadosAgregar, IList<Acabado> acabadosQuitar)
         {
             string url = ServiciosMaterial.rutaBase + "material";
             HttpClient cliente = new HttpClient();
             JArray acabados = new JArray();
             foreach (Acabado acabado in material.Acabados)
             {
-                JObject jAcabado = new JObject
-                {
-                    { "Id", acabado.Id },
-                    { "Nombre", acabado.Nombre },
-                    { "Ancho", acabado.Ancho },
-                    { "Alto", acabado.Alto },
-                    { "Grosor", acabado.Grosor },
-                    { "Precio", acabado.Precio},
-                    { "Iva", acabado.Iva },
-                    { "IdMoneda", acabado.Moneda.Id }
-                };
+                JObject jAcabado = JObject.Parse(JsonConvert.SerializeObject(acabado));
+                jAcabado.Remove("IvaEnTexto");
+                jAcabado.Remove("Moneda");
+                jAcabado.Add("IdMoneda", acabado.Moneda.Id);
                 acabados.Add(jAcabado);
+            }
+            JArray acabadosNuevos = new JArray();
+            foreach (Acabado acabado in acabadosAgregar)
+            {
+                JObject jAcabado = JObject.Parse(JsonConvert.SerializeObject(acabado));
+                jAcabado.Remove("IvaEnTexto");
+                acabadosNuevos.Add(jAcabado);
             }
             JArray acabadosEliminar = new JArray();
             foreach (Acabado acabado in acabadosQuitar)
@@ -58,22 +58,15 @@ namespace OrozGP.Servicios.Catalogos
                 };
                 acabadosEliminar.Add(jAcabado);
             }
-            JObject json = new JObject
-            {
-                { "Id", material.Id },
-                { "Nombre", material.Nombre},
-                { "Clave", material.Clave},
-                { "Proveedor", material.Proveedor},
-                { "Ancho", material.Ancho },
-                { "Alto", material.Alto },
-                { "Grosor", material.Grosor },
-                { "Precio", material.Precio},
-                { "Iva", material.Iva },
-                { "IdMoneda", material.Moneda.Id },
-                { "Acabados", acabados },
-                { "AcabadosEliminar", acabadosEliminar }
-            };
-            var contenido = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+            JObject jMaterial = JObject.Parse(JsonConvert.SerializeObject(material));
+            jMaterial.Remove("IvaEnTexto");
+            jMaterial.Remove("Acabados");
+            jMaterial.Remove("Moneda");
+            jMaterial.Add("IdMoneda", material.Moneda.Id);
+            jMaterial.Add("AcabadosEditar", acabados);
+            jMaterial.Add("AcabadosAgregar", acabadosNuevos);
+            jMaterial.Add("AcabadosEliminar", acabadosEliminar);
+            var contenido = new StringContent(jMaterial.ToString(), Encoding.UTF8, "application/json");
             var respuesta = await cliente.PutAsync(url, contenido);
             string cadena = await respuesta.Content.ReadAsStringAsync();
             return JObject.Parse(cadena);

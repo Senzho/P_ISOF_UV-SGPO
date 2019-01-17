@@ -40,9 +40,12 @@ class Material_Controller extends REST_Controller
 	{
 		$respuesta;
 		$material = $this->put();
-		$respuesta['Exito'] = $this->Material_Model->editar($material);
+		$resultado = $this->Material_Model->editar($material);
+		$respuesta['Exito'] = $resultado['Resultado'];
 		if (!$respuesta['Exito']){
 			$respuesta['Error'] = 2;
+		}else{
+			$respuesta['AcabadosAgregados'] = $resultado['Acabados'];
 		}
 		$codigo = $respuesta['Exito'] ? 200 : 404;
 		$this->response($respuesta, $codigo);

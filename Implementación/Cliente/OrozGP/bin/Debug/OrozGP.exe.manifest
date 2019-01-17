@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OrozGP.exe" size="948688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OrozGP.exe" size="951248">
       <assemblyIdentity name="OrozGP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2Jr1hBZ4VRHtBPI5L1lDw7/h23zZacUWzM3DKDorN/M=</dsig:DigestValue>
+        <dsig:DigestValue>8sKDrhFbglW+PZC+p6OhhjO/Cki89KWnHj8TZu5Dojs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

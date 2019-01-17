@@ -28,16 +28,21 @@ class Material_Model extends CI_Model
 	public function editar($material)
 	{
 		$this->db->where('id', $material['Id']);
-		$acabados = $material['Acabados'];
-		unset($material['Acabados']);
+		$acabados = $material['AcabadosEditar'];
+		unset($material['AcabadosEditar']);
+		$acabados_agregar = $material['AcabadosAgregar'];
+		unset($material['AcabadosAgregar']);
 		$acabados_quitar = $material['AcabadosEliminar'];
 		unset($material['AcabadosEliminar']);
 		$resultado = $this->db->update('material', $material);
+		$acabados_nuevos;
 		if ($resultado){
 			$this->Acabado_Model->editar_acabados($acabados);
+			$acabados_nuevos = $this->Acabado_Model->registrar($material['Id'], $acabados_agregar);
 			$this->Acabado_Model->eliminar_acabados($acabados_quitar);
 		}
-		return $resultado;
+		$respuesta = array('Resultado' => $resultado, 'Acabados' => $acabados_nuevos);
+		return $respuesta;
 	}
 	public function eliminar($id_material)
 	{
