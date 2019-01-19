@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Usuarios
 {
+    /// <summary>
+    /// Clase controladora del control de usuario del panel de usuarios.
+    /// </summary>
     public partial class PanelUsuarios : UserControl
     {
         private IList<Usuario> usuarios;
@@ -29,11 +32,20 @@ namespace OrozGP.InterfazGrafica.Usuarios
             generar,
         };
 
+        /// <summary>
+        /// Obtiene los usarios de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task ObtenerUsuarios()
         {
             this.usuarios = await Usuario.ObtenerUsuarios();
             this.CargarUsuarios();
         }
+        /// <summary>
+        /// Obtiene los usuarios relacionados con una palabra clave de forma asíncrona.
+        /// </summary>
+        /// <param name="clave">Palabra clave para la búsqueda.</param>
+        /// <returns></returns>
         private async Task BuscarUsuarios(string clave)
         {
             IList<Usuario> usuariosBusqueda = await Usuario.ObtenerUsuarios(clave);
@@ -48,14 +60,28 @@ namespace OrozGP.InterfazGrafica.Usuarios
                 this.CargarUsuarios();
             }
         }
+        /// <summary>
+        /// Establece la fuente de datos para la tabla.
+        /// </summary>
         private void CargarUsuarios()
         {
             this.tabla.ItemsSource = this.usuarios;
         }
+        /// <summary>
+        /// Muestra el control de usuario del panel de usuario.
+        /// </summary>
+        /// <param name="usuario">Usuario a editar.</param>
         private void CargarPanelUsuario(Usuario usuario)
         {
             this.cargador.Cargar(new PanelUsuario(this.cargador, usuario));
         }
+        /// <summary>
+        /// Verifica la selección de un elemento de la tabla.
+        /// </summary>
+        /// <param name="seleccion">Tipo de acción de selección.</param>
+        /// <returns>
+        /// Un booleano con la confirmación de selección.
+        /// </returns>
         private bool ValidarSeleccion(Seleccion seleccion)
         {
             Object elemento = this.tabla.SelectedItem;
@@ -68,6 +94,11 @@ namespace OrozGP.InterfazGrafica.Usuarios
             }
             return valida;
         }
+        /// <summary>
+        /// Elimina un usuario de forma asíncrona.
+        /// </summary>
+        /// <param name="usuario">Usuario a eliminar.</param>
+        /// <returns></returns>
         private async Task EliminarUsuario(Usuario usuario)
         {
             bool baja = await usuario.EliminarUsuario();
@@ -88,11 +119,18 @@ namespace OrozGP.InterfazGrafica.Usuarios
             vMensaje.ShowDialog();
             this.botonEliminar.IsEnabled = true;
         }
+        /// <summary>
+        /// Borra a un usuario de la fuente de datos de la tabla y refresca.
+        /// </summary>
+        /// <param name="usuario">Usuario a borrar.</param>
         private void BorrarUsuario(Usuario usuario)
         {
             this.usuarios.Remove(usuario);
             this.tabla.Items.Refresh();
         }
+        /// <summary>
+        /// Solicita la confirmacón de la baja de un usuario.
+        /// </summary>
         private void SolicitarConfirmacionBaja()
         {
             VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar al usuario?", VentanaMensaje.Botones.okCancel, this.cargador.Principal);
@@ -105,6 +143,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
             }
         }
 
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="cargador">Instancia del cargador.</param>
         public PanelUsuarios(Cargador cargador)
         {
             InitializeComponent();

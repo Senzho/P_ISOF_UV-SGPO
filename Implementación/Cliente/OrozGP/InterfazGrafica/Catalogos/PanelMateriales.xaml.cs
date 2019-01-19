@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Catalogos
 {
+    /// <summary>
+    /// Clase controladora para el control de usuario del panel de materiales.
+    /// </summary>
     public partial class PanelMateriales : UserControl
     {
         private Cargador cargador;
@@ -24,15 +27,29 @@ namespace OrozGP.InterfazGrafica.Catalogos
         private Categoria categoria;
         private IList<Material> materiales;
 
+        /// <summary>
+        /// Obtiene los materiales de una categoría de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task ObtenerMateriales()
         {
             this.materiales = await Material.ObtenerMateriales(this.categoria.Id);
             this.CargarMateriales();
         }
+        /// <summary>
+        /// Establece la fuente de datos para la tabla.
+        /// </summary>
         private void CargarMateriales()
         {
             this.tabla.ItemsSource = this.materiales;
         }
+        /// <summary>
+        /// Verifica la selección de un elemento de la tabla.
+        /// </summary>
+        /// <param name="seleccion">Enumerador con el tipo de acción a realizar.</param>
+        /// <returns>
+        /// Un booleano con la confirmación de selección.
+        /// </returns>
         private bool ValidarSeleccion(Seleccion seleccion)
         {
             Object elemento = this.tabla.SelectedItem;
@@ -45,6 +62,11 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return valida;
         }
+        /// <summary>
+        /// Obtiene los materiales relacionados con una palabra clave de forma asíncrona.
+        /// </summary>
+        /// <param name="clave">Palabra clave para la búsqueda (campo de búsqueda).</param>
+        /// <returns></returns>
         private async Task BuscarMateriales(string clave)
         {
             IList<Material> materialesBusqueda = await Material.ObtenerMateriales(this.categoria.Id, clave);
@@ -59,6 +81,9 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.CargarMateriales();
             }
         }
+        /// <summary>
+        /// Solicita la confirmación para la baja de un material seleccionado.
+        /// </summary>
         private void SolicitarConfirmacionBaja()
         {
             VentanaMensaje vMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.confirmacion, "Baja", "¿Está seguro de eliminar el material?", VentanaMensaje.Botones.okCancel, this.cargador.Principal);
@@ -70,6 +95,11 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.EliminarMaterial(material);
             }
         }
+        /// <summary>
+        /// Elimina un material de forma asíncrona.
+        /// </summary>
+        /// <param name="material">Material para eliminar.</param>
+        /// <returns></returns>
         private async Task EliminarMaterial(Material material)
         {
             bool baja = await material.EliminarMaterial();
@@ -90,6 +120,10 @@ namespace OrozGP.InterfazGrafica.Catalogos
             vMensaje.ShowDialog();
             this.botonEliminar.IsEnabled = true;
         }
+        /// <summary>
+        /// Borra un material de la fuente de datos de la tabla y refresca.
+        /// </summary>
+        /// <param name="material">Material para borrar.</param>
         private void BorrarMaterial(Material material)
         {
             this.materiales.Remove(material);
@@ -102,6 +136,12 @@ namespace OrozGP.InterfazGrafica.Catalogos
             eliminar,
         };
 
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="cargador">Instancia del cargador de elementos.</param>
+        /// <param name="tipo">Tipo de categoría de materiales.</param>
+        /// <param name="categoria">Categoría de materiales.</param>
         public PanelMateriales(Cargador cargador, int tipo, Categoria categoria)
         {
             InitializeComponent();

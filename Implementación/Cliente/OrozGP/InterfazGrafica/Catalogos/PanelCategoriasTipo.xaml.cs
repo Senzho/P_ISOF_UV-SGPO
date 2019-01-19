@@ -17,17 +17,27 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Catalogos
 {
+    /// <summary>
+    /// Clase controladora del control de usuario del panel de categorías.
+    /// </summary>
     public partial class PanelCategoriasTipo : UserControl, ISeleccionCategoria
     {
         private Cargador cargador;
         private int tipo;
         private IList<Categoria> categorias;
 
+        /// <summary>
+        /// Obtiene las categorías de su tipo de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task ObtenerCategorias()
         {
             this.categorias = await Categoria.ObtenerCategorias(this.tipo);
             this.CargarCategorias();
         }
+        /// <summary>
+        /// Agrega los controles de usuario de categorías al panel de visualización.
+        /// </summary>
         private void CargarCategorias()
         {
             foreach (Categoria categoria in this.categorias)
@@ -35,6 +45,10 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.panelCategorias.Children.Add(new PanelCategoria(categoria, this));
             }
         }
+        /// <summary>
+        /// Muestra el panel del catálogo correspondiente a una categoría.
+        /// </summary>
+        /// <param name="categoria">Categoría.</param>
         private void CargarPanelCatalogo(Categoria categoria)
         {
             if (this.tipo == 1)
@@ -43,6 +57,11 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
         }
 
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="tipo">Tipo de categorías a mostrar.</param>
+        /// <param name="cargador">Instancia del cargardor de elementos.</param>
         public PanelCategoriasTipo(int tipo, Cargador cargador)
         {
             InitializeComponent();

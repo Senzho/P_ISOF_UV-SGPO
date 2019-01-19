@@ -1,0 +1,1332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OrozGP</name>
+    </assembly>
+    <members>
+        <member name="T:OrozGP.InterfazGrafica.Catalogos.PanelCategoria">
+            <summary>
+            Clase controladora del control de usuario de categoría.
+            </summary>
+            <summary>
+            PanelCategoria
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoria.CargarCategoria">
+            <summary>
+            Establece el nombre de la categoría para la vista.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoria.#ctor(OrozGP.LogicaNegocio.Catalogos.Categoria,OrozGP.LogicaNegocio.Catalogos.ISeleccionCategoria)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="categoria">Categoría.</param>
+            <param name="seleccion">Interfaz de selección de categoría.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoria.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.Catalogos.PanelCategoriasTipo">
+            <summary>
+            Clase controladora del control de usuario del panel de categorías.
+            </summary>
+            <summary>
+            PanelCategoriasTipo
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoriasTipo.ObtenerCategorias">
+            <summary>
+            Obtiene las categorías de su tipo de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoriasTipo.CargarCategorias">
+            <summary>
+            Agrega los controles de usuario de categorías al panel de visualización.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoriasTipo.CargarPanelCatalogo(OrozGP.LogicaNegocio.Catalogos.Categoria)">
+            <summary>
+            Muestra el panel del catálogo correspondiente a una categoría.
+            </summary>
+            <param name="categoria">Categoría.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoriasTipo.#ctor(System.Int32,OrozGP.LogicaNegocio.Cargador)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="tipo">Tipo de categorías a mostrar.</param>
+            <param name="cargador">Instancia del cargardor de elementos.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelCategoriasTipo.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.Catalogos.PanelMaterial">
+            <summary>
+            Clase controladora del control de usuario del panel de material.
+            </summary>
+            <summary>
+            PanelMaterial
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.Regresar">
+            <summary>
+            Regresa a la ventana de administración de materiales.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ObtenerMonedas">
+            <summary>
+            Obiene las monedas de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.CargarMonedas">
+            <summary>
+            Carga las monedas en los combos de selección de material y acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ObtenerAcabados(System.Int32)">
+            <summary>
+            Obitiene los acabados del material de forma síncrona.
+            </summary>
+            <param name="idMaterial">Identificador del material.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.CargarMaterial">
+            <summary>
+            Muestra los datos del material.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.CargarAcabado(OrozGP.LogicaNegocio.Catalogos.Acabado)">
+            <summary>
+            Muestra los datos de un acabado seleccionado en el formulario de acabados.
+            </summary>
+            <param name="acabado">Acabado a cargar.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.EstablecerMonedaSeleccionada(OrozGP.LogicaNegocio.Configuraciones.Moneda,System.Boolean)">
+            <summary>
+            Establece la moneda seleccionada en los combos de selección dependiendo de si se trata de un material o un acabado.
+            </summary>
+            <param name="moneda">Moneda seleccionada.</param>
+            <param name="esMaterial">Identificador para material o acabado.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.LimpiarFormularioAcabado">
+            <summary>
+            Quita los datos cargados del formulario de acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.AcabadoEnEdicion(OrozGP.LogicaNegocio.Catalogos.Acabado)">
+            <summary>
+            Identifica si un acabado se encuentra en edición.
+            </summary>
+            <param name="acabado">Acabado a identificar.</param>
+            <returns>
+            Un booleano con la confirmación del estado de edición del acabado.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.FormularioAcabadoEnEdicion">
+            <summary>
+            Identifica si se está registrando un nuevo acabado.
+            </summary>
+            <returns>
+            Un booleano con la confirmación de contenido en el formulario de acabados.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.MostrarMensajeEdicion">
+            <summary>
+            Muestra un mensaja para informar sobre la edición / creación de un acabado.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ValidarDouble(System.String)">
+            <summary>
+            Valida si una cadena de texto corresponde a un número decimal double.
+            </summary>
+            <param name="dato">Dato a validar.</param>
+            <returns>
+            Un booleano con la confirmación de validéz.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ValidarDatosMaterial">
+            <summary>
+            Valida los datos de un material.
+            </summary>
+            <returns>
+            Un enumerador sobre el estado de validéz.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ValidarDatosAcabado">
+            <summary>
+            Valida los datos de un acabado.
+            </summary>
+            <returns>
+            Un enumerador con el estado de validez.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.MostrarMensajeDatos(OrozGP.InterfazGrafica.Catalogos.PanelMaterial.DatosMaterial)">
+            <summary>
+            Muestra un mensaje de corrección de la información ingresada.
+            </summary>
+            <param name="datos">Enumerador con el estado de invalidéz de los datos.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.AgregarAcabado">
+            <summary>
+            Agrega un acabado a la lista de acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ActualizarAcabado">
+            <summary>
+            Actualiza un acabado editado de la lista de acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.Registrar">
+            <summary>
+            Registra un material de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.Editar">
+            <summary>
+            Actualiza un material de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.VaciarListas">
+            <summary>
+            Vacía las listas de acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.ActualizarAcabadosEditados(System.Collections.Generic.IList{OrozGP.LogicaNegocio.Catalogos.Acabado})">
+            <summary>
+            Actualiza la lista de acabados después de una actualización de material, reemplazando los acabados nuevos (identificador 0) por los registrados con su respectivo identificador de registro.
+            </summary>
+            <param name="acabados">Lista de acabados registrados</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.#ctor(OrozGP.LogicaNegocio.Catalogos.Categoria,System.Int32,OrozGP.LogicaNegocio.Cargador,OrozGP.LogicaNegocio.Catalogos.Material)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="categoria">Categoría del material.</param>
+            <param name="tipo">Tipo de categoría del material.</param>
+            <param name="cargador">Instancia del cargador de elementos.</param>
+            <param name="material">Material (null para registrar).</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMaterial.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.Catalogos.PanelMateriales">
+            <summary>
+            Clase controladora para el control de usuario del panel de materiales.
+            </summary>
+            <summary>
+            PanelMateriales
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.ObtenerMateriales">
+            <summary>
+            Obtiene los materiales de una categoría de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.CargarMateriales">
+            <summary>
+            Establece la fuente de datos para la tabla.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.ValidarSeleccion(OrozGP.InterfazGrafica.Catalogos.PanelMateriales.Seleccion)">
+            <summary>
+            Verifica la selección de un elemento de la tabla.
+            </summary>
+            <param name="seleccion">Enumerador con el tipo de acción a realizar.</param>
+            <returns>
+            Un booleano con la confirmación de selección.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.BuscarMateriales(System.String)">
+            <summary>
+            Obtiene los materiales relacionados con una palabra clave de forma asíncrona.
+            </summary>
+            <param name="clave">Palabra clave para la búsqueda (campo de búsqueda).</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.SolicitarConfirmacionBaja">
+            <summary>
+            Solicita la confirmación para la baja de un material seleccionado.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.EliminarMaterial(OrozGP.LogicaNegocio.Catalogos.Material)">
+            <summary>
+            Elimina un material de forma asíncrona.
+            </summary>
+            <param name="material">Material para eliminar.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.BorrarMaterial(OrozGP.LogicaNegocio.Catalogos.Material)">
+            <summary>
+            Borra un material de la fuente de datos de la tabla y refresca.
+            </summary>
+            <param name="material">Material para borrar.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.#ctor(OrozGP.LogicaNegocio.Cargador,System.Int32,OrozGP.LogicaNegocio.Catalogos.Categoria)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="cargador">Instancia del cargador de elementos.</param>
+            <param name="tipo">Tipo de categoría de materiales.</param>
+            <param name="categoria">Categoría de materiales.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Catalogos.PanelMateriales.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.Usuarios.PanelUsuario">
+            <summary>
+            Clase controladora del control de usuario del panel de usuario.
+            </summary>
+            <summary>
+            PanelUsuario
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.CargarUsuario">
+            <summary>
+            Muestra los datos del usuario.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.ObtenerPermisos">
+            <summary>
+            Obtiene los permisos del usuario de forma síncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.CargarPermisos">
+            <summary>
+            Muestra los permisos en la tabla.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.ValidarCampos">
+            <summary>
+            Valida los datos ingresados del usuario.
+            </summary>
+            <returns>
+            Un enumerador con el estado de validéz de los datos.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.ValidarCorreo(System.String)">
+            <summary>
+            Valida un correo electrónico.
+            </summary>
+            <param name="correo">Correo del usuario.</param>
+            <returns>
+            Un booleano con la confirmación de validéz.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.MostrarMensajeDatos(OrozGP.InterfazGrafica.Usuarios.PanelUsuario.DatosUsuario)">
+            <summary>
+            Muestra un mensaje de corrección de la información del usuario.
+            </summary>
+            <param name="datos">Enumerador como identificador de invalidéz de los datos.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.Regresar">
+            <summary>
+            Regresa al panel de administración de usuarios.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.Registrar">
+            <summary>
+            Registra un usuario de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.Editar">
+            <summary>
+            Actualiza un usuario de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.#ctor(OrozGP.LogicaNegocio.Cargador,OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="cargador">Instancia del cargador de elementos.</param>
+            <param name="usuario">Usuario (null para registrar).</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuario.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios">
+            <summary>
+            Clase controladora del control de usuario del panel de usuarios.
+            </summary>
+            <summary>
+            PanelUsuarios
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.ObtenerUsuarios">
+            <summary>
+            Obtiene los usarios de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.BuscarUsuarios(System.String)">
+            <summary>
+            Obtiene los usuarios relacionados con una palabra clave de forma asíncrona.
+            </summary>
+            <param name="clave">Palabra clave para la búsqueda.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.CargarUsuarios">
+            <summary>
+            Establece la fuente de datos para la tabla.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.CargarPanelUsuario(OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            Muestra el control de usuario del panel de usuario.
+            </summary>
+            <param name="usuario">Usuario a editar.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.ValidarSeleccion(OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.Seleccion)">
+            <summary>
+            Verifica la selección de un elemento de la tabla.
+            </summary>
+            <param name="seleccion">Tipo de acción de selección.</param>
+            <returns>
+            Un booleano con la confirmación de selección.
+            </returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.EliminarUsuario(OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            Elimina un usuario de forma asíncrona.
+            </summary>
+            <param name="usuario">Usuario a eliminar.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.BorrarUsuario(OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            Borra a un usuario de la fuente de datos de la tabla y refresca.
+            </summary>
+            <param name="usuario">Usuario a borrar.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.SolicitarConfirmacionBaja">
+            <summary>
+            Solicita la confirmacón de la baja de un usuario.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.#ctor(OrozGP.LogicaNegocio.Cargador)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="cargador">Instancia del cargador.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.Usuarios.PanelUsuarios.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.VentanaMensaje">
+            <summary>
+            Clase controladora de la ventana personalizada de mensajes.
+            </summary>
+            <summary>
+            VentanaMensaje
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaMensaje.CargarTipo">
+            <summary>
+            Carga la imágen de un tipo de mensaje.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaMensaje.CargarBotones">
+            <summary>
+            Muestra los botones de acuerdo al tipo de mensaje.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaMensaje.#ctor(OrozGP.InterfazGrafica.VentanaMensaje.Mensaje,System.String,System.String,OrozGP.InterfazGrafica.VentanaMensaje.Botones,System.Windows.Window)">
+            <summary>
+            COnstructor principal de la clase,
+            </summary>
+            <param name="tipo">Tipo de mensaje.</param>
+            <param name="nombre">Título del mensaje.</param>
+            <param name="mensaje">Mensaje</param>
+            <param name="boton">Tipo de botones.</param>
+            <param name="propietario">Ventana propietaria.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaMensaje.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.InterfazGrafica.VentanaPrincipal">
+            <summary>
+            Clase controladora de la ventana principal.
+            </summary>
+            <summary>
+            VentanaPrincipal
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaPrincipal.CargarPanelUsuarios">
+            <summary>
+            Muestra el control de usuario de usuarios.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaPrincipal.CargarPanelCategoriasTipo(System.Int32)">
+            <summary>
+            Muestra el conrol de usuario de categorías por tipo.
+            </summary>
+            <param name="tipo">Tipo de categorías.</param>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaPrincipal.#ctor">
+            <summary>
+            Constructor princpal de la clase.
+            </summary>
+        </member>
+        <member name="P:OrozGP.InterfazGrafica.VentanaPrincipal.Usuario">
+            <summary>
+            Establece o regresa el usuario.
+            </summary>
+        </member>
+        <member name="M:OrozGP.InterfazGrafica.VentanaPrincipal.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Cargador">
+            <summary>
+            Clase para cargar un elemento gráfico UIElement al panel principal de la ventana principal.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Cargador.BorrarYCargar(System.Windows.UIElement)">
+            <summary>
+            Quita cualquier elemento del panel principal y lo reemplaza por otro.
+            </summary>
+            <param name="elemento">Elemento a cargar.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Cargador.#ctor(OrozGP.InterfazGrafica.VentanaPrincipal,System.Windows.Controls.DockPanel)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="principal">Ventana madre.</param>
+            <param name="panel">Panel principal.</param>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Cargador.Panel">
+            <value>
+            Establece o regresa el panel principal.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Cargador.Principal">
+            <value>
+            Establece o regresa la ventana madre.
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Cargador.Cargar(System.Windows.Window)">
+            <summary>
+            Carga una ventna en el panel principal.
+            </summary>
+            <param name="ventana">Ventana para cargar.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Cargador.Cargar(System.Windows.Controls.UserControl)">
+            <summary>
+            Carga un control de usuario al panel principal.
+            </summary>
+            <param name="control">Control de usuario para cargar.</param>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Catalogos.Acabado">
+            <summary>
+            Clase de logica para los acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Acabado.#ctor(System.Int32,System.String,System.Double,System.Double,System.Double,System.Double,System.Boolean)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="id">Identificador del acabado (0 para registrar).</param>
+            <param name="nombre">Nombre del acabado.</param>
+            <param name="ancho">Ancho del acabado.</param>
+            <param name="alto">Alto del acabado.</param>
+            <param name="grosor">Grosor del acabado.</param>
+            <param name="precio">Precio del acabado.</param>
+            <param name="iva">Indicador para la inclusión del iva en el precio.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Acabado.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor json de la clase.
+            </summary>
+            <param name="json">Objeto json con los datos de un acabado.</param>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Id">
+            <value>
+            Establece o regresa el identificador del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Nombre">
+            <value>
+            Establece o regresa el nNombre del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Ancho">
+            <value>
+            Establece o regresa el ancho del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Alto">
+            <value>
+            Establece o regresa el alto del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Grosor">
+            <value>
+            Establece o regresa el grosor del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Precio">
+            <value>
+            Establece o regresa el precio del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Iva">
+            <value>
+            Establece o regresa el identificador para la inclusión del iva en el precio.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.Moneda">
+            <value>
+            Establece o regresa la moneda asociada al precio del acabado.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Acabado.IvaEnTexto">
+            <value>
+            Regresa el valor en texto para la inclusión del iva en el precio (para binding).
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Acabado.ToString">
+            <summary>
+            Sobreescribe el método ToString.
+            </summary>
+            <returns>
+            EL nombre del acabado.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Acabado.ObtenerAcabados(System.Int32)">
+            <summary>
+            Obtiene una lista con los acabados de un material dado.
+            </summary>
+            <param name="idMaterial">Identificador del material.</param>
+            <returns>
+            Una lista con los acabados.
+            </returns>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Catalogos.Categoria">
+            <summary>
+            Clase de lógica para las categorías.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Categoria.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="id">Identificador de la categoría (0 para registrar).</param>
+            <param name="nombre">Nombre de la categoría.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Categoria.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor json de la clase.
+            </summary>
+            <param name="json">Objeto json con los datos de la categoría.</param>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Categoria.Id">
+            <value>
+            Establece o regresa el identificador de la categoría.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Categoria.Nombre">
+            <value>
+            Establece o regresa el nombre de la categoría.
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Categoria.RegistrarCategoria(System.Int32)">
+            <summary>
+            Registra una categoría a un tipo de categorías.
+            </summary>
+            <param name="tipo">Tipo de la categoría.</param>
+            <returns>
+            Un booleano con la confirmación del registro.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Categoria.EditarCategoria">
+            <summary>
+            Actualiza una categoría.
+            </summary>
+            <returns>
+            Un booleano con la confirmación de la actualización.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Categoria.ObtenerCategorias(System.Int32)">
+            <summary>
+            Obtiene una lista con las categorías de un tipo.
+            </summary>
+            <param name="tipo">Tipo de categorías.</param>
+            <returns>
+            Una lista con las categorías.
+            </returns>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Catalogos.Material">
+            <summary>
+            Clase de lógica para los materiales.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.#ctor">
+            <summary>
+            Constructor default de la clase.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.#ctor(System.Int32,System.String,System.String,System.String,System.Double,System.Boolean)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="id">Identificador del material (0 para registrar).</param>
+            <param name="nombre">Nombre del material.</param>
+            <param name="proveedor">Nombre del proveedor del material.</param>
+            <param name="clave">Clave de búsqueda del material.</param>
+            <param name="precio">Precio del material.</param>
+            <param name="iva">Identificador para la inclusión del iva en el precio.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor json de la clase.
+            </summary>
+            <param name="json">Un objeto json con los datos del material.</param>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Id">
+            <value>
+            Establece o regresa el identificador del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Nombre">
+            <value>
+            Establece o regresa el nombre del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Proveedor">
+            <value>
+            Establece o regresa el nombre del proveedor del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Clave">
+            <value>
+            Establece o regresa la clave de búsqueda del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Ancho">
+            <value>
+            Establece o regresa el ancho del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Alto">
+            <value>
+            Establece o regresa el alto del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Grosor">
+            <value>
+            Establece o regresa el grosor del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Precio">
+            <value>
+            Establece o regresa el precio del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Iva">
+            <value>
+            Establece o regresa el identificador para la inclusión del iva en el precio.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Acabados">
+            <value>
+            Establece o regresa la lista de los acabados del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.Moneda">
+            <value>
+            Establece o regresa la moneda asociada al precio del material.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Catalogos.Material.IvaEnTexto">
+            <value>
+            Regresa el valor en texto para la inclusión del iva en el precio (para binding).
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.RegistrarMaterial(System.Int32)">
+            <summary>
+            Registra el material de la instancia de la clase a una categoría.
+            </summary>
+            <param name="idCategoria">Identificador de la categoría.</param>
+            <returns>
+            Un material con su identificador de registro.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.EditarMaterial(System.Collections.Generic.IList{OrozGP.LogicaNegocio.Catalogos.Acabado},System.Collections.Generic.IList{OrozGP.LogicaNegocio.Catalogos.Acabado})">
+            <summary>
+            Actualiza el material de la instancia de la clase.
+            </summary>
+            <param name="acabadosAgregar">La lista de los acabados a agregar al material.</param>
+            <param name="acabadosQuitar">La lista de los acabados a eliminar del material.</param>
+            <returns>
+            Un arreglo de objetos: [0]booleano con la confirmación de la actualización, [1]lista de acabados registrados en la actualización.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.EliminarMaterial">
+            <summary>
+            Elimina el material de la instancia de la clase.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.ObtenerMateriales(System.Int32)">
+            <summary>
+            Obtiene los materiales de una categoría.
+            </summary>
+            <param name="idCategoria">Identificador de la categoría.</param>
+            <returns>
+            Una lista con los materiales de la categoría.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.ObtenerMateriales(System.Int32,System.String)">
+            <summary>
+            Obtiene los materiales de una categoría y relacionados con una palabra clave.
+            </summary>
+            <param name="idCategoria">Identificador de la categoría.</param>
+            <param name="clave">Palabra clave para la búsqueda.</param>
+            <returns>
+            Una lista con los materiales.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.ObtenerMateriales(System.String)">
+            <summary>
+            Obtiene los mateirales relacionados con una palabra clave.
+            </summary>
+            <param name="clave">Palabra clave para la búsqueda.</param>
+            <returns>
+            Una lista con los materiales.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.Material.ObtenerMateriales(System.Boolean)">
+            <summary>
+            Obtiene los materiales registrados.
+            </summary>
+            <param name="incluirAcabados">Establece si se deben regresar los acabados de cada material o no.</param>
+            <returns>
+            Una lista con los materiales.
+            </returns>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Catalogos.ISeleccionCategoria">
+            <summary>
+            Interfaz para la selección de una categoría en la GUI.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Catalogos.ISeleccionCategoria.CategoriaSeleccionada(OrozGP.LogicaNegocio.Catalogos.Categoria)">
+            <summary>
+            Debe contener código correspondiente a la acción posterior a la selección de una categoría.
+            </summary>
+            <param name="categoria">Categoría seleccionada.</param>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Configuraciones.Moneda">
+            <summary>
+            Clase de lógica para las monedas.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Configuraciones.Moneda.#ctor(System.Int32,System.String)">
+            <summary>
+            COnstructor principal de la clase.
+            </summary>
+            <param name="id">Identificador de la moneda (0 para registrar).</param>
+            <param name="nombre">Nombre de la moneda.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Configuraciones.Moneda.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor json de la clase.
+            </summary>
+            <param name="json">Objeto json con los datos de la moneda.</param>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Configuraciones.Moneda.Id">
+            <value>
+            Establece o regresa el identificador de la moneda.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Configuraciones.Moneda.Nombre">
+            <value>
+            Establece o regresa el nombre de la moneda.
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Configuraciones.Moneda.ToString">
+            <summary>
+            Sobreescribe el método ToString.
+            </summary>
+            <returns>
+            EL nombre de la moneda.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Configuraciones.Moneda.ObtenerMonedas">
+            <summary>
+            Obtiene la monedas registradas.
+            </summary>
+            <returns>
+            Una lista con las monedas.
+            </returns>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Usuarios.Permiso">
+            <summary>
+            Clase de lógica para los permisos de los usuarios.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Permiso.#ctor(System.Int32,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="id">Identificador del permiso.</param>
+            <param name="ambito">Nombre del ámbito del permiso (Usuarios, Materiales, Módulos, Presupuestos y Accesorios).</param>
+            <param name="consultar">Identificador para el permiso de consulta.</param>
+            <param name="crear">Identificador para el permiso de creación.</param>
+            <param name="modificar">Identificador para el permiso de modificación.</param>
+            <param name="eliminar">Identificador para el permiso de eliminar.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Permiso.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor json de la clase.
+            </summary>
+            <param name="json">Un objeto json con los datos del permiso.</param>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Permiso.Id">
+            <value>
+            Establece o regresa el identificador del permiso.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Permiso.Ambito">
+            <value>
+            Establece o regresa el nombre del ámbito del permiso (Usuarios, Materiales, Módulos, Presupuestos y Accesorios).
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Permiso.Consultar">
+            <value>
+            Establece o regresa el identificador del permiso de consulta.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Permiso.Crear">
+            <value>
+            Establece o regresa el identificador del permiso de creación.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Permiso.Modificar">
+            <value>
+            Establece o regresa el identificador del permiso de modificación.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Permiso.Eliminar">
+            <value>
+            Establece o regresa el identificador del permiso de eliminación.
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Permiso.ObtenerPermisos(System.Int32)">
+            <summary>
+            Obtiene los permisos de un usuario dado.
+            </summary>
+            <param name="idUsuario">Identificador del usuario.</param>
+            <returns>
+            Una lista con los permisos.
+            </returns>
+        </member>
+        <member name="T:OrozGP.LogicaNegocio.Usuarios.Usuario">
+            <summary>
+            Clase de lógica para los usuarios.
+            </summary>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor principal de la clase.
+            </summary>
+            <param name="id">Identificador del usuario (0 para crear).</param>
+            <param name="nombre">Nombre del usuario.</param>
+            <param name="correo">Correo del usuario.</param>
+            <param name="puesto">Nombre del puesto del usuario.</param>
+            <param name="nombreUsuario">Nombre de usuario del usuario.</param>
+            <param name="contraseña">Contraseña del usuario.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor json de la clase.
+            </summary>
+            <param name="json">Objeto json con los datos del usuario.</param>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.#ctor">
+            <summary>
+            Constructor default de la clase.
+            </summary>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.Id">
+            <value>
+            Establece o regresa el identificador del usuario.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.Nombre">
+            <value>
+            Establece o regresa el nombre del usuario.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.Correo">
+            <value>
+            Establece o regresa el correo del usuario.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.Puesto">
+            <value>
+            Establece o regresa el nombre del puesto del usuario.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.NombreUsuario">
+            <value>
+            Establece o regresa el nombre de usuario del usuario.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.Contraseña">
+            <value>
+            Establece o regresa la constraseña del usuario.
+            </value>
+        </member>
+        <member name="P:OrozGP.LogicaNegocio.Usuarios.Usuario.Permisos">
+            <value>
+            Establece o regresa la lista de permisos del usuario.
+            </value>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.IniciarSesion(System.String,System.String)">
+            <summary>
+            Obtiene un usuario a partir de un nombre de usuario y una contraseña.
+            </summary>
+            <param name="nombre">Nombre de usuario del usuario.</param>
+            <param name="contraseña">Contraseña del usuario (en SHA256)</param>
+            <returns>
+            El usuario asociado.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.GenerarContraseña(System.String)">
+            <summary>
+            Genera una contraseña para un usuario dado.
+            </summary>
+            <param name="nombre">Nombre de usuario del usuario.</param>
+            <returns>
+            Un booleano con la confirmación de la generación.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.ObtenerUsuarios">
+            <summary>
+            Obtiene los usuarios registrados.
+            </summary>
+            <returns>
+            Una lista con los usuarios.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.ObtenerUsuarios(System.String)">
+            <summary>
+            Obitne los usuarios relacionados con una palabra clave.
+            </summary>
+            <param name="clave">Palabra clave para la búsqueda.</param>
+            <returns>
+            Una lista con los usuarios.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.RegistrarUsuario">
+            <summary>
+            Registra el usuario de la instancia de la clase.
+            </summary>
+            <returns>
+            Un usuario.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.EditarUsuario">
+            <summary>
+            Actualiza el usuario de la instancia de la clase.
+            </summary>
+            <returns>
+            Un booleano con la confirmación de la actualización.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.EliminarUsuario">
+            <summary>
+            Elimina al usuario de la instancia de la clase.
+            </summary>
+            <returns>
+            Un booleano con la confirmación de la baja.
+            </returns>
+        </member>
+        <member name="M:OrozGP.LogicaNegocio.Usuarios.Usuario.GenerarCredenciales">
+            <summary>
+            Genera las credenciales del usuario de la instancia de la clase.
+            </summary>
+            <returns>
+            Un booleano con la confirmación de la generación.
+            </returns>
+        </member>
+        <member name="T:OrozGP.Servicios.Catalogos.ServiciosAcabado">
+            <summary>
+            Clase con métodos para acceder a servicios web y retornar objetos json, respecto a los acabados.
+            </summary>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosAcabado.ObtenerAcabados(System.Int32)">
+            <summary>
+            Solicita los acabados de un material en json.
+            </summary>
+            <param name="idMaterial">Identificador del material dado.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="T:OrozGP.Servicios.Catalogos.ServiciosCategoria">
+            <summary>
+            Clase con métodos para acceder a servicios web y retornar objetos json, respecto a las categorías.
+            </summary>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosCategoria.ObtenerCategorias(System.Int32)">
+            <summary>
+            Solicita las categorías de un tipo en json.
+            </summary>
+            <param name="tipo">Tipo de categoría.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="T:OrozGP.Servicios.Catalogos.ServiciosMaterial">
+            <summary>
+            Clase con métodos para acceder a servicios web y retornar objetos json, respecto a los materiales.
+            </summary>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosMaterial.RegistrarMaterial(OrozGP.LogicaNegocio.Catalogos.Material,System.Int32)">
+            <summary>
+            Solicita el registro un material y regresa la respuesta del servidor.
+            </summary>
+            <param name="material">El material para registrar.</param>
+            <param name="idCategoria">Identificador de la categoría a la cual registrar el material.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosMaterial.EditarMaterial(OrozGP.LogicaNegocio.Catalogos.Material,System.Collections.Generic.IList{OrozGP.LogicaNegocio.Catalogos.Acabado},System.Collections.Generic.IList{OrozGP.LogicaNegocio.Catalogos.Acabado})">
+            <summary>
+            Solicita la actualización de un material y regresa la respuesta del servidor.
+            </summary>
+            <param name="material">El material para actualizar.</param>
+            <param name="acabadosAgregar">La lista de acabados para agregar al material.</param>
+            <param name="acabadosQuitar">La lista de acabados para quitar del material.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosMaterial.EliminarMaterial(System.Int32)">
+            <summary>
+            Solicita la baja de un material y regresa la respuesta del servidor.
+            </summary>
+            <param name="idMaterial">Identificador del material para eliminar.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosMaterial.ObtenerMateriales(System.Int32)">
+            <summary>
+            Solicita los materiales correspondientes a una categoría.
+            </summary>
+            <param name="idCategoria">Identificador de la categoría de materiales.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Catalogos.ServiciosMaterial.ObtenerMateriales(System.Int32,System.String)">
+            <summary>
+            Solicita los materiales correspondientes a una categoría y relacionados con una palabra clave.
+            </summary>
+            <param name="idCategoria">Identificador de la categoría de materiales.</param>
+            <param name="clave">Palabra clave para la búsqueda.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="T:OrozGP.Servicios.ServiciosMoneda">
+            <summary>
+            Clase con métodos para acceder a servicios web y retornar objetos json, respecto a las monedas.
+            </summary>
+        </member>
+        <member name="M:OrozGP.Servicios.ServiciosMoneda.ObtenerMonedas">
+            <summary>
+            Solicita las monedas registradas.
+            </summary>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="T:OrozGP.Servicios.Usuarios.ServiciosUsuario">
+            <summary>
+            Clase con métodos para acceder a servicios web y retornar objetos json, respecto a los usuarios.
+            </summary>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.ObtenerUsuario(System.String,System.String)">
+            <summary>
+            Solicita un usuario a partir de un nombre de usuario y contraseña.
+            </summary>
+            <param name="nombre">El nombre del usuario.</param>
+            <param name="contraseña">La contraseña del usuario</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.ObtenerUsuarios">
+            <summary>
+            Solicita los usuarios registrados.
+            </summary>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.ObtenerUsuarios(System.String)">
+            <summary>
+            Solicita los usuarios relacionados con una palabra clave.
+            </summary>
+            <param name="clave">Palabra clave para la búsqueda.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.RegistrarUsuario(OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            SOlicita el registro de un usuario y regresa la respuesta del servidor.
+            </summary>
+            <param name="usuario">Usuario para registrar.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.EditarUsuario(OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            Solicita la actualización de un usuario y regresa la respuesta del servidor.
+            </summary>
+            <param name="usuario">Usuario para actualizar.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.EliminarUsuario(System.Int32)">
+            <summary>
+            Solicita la baja de un usuario y regresa la respuesta del servidor.
+            </summary>
+            <param name="id">Identificador del usuario para eliminar.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="M:OrozGP.Servicios.Usuarios.ServiciosUsuario.ObtenerPermisos(System.Int32)">
+            <summary>
+            Solicita los permisos de un usuario dado.
+            </summary>
+            <param name="idUsuario">Identificador del usuario.</param>
+            <returns>
+            Un objeto json con la respuesta del servidor.
+            </returns>
+        </member>
+        <member name="T:OrozGP.Util.Encriptacion">
+            <summary>
+            Clase con métodos para la encriptación / codificación de cadenas de texto.
+            </summary>
+        </member>
+        <member name="M:OrozGP.Util.Encriptacion.Sha256(System.String)">
+            <summary>
+            Codifica una cadena de texto en SHA256.
+            </summary>
+            <param name="cadena">Cadena de texto a codificar.</param>
+            <returns>
+            Una cadena de texto con el valor SHA256 de una cadena de texto dada.
+            </returns>
+        </member>
+        <member name="T:OrozGP.App">
+            <summary>
+            Lógica de interacción para App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:OrozGP.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:OrozGP.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:OrozGP.MainWindow">
+            <summary>
+            Clase controladora de la ventana de inicio de sesión.
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:OrozGP.MainWindow.DesplegarVentanaPrincipal(OrozGP.LogicaNegocio.Usuarios.Usuario)">
+            <summary>
+            Muestra la ventana principal y se cierra.
+            </summary>
+            <param name="usuario">Usuario autenticado.</param>
+        </member>
+        <member name="M:OrozGP.MainWindow.ValidarCampos">
+            <summary>
+            Valida la información de inicio de sesión ingresada.
+            </summary>
+            <returns>
+            Un enumerador con el estado de validéz de la información.
+            </returns>
+        </member>
+        <member name="M:OrozGP.MainWindow.MostrarMensajeError(System.String)">
+            <summary>
+            Muestra un mensaje de error.
+            </summary>
+            <param name="mensaje">Texto del mensaje.</param>
+        </member>
+        <member name="M:OrozGP.MainWindow.#ctor">
+            <summary>
+            Constructor principal de la calse.
+            </summary>
+        </member>
+        <member name="M:OrozGP.MainWindow.IniciarSesion">
+            <summary>
+            Obtiene un usuario a partir de los datos ingresados, de forma asíncrona.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrozGP.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:OrozGP.Properties.Resources">
+            <summary>
+              Clase de recurso fuertemente tipado para buscar cadenas traducidas, etc.
+            </summary>
+        </member>
+        <member name="P:OrozGP.Properties.Resources.ResourceManager">
+            <summary>
+              Devuelve la instancia ResourceManager almacenada en caché utilizada por esta clase.
+            </summary>
+        </member>
+        <member name="P:OrozGP.Properties.Resources.Culture">
+            <summary>
+              Invalida la propiedad CurrentUICulture del subproceso actual para todas las
+              búsquedas de recursos usando esta clase de recursos fuertemente tipados.
+            </summary>
+        </member>
+    </members>
+</doc>

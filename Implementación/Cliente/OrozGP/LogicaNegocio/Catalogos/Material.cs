@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace OrozGP.LogicaNegocio.Catalogos
 {
+    /// <summary>
+    /// Clase de lógica para los materiales.
+    /// </summary>
     public class Material
     {
         private int id;
@@ -23,10 +26,22 @@ namespace OrozGP.LogicaNegocio.Catalogos
         private Moneda moneda;
         private IList<Acabado> acabados;
 
+        /// <summary>
+        /// Constructor default de la clase.
+        /// </summary>
         public Material()
         {
             this.id = 0;
         }
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="id">Identificador del material (0 para registrar).</param>
+        /// <param name="nombre">Nombre del material.</param>
+        /// <param name="proveedor">Nombre del proveedor del material.</param>
+        /// <param name="clave">Clave de búsqueda del material.</param>
+        /// <param name="precio">Precio del material.</param>
+        /// <param name="iva">Identificador para la inclusión del iva en el precio.</param>
         public Material(int id, string nombre, string proveedor, string clave, double precio, bool iva)
         {
             this.id = id;
@@ -36,6 +51,10 @@ namespace OrozGP.LogicaNegocio.Catalogos
             this.precio = precio;
             this.iva = iva;
         }
+        /// <summary>
+        /// Constructor json de la clase.
+        /// </summary>
+        /// <param name="json">Un objeto json con los datos del material.</param>
         public Material(JObject json)
         {
             this.id = json.GetValue("Id").Value<int>();
@@ -58,54 +77,97 @@ namespace OrozGP.LogicaNegocio.Catalogos
             }
         }
 
+        /// <value>
+        /// Establece o regresa el identificador del material.
+        /// </value>
         public int Id {
             get => id;
             set => id = value;
         }
+        /// <value>
+        /// Establece o regresa el nombre del material.
+        /// </value>
         public string Nombre {
             get => nombre;
             set => nombre = value;
         }
+        /// <value>
+        /// Establece o regresa el nombre del proveedor del material.
+        /// </value>
         public string Proveedor {
             get => proveedor;
             set => proveedor = value;
         }
+        /// <value>
+        /// Establece o regresa la clave de búsqueda del material.
+        /// </value>
         public string Clave {
             get => clave;
             set => clave = value;
         }
+        /// <value>
+        /// Establece o regresa el ancho del material.
+        /// </value>
         public double Ancho {
             get => ancho;
             set => ancho = value;
         }
+        /// <value>
+        /// Establece o regresa el alto del material.
+        /// </value>
         public double Alto {
             get => alto;
             set => alto = value;
         }
+        /// <value>
+        /// Establece o regresa el grosor del material.
+        /// </value>
         public double Grosor {
             get => grosor;
             set => grosor = value;
         }
+        /// <value>
+        /// Establece o regresa el precio del material.
+        /// </value>
         public double Precio {
             get => precio;
             set => precio = value;
         }
+        /// <value>
+        /// Establece o regresa el identificador para la inclusión del iva en el precio.
+        /// </value>
         public bool Iva {
             get => iva;
             set => iva = value;
         }
+        /// <value>
+        /// Establece o regresa la lista de los acabados del material.
+        /// </value>
         public IList<Acabado> Acabados {
             get => acabados;
             set => acabados = value;
         }
+        /// <value>
+        /// Establece o regresa la moneda asociada al precio del material.
+        /// </value>
         public Moneda Moneda {
             get => moneda;
             set => moneda = value;
         }
+        /// <value>
+        /// Regresa el valor en texto para la inclusión del iva en el precio (para binding).
+        /// </value>
         public string IvaEnTexto {
             get => this.iva ? "Sí" : "No";
         }
 
+        /// <summary>
+        /// Registra el material de la instancia de la clase a una categoría.
+        /// </summary>
+        /// <param name="idCategoria">Identificador de la categoría.</param>
+        /// <returns>
+        /// Un material con su identificador de registro.
+        /// </returns>
         public async Task<Material> RegistrarMaterial(int idCategoria)
         {
             Material material;
@@ -120,6 +182,14 @@ namespace OrozGP.LogicaNegocio.Catalogos
             }
             return material;
         }
+        /// <summary>
+        /// Actualiza el material de la instancia de la clase.
+        /// </summary>
+        /// <param name="acabadosAgregar">La lista de los acabados a agregar al material.</param>
+        /// <param name="acabadosQuitar">La lista de los acabados a eliminar del material.</param>
+        /// <returns>
+        /// Un arreglo de objetos: [0]booleano con la confirmación de la actualización, [1]lista de acabados registrados en la actualización.
+        /// </returns>
         public async Task<Object[]> EditarMaterial(IList<Acabado> acabadosAgregar, IList<Acabado> acabadosQuitar)
         {
             Object[] respuesta = new object[2];
@@ -135,6 +205,10 @@ namespace OrozGP.LogicaNegocio.Catalogos
             respuesta[1] = acabados;
             return respuesta;
         }
+        /// <summary>
+        /// Elimina el material de la instancia de la clase.
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> EliminarMaterial()
         {
             bool baja;
@@ -142,7 +216,13 @@ namespace OrozGP.LogicaNegocio.Catalogos
             baja = json.GetValue("Exito").Value<bool>();
             return baja;
         }
-        
+        /// <summary>
+        /// Obtiene los materiales de una categoría.
+        /// </summary>
+        /// <param name="idCategoria">Identificador de la categoría.</param>
+        /// <returns>
+        /// Una lista con los materiales de la categoría.
+        /// </returns>
         public static async Task<IList<Material>> ObtenerMateriales(int idCategoria)
         {
             IList<Material> materiales = new List<Material>();
@@ -153,6 +233,14 @@ namespace OrozGP.LogicaNegocio.Catalogos
             }
             return materiales;
         }
+        /// <summary>
+        /// Obtiene los materiales de una categoría y relacionados con una palabra clave.
+        /// </summary>
+        /// <param name="idCategoria">Identificador de la categoría.</param>
+        /// <param name="clave">Palabra clave para la búsqueda.</param>
+        /// <returns>
+        /// Una lista con los materiales.
+        /// </returns>
         public static async Task<IList<Material>> ObtenerMateriales(int idCategoria, string clave)
         {
             IList<Material> materiales = new List<Material>();
@@ -170,11 +258,25 @@ namespace OrozGP.LogicaNegocio.Catalogos
             }
             return materiales;
         }
+        /// <summary>
+        /// Obtiene los mateirales relacionados con una palabra clave.
+        /// </summary>
+        /// <param name="clave">Palabra clave para la búsqueda.</param>
+        /// <returns>
+        /// Una lista con los materiales.
+        /// </returns>
         public static async Task<IList<Material>> ObtenerMateriales(string clave)
         {
             IList<Material> materiales = new List<Material>();
             return materiales;
         }
+        /// <summary>
+        /// Obtiene los materiales registrados.
+        /// </summary>
+        /// <param name="incluirAcabados">Establece si se deben regresar los acabados de cada material o no.</param>
+        /// <returns>
+        /// Una lista con los materiales.
+        /// </returns>
         public static async Task<IList<Material>> ObtenerMateriales(bool incluirAcabados)
         {
             IList<Material> materiales = new List<Material>();

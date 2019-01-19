@@ -8,6 +8,9 @@ using OrozGP.Servicios.Usuarios;
 
 namespace OrozGP.LogicaNegocio.Usuarios
 {
+    /// <summary>
+    /// Clase de lógica para los usuarios.
+    /// </summary>
     public class Usuario
     {
         private int id;
@@ -18,6 +21,15 @@ namespace OrozGP.LogicaNegocio.Usuarios
         private string contraseña;
         private IList<Permiso> permisos;
 
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="id">Identificador del usuario (0 para crear).</param>
+        /// <param name="nombre">Nombre del usuario.</param>
+        /// <param name="correo">Correo del usuario.</param>
+        /// <param name="puesto">Nombre del puesto del usuario.</param>
+        /// <param name="nombreUsuario">Nombre de usuario del usuario.</param>
+        /// <param name="contraseña">Contraseña del usuario.</param>
         public Usuario(int id, string nombre, string correo, string puesto, string nombreUsuario, string contraseña)
         {
             this.id = id;
@@ -27,6 +39,10 @@ namespace OrozGP.LogicaNegocio.Usuarios
             this.nombreUsuario = nombreUsuario;
             this.contraseña = contraseña;
         }
+        /// <summary>
+        /// Constructor json de la clase.
+        /// </summary>
+        /// <param name="json">Objeto json con los datos del usuario.</param>
         public Usuario(JObject json)
         {
             this.Id = json.GetValue("Id").Value<int>();
@@ -43,40 +59,72 @@ namespace OrozGP.LogicaNegocio.Usuarios
                 }
             }
         }
+        /// <summary>
+        /// Constructor default de la clase.
+        /// </summary>
         public Usuario()
         {
             this.id = 0;
         }
 
+        /// <value>
+        /// Establece o regresa el identificador del usuario.
+        /// </value>
         public int Id {
             get => id;
             set => id = value;
         }
+        /// <value>
+        /// Establece o regresa el nombre del usuario.
+        /// </value>
         public string Nombre {
             get => nombre;
             set => nombre = value;
         }
+        /// <value>
+        /// Establece o regresa el correo del usuario.
+        /// </value>
         public string Correo {
             get => correo;
             set => correo = value;
         }
+        /// <value>
+        /// Establece o regresa el nombre del puesto del usuario.
+        /// </value>
         public string Puesto {
             get => puesto;
             set => puesto = value;
         }
+        /// <value>
+        /// Establece o regresa el nombre de usuario del usuario.
+        /// </value>
         public string NombreUsuario {
             get => nombreUsuario;
             set => nombreUsuario = value;
         }
+        /// <value>
+        /// Establece o regresa la constraseña del usuario.
+        /// </value>
         public string Contraseña {
             get => contraseña;
             set => contraseña = value;
         }
+        /// <value>
+        /// Establece o regresa la lista de permisos del usuario.
+        /// </value>
         public IList<Permiso> Permisos {
             get => permisos;
             set => permisos = value;
         }
 
+        /// <summary>
+        /// Obtiene un usuario a partir de un nombre de usuario y una contraseña.
+        /// </summary>
+        /// <param name="nombre">Nombre de usuario del usuario.</param>
+        /// <param name="contraseña">Contraseña del usuario (en SHA256)</param>
+        /// <returns>
+        /// El usuario asociado.
+        /// </returns>
         public static async Task<Usuario> IniciarSesion(string nombre, string contraseña)
         {
             Usuario usuario = new Usuario();
@@ -87,10 +135,23 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuario;
         }
+        /// <summary>
+        /// Genera una contraseña para un usuario dado.
+        /// </summary>
+        /// <param name="nombre">Nombre de usuario del usuario.</param>
+        /// <returns>
+        /// Un booleano con la confirmación de la generación.
+        /// </returns>
         public static bool GenerarContraseña(string nombre)
         {
             return false;
         }
+        /// <summary>
+        /// Obtiene los usuarios registrados.
+        /// </summary>
+        /// <returns>
+        /// Una lista con los usuarios.
+        /// </returns>
         public static async Task<IList<Usuario>> ObtenerUsuarios()
         {
             IList<Usuario> usuarios = new List<Usuario>();
@@ -101,6 +162,13 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuarios;
         }
+        /// <summary>
+        /// Obitne los usuarios relacionados con una palabra clave.
+        /// </summary>
+        /// <param name="clave">Palabra clave para la búsqueda.</param>
+        /// <returns>
+        /// Una lista con los usuarios.
+        /// </returns>
         public static async Task<IList<Usuario>> ObtenerUsuarios(string clave)
         {
             IList<Usuario> usuarios = new List<Usuario>();
@@ -118,6 +186,12 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuarios;
         }
+        /// <summary>
+        /// Registra el usuario de la instancia de la clase.
+        /// </summary>
+        /// <returns>
+        /// Un usuario.
+        /// </returns>
         public async Task<Usuario> RegistrarUsuario()
         {
             Usuario usuario;
@@ -132,6 +206,12 @@ namespace OrozGP.LogicaNegocio.Usuarios
             }
             return usuario;
         }
+        /// <summary>
+        /// Actualiza el usuario de la instancia de la clase.
+        /// </summary>
+        /// <returns>
+        /// Un booleano con la confirmación de la actualización.
+        /// </returns>
         public async Task<bool> EditarUsuario()
         {
             bool edicion;
@@ -139,6 +219,12 @@ namespace OrozGP.LogicaNegocio.Usuarios
             edicion = json.GetValue("Exito").Value<bool>();
             return edicion;
         }
+        /// <summary>
+        /// Elimina al usuario de la instancia de la clase.
+        /// </summary>
+        /// <returns>
+        /// Un booleano con la confirmación de la baja.
+        /// </returns>
         public async Task<bool> EliminarUsuario()
         {
             bool baja;
@@ -146,6 +232,12 @@ namespace OrozGP.LogicaNegocio.Usuarios
             baja = json.GetValue("Exito").Value<bool>();
             return baja;
         }
+        /// <summary>
+        /// Genera las credenciales del usuario de la instancia de la clase.
+        /// </summary>
+        /// <returns>
+        /// Un booleano con la confirmación de la generación.
+        /// </returns>
         public bool GenerarCredenciales()
         {
             return false;

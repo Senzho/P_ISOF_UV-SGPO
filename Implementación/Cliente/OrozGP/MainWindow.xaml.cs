@@ -17,8 +17,15 @@ using System.Windows.Shapes;
 
 namespace OrozGP
 {
+    /// <summary>
+    /// Clase controladora de la ventana de inicio de sesión.
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Muestra la ventana principal y se cierra.
+        /// </summary>
+        /// <param name="usuario">Usuario autenticado.</param>
         private void DesplegarVentanaPrincipal(Usuario usuario)
         {
             VentanaPrincipal principal = new VentanaPrincipal
@@ -31,6 +38,12 @@ namespace OrozGP
             this.Close();
             App.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
+        /// <summary>
+        /// Valida la información de inicio de sesión ingresada.
+        /// </summary>
+        /// <returns>
+        /// Un enumerador con el estado de validéz de la información.
+        /// </returns>
         private Login ValidarCampos()
         {
             Login valor;
@@ -49,12 +62,19 @@ namespace OrozGP
             }
             return valor;
         }
+        /// <summary>
+        /// Muestra un mensaje de error.
+        /// </summary>
+        /// <param name="mensaje">Texto del mensaje.</param>
         private void MostrarMensajeError(string mensaje)
         {
             VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this);
             ventanaMensaje.ShowDialog();
         }
 
+        /// <summary>
+        /// Constructor principal de la calse.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -71,6 +91,11 @@ namespace OrozGP
             contraseña,
             ok,
         };
+
+        /// <summary>
+        /// Obtiene un usuario a partir de los datos ingresados, de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         public async Task IniciarSesion()
         {
             string nombre = this.campoUsuario.Text.Trim();

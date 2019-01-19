@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace OrozGP.InterfazGrafica
 {
     /// <summary>
-    /// Lógica de interacción para VentanaMensaje.xaml
+    /// Clase controladora de la ventana personalizada de mensajes.
     /// </summary>
     public partial class VentanaMensaje : Window
     {
@@ -24,6 +24,9 @@ namespace OrozGP.InterfazGrafica
         private string mensaje;
         private Botones boton;
 
+        /// <summary>
+        /// Carga la imágen de un tipo de mensaje.
+        /// </summary>
         private void CargarTipo()
         {
             BitmapImage imagen;
@@ -46,6 +49,9 @@ namespace OrozGP.InterfazGrafica
             this.etiquetaTitulo.Content = this.titulo;
             this.bloqueMensaje.Text = this.mensaje;
         }
+        /// <summary>
+        /// Muestra los botones de acuerdo al tipo de mensaje.
+        /// </summary>
         private void CargarBotones()
         {
             switch (this.boton)
@@ -77,6 +83,14 @@ namespace OrozGP.InterfazGrafica
             cancel,
         };
 
+        /// <summary>
+        /// COnstructor principal de la clase,
+        /// </summary>
+        /// <param name="tipo">Tipo de mensaje.</param>
+        /// <param name="nombre">Título del mensaje.</param>
+        /// <param name="mensaje">Mensaje</param>
+        /// <param name="boton">Tipo de botones.</param>
+        /// <param name="propietario">Ventana propietaria.</param>
         public VentanaMensaje(Mensaje tipo, string nombre, string mensaje, Botones boton, Window propietario)
         {
             InitializeComponent();

@@ -19,24 +19,38 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Usuarios
 {
+    /// <summary>
+    /// Clase controladora del control de usuario del panel de usuario.
+    /// </summary>
     public partial class PanelUsuario : UserControl
     {
         private Cargador cargador;
         private Usuario usuario;
 
+        /// <summary>
+        /// Muestra los datos del usuario.
+        /// </summary>
         private void CargarUsuario()
         {
             this.campoNombre.Text = this.usuario.Nombre;
             this.campoCorreo.Text = this.usuario.Correo;
             this.campoPuesto.Text = this.usuario.Puesto;
             this.tablaPermisos.ItemsSource = this.usuario.Permisos;
+            //Obtiene los permisos.
             this.ObtenerPermisos();
         }
+        /// <summary>
+        /// Obtiene los permisos del usuario de forma síncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task ObtenerPermisos()
         {
             this.usuario.Permisos = await Permiso.ObtenerPermisos(this.usuario.Id);
             this.CargarPermisos();
         }
+        /// <summary>
+        /// Muestra los permisos en la tabla.
+        /// </summary>
         private void CargarPermisos()
         {
             IList<Permiso> permisos;
@@ -58,6 +72,12 @@ namespace OrozGP.InterfazGrafica.Usuarios
             this.tablaPermisos.ItemsSource = permisos;
             this.botonGuardar.IsEnabled = true;
         }
+        /// <summary>
+        /// Valida los datos ingresados del usuario.
+        /// </summary>
+        /// <returns>
+        /// Un enumerador con el estado de validéz de los datos.
+        /// </returns>
         private DatosUsuario ValidarCampos()
         {
             DatosUsuario valor;
@@ -86,11 +106,22 @@ namespace OrozGP.InterfazGrafica.Usuarios
             }
             return valor;
         }
+        /// <summary>
+        /// Valida un correo electrónico.
+        /// </summary>
+        /// <param name="correo">Correo del usuario.</param>
+        /// <returns>
+        /// Un booleano con la confirmación de validéz.
+        /// </returns>
         private bool ValidarCorreo(string correo)
         {
             string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
             return Regex.IsMatch(correo, expresion);
         }
+        /// <summary>
+        /// Muestra un mensaje de corrección de la información del usuario.
+        /// </summary>
+        /// <param name="datos">Enumerador como identificador de invalidéz de los datos.</param>
         private void MostrarMensajeDatos(DatosUsuario datos)
         {
             VentanaMensaje ventanaMensaje;
@@ -114,10 +145,17 @@ namespace OrozGP.InterfazGrafica.Usuarios
             ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             ventanaMensaje.ShowDialog();
         }
+        /// <summary>
+        /// Regresa al panel de administración de usuarios.
+        /// </summary>
         private void Regresar()
         {
             this.cargador.Cargar(new PanelUsuarios(this.cargador));
         }
+        /// <summary>
+        /// Registra un usuario de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task Registrar()
         {
             string correo = this.campoCorreo.Text.Trim();
@@ -145,6 +183,10 @@ namespace OrozGP.InterfazGrafica.Usuarios
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
         }
+        /// <summary>
+        /// Actualiza un usuario de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task Editar()
         {
             Usuario usuarioPeticion = new Usuario(this.usuario.Id, this.campoNombre.Text.Trim(), this.campoCorreo.Text.Trim(), this.campoPuesto.Text.Trim(), "", "")
@@ -179,6 +221,11 @@ namespace OrozGP.InterfazGrafica.Usuarios
             ok,
         };
 
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="cargador">Instancia del cargador de elementos.</param>
+        /// <param name="usuario">Usuario (null para registrar).</param>
         public PanelUsuario(Cargador cargador, Usuario usuario)
         {
             InitializeComponent();

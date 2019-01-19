@@ -57,3 +57,4 @@ C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\O
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\bin\Debug\OrozGP.application
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\OrozGP.exe.manifest
 C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\obj\Debug\OrozGP.application
+C:\Users\Victor Javier\Documents\GitHub\P_ISOF_UV-SGPO\Implementación\Cliente\OrozGP\bin\Debug\OrozGP.xml

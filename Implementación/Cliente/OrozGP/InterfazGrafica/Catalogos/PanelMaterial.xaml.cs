@@ -18,6 +18,9 @@ using System.Windows.Shapes;
 
 namespace OrozGP.InterfazGrafica.Catalogos
 {
+    /// <summary>
+    /// Clase controladora del control de usuario del panel de material.
+    /// </summary>
     public partial class PanelMaterial : UserControl
     {
         private Categoria categoria;
@@ -30,15 +33,25 @@ namespace OrozGP.InterfazGrafica.Catalogos
         private IList<Acabado> acabadosQuitar;
         private IList<Moneda> monedas;
 
+        /// <summary>
+        /// Regresa a la ventana de administración de materiales.
+        /// </summary>
         private void Regresar()
         {
             this.cargador.Cargar(new PanelMateriales(this.cargador, this.tipo, this.categoria));
         }
+        /// <summary>
+        /// Obiene las monedas de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task ObtenerMonedas()
         {
             this.monedas = await Moneda.ObtenerMonedas();
             this.CargarMonedas();
         }
+        /// <summary>
+        /// Carga las monedas en los combos de selección de material y acabados.
+        /// </summary>
         private void CargarMonedas()
         {
             this.comboMonedas.ItemsSource = this.monedas;
@@ -55,6 +68,11 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.botonGuardar.IsEnabled = true;
             }
         }
+        /// <summary>
+        /// Obitiene los acabados del material de forma síncrona.
+        /// </summary>
+        /// <param name="idMaterial">Identificador del material.</param>
+        /// <returns></returns>
         private async Task ObtenerAcabados(int idMaterial)
         {
             this.acabados = await Acabado.ObtenerAcabados(idMaterial);
@@ -62,6 +80,9 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.listaAcabados.ItemsSource = this.acabados;
             this.botonGuardar.IsEnabled = true;
         }
+        /// <summary>
+        /// Muestra los datos del material.
+        /// </summary>
         private void CargarMaterial()
         {
             this.campoNombre.Text = this.material.Nombre;
@@ -72,8 +93,13 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.campoAncho.Text = this.material.Ancho.ToString();
             this.campoAlto.Text = this.material.Alto.ToString();
             this.campoGrosor.Text = this.material.Grosor.ToString();
+            //Obtiene los acabados.
             this.ObtenerAcabados(this.material.Id);
         }
+        /// <summary>
+        /// Muestra los datos de un acabado seleccionado en el formulario de acabados.
+        /// </summary>
+        /// <param name="acabado">Acabado a cargar.</param>
         private void CargarAcabado(Acabado acabado)
         {
             this.campoNombreAcabado.Text = acabado.Nombre;
@@ -84,6 +110,11 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.campoGrosorAcabado.Text = acabado.Grosor.ToString();
             this.EstablecerMonedaSeleccionada(acabado.Moneda, false);
         }
+        /// <summary>
+        /// Establece la moneda seleccionada en los combos de selección dependiendo de si se trata de un material o un acabado.
+        /// </summary>
+        /// <param name="moneda">Moneda seleccionada.</param>
+        /// <param name="esMaterial">Identificador para material o acabado.</param>
         private void EstablecerMonedaSeleccionada(Moneda moneda, bool esMaterial)
         {
             Moneda monedaSeleccion = null;
@@ -104,6 +135,9 @@ namespace OrozGP.InterfazGrafica.Catalogos
                 this.comboMonedasAcabado.SelectedItem = monedaSeleccion;
             }
         }
+        /// <summary>
+        /// Quita los datos cargados del formulario de acabados.
+        /// </summary>
         private void LimpiarFormularioAcabado()
         {
             this.listaAcabados.SelectedItem = null;
@@ -114,6 +148,13 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.campoGrosorAcabado.Text = "";
             this.checkIvaAcabado.IsChecked = false;
         }
+        /// <summary>
+        /// Identifica si un acabado se encuentra en edición.
+        /// </summary>
+        /// <param name="acabado">Acabado a identificar.</param>
+        /// <returns>
+        /// Un booleano con la confirmación del estado de edición del acabado.
+        /// </returns>
         private bool AcabadoEnEdicion(Acabado acabado)
         {
             bool enEdicion = false;
@@ -123,6 +164,12 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return enEdicion;
         }
+        /// <summary>
+        /// Identifica si se está registrando un nuevo acabado.
+        /// </summary>
+        /// <returns>
+        /// Un booleano con la confirmación de contenido en el formulario de acabados.
+        /// </returns>
         private bool FormularioAcabadoEnEdicion()
         {
             bool enEdicion = false;
@@ -132,11 +179,21 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return enEdicion;
         }
+        /// <summary>
+        /// Muestra un mensaja para informar sobre la edición / creación de un acabado.
+        /// </summary>
         private void MostrarMensajeEdicion()
         {
             VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Acabado", "Aún no guardas el nuevo acabado", VentanaMensaje.Botones.ok, this.cargador.Principal);
             ventanaMensaje.ShowDialog();
         }
+        /// <summary>
+        /// Valida si una cadena de texto corresponde a un número decimal double.
+        /// </summary>
+        /// <param name="dato">Dato a validar.</param>
+        /// <returns>
+        /// Un booleano con la confirmación de validéz.
+        /// </returns>
         private bool ValidarDouble(string dato)
         {
             bool valido;
@@ -151,6 +208,12 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return valido;
         }
+        /// <summary>
+        /// Valida los datos de un material.
+        /// </summary>
+        /// <returns>
+        /// Un enumerador sobre el estado de validéz.
+        /// </returns>
         private DatosMaterial ValidarDatosMaterial()
         {
             DatosMaterial datos;
@@ -208,6 +271,12 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return datos;
         }
+        /// <summary>
+        /// Valida los datos de un acabado.
+        /// </summary>
+        /// <returns>
+        /// Un enumerador con el estado de validez.
+        /// </returns>
         private DatosMaterial ValidarDatosAcabado()
         {
             DatosMaterial datos;
@@ -257,6 +326,10 @@ namespace OrozGP.InterfazGrafica.Catalogos
             }
             return datos;
         }
+        /// <summary>
+        /// Muestra un mensaje de corrección de la información ingresada.
+        /// </summary>
+        /// <param name="datos">Enumerador con el estado de invalidéz de los datos.</param>
         private void MostrarMensajeDatos(DatosMaterial datos)
         {
             string mensaje;
@@ -300,6 +373,9 @@ namespace OrozGP.InterfazGrafica.Catalogos
             VentanaMensaje ventanaMensaje = new VentanaMensaje(VentanaMensaje.Mensaje.info, "Datos no válidos", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             ventanaMensaje.ShowDialog();
         }
+        /// <summary>
+        /// Agrega un acabado a la lista de acabados.
+        /// </summary>
         private void AgregarAcabado()
         {
             Acabado acabado = new Acabado(0, this.campoNombreAcabado.Text.Trim(), Double.Parse(this.campoAnchoAcabado.Text.Trim()), Double.Parse(this.campoAltoAcabado.Text.Trim()), Double.Parse(this.campoGrosorAcabado.Text.Trim()), Double.Parse(this.campoPrecioAcabado.Text.Trim()), this.checkIvaAcabado.IsChecked.Value)
@@ -311,6 +387,9 @@ namespace OrozGP.InterfazGrafica.Catalogos
             this.listaAcabados.Items.Refresh();
             this.LimpiarFormularioAcabado();
         }
+        /// <summary>
+        /// Actualiza un acabado editado de la lista de acabados.
+        /// </summary>
         private void ActualizarAcabado()
         {
             Acabado acabado = (Acabado)this.listaAcabados.SelectedItem;
@@ -333,6 +412,10 @@ namespace OrozGP.InterfazGrafica.Catalogos
             acabado.Moneda = (Moneda)this.comboMonedasAcabado.SelectedItem;
             this.listaAcabados.Items.Refresh();
         }
+        /// <summary>
+        /// Registra un material de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task Registrar()
         {
             Material materialPeticion = new Material(0, this.campoNombre.Text.Trim(), this.campoProveedor.Text.Trim(), this.campoClave.Text.Trim(), Double.Parse(this.campoPrecio.Text.Trim()), this.checkIva.IsChecked.Value)
@@ -365,6 +448,10 @@ namespace OrozGP.InterfazGrafica.Catalogos
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Registro", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
         }
+        /// <summary>
+        /// Actualiza un material de forma asíncrona.
+        /// </summary>
+        /// <returns></returns>
         private async Task Editar()
         {
             Material materialPeticion = new Material(this.material.Id, this.campoNombre.Text.Trim(), this.campoProveedor.Text.Trim(), this.campoClave.Text.Trim(), Double.Parse(this.campoPrecio.Text.Trim()), this.checkIva.IsChecked.Value)
@@ -394,12 +481,19 @@ namespace OrozGP.InterfazGrafica.Catalogos
             VentanaMensaje vMensaje = new VentanaMensaje(tipo, "Edicion", mensaje, VentanaMensaje.Botones.ok, this.cargador.Principal);
             vMensaje.ShowDialog();
         }
+        /// <summary>
+        /// Vacía las listas de acabados.
+        /// </summary>
         private void VaciarListas()
         {
             this.acabadosAgregar.Clear();
             this.acabadosEditar.Clear();
             this.acabadosQuitar.Clear();
         }
+        /// <summary>
+        /// Actualiza la lista de acabados después de una actualización de material, reemplazando los acabados nuevos (identificador 0) por los registrados con su respectivo identificador de registro.
+        /// </summary>
+        /// <param name="acabados">Lista de acabados registrados</param>
         private void ActualizarAcabadosEditados(IList<Acabado> acabados)
         {
             Acabado acabado;
@@ -431,6 +525,13 @@ namespace OrozGP.InterfazGrafica.Catalogos
             ok
         }
 
+        /// <summary>
+        /// Constructor principal de la clase.
+        /// </summary>
+        /// <param name="categoria">Categoría del material.</param>
+        /// <param name="tipo">Tipo de categoría del material.</param>
+        /// <param name="cargador">Instancia del cargador de elementos.</param>
+        /// <param name="material">Material (null para registrar).</param>
         public PanelMaterial(Categoria categoria, int tipo, Cargador cargador, Material material)
         {
             InitializeComponent();

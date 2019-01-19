@@ -9,10 +9,19 @@ using System.Threading.Tasks;
 
 namespace OrozGP.Servicios
 {
+    /// <summary>
+    /// Clase con métodos para acceder a servicios web y retornar objetos json, respecto a las monedas.
+    /// </summary>
     public class ServiciosMoneda
     {
         private const string rutaBase = "http://localhost/CodeIgniter/index.php/Moneda_Controller/";
 
+        /// <summary>
+        /// Solicita las monedas registradas.
+        /// </summary>
+        /// <returns>
+        /// Un objeto json con la respuesta del servidor.
+        /// </returns>
         public static async Task<JObject> ObtenerMonedas()
         {
             string url = ServiciosMoneda.rutaBase + "monedas";
